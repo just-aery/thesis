@@ -6,11 +6,9 @@ Created on Thu Oct 10 13:15:12 2013
 """
 
 from sympy import * 
-import mpmath
 import numpy as np
-from scipy.optimize import fsolve, minimize
+from scipy.optimize import minimize
 import pylab as pl
-import dis
 
 from function_tricks import *
 
@@ -104,8 +102,6 @@ def all_opt_min(det, eigen):
     def func_to_min(args):
         eigen_numpy = map(lambda x: function_wrapper(sympy_2_numpy(x)), eigen)
         return min(map(lambda f: f(args).real, eigen_numpy))
-        #print eigen_numpy[0](args).real
-        #return eigen_numpy[0](args).real
     def deriv_func_to_min(args):        
         eigen_numpy = map(lambda x: function_wrapper(sympy_2_numpy(x)), eigen)
         es = map(lambda f: f(args), eigen_numpy)
@@ -212,29 +208,21 @@ def K_opt_min(det, to_min, mean_cons):
     deriv_sympy_func = diff_sympy_func(vars)
     n_det = sympy_2_numpy(-re(det))
     deriv_sympy = deriv_sympy_func(-re(det))
-    numpy_mean_cons = function_wrapper(sympy_2_numpy(-mean_cons))
-    deriv_mean_cons_sympy = deriv_sympy_func(-mean_cons)
-    deriv_mean_cons_numpy = lambda_out_array(map(lambda x: function_wrapper(sympy_2_numpy(x)), deriv_mean_cons_sympy))
-    deriv_numpy = lambda_out_array(map(lambda x: function_wrapper(sympy_2_numpy(x)), deriv_sympy))
+    deriv_numpy = lambda_out_array(map(lambda x: function_wrapper(sympy_2_numpy(x), 1), deriv_sympy), 1)
     def func_to_min(args):
-        return function_wrapper(sympy_2_numpy(to_min))(args).real
+        return function_wrapper(sympy_2_numpy(to_min), 1)(args).real
     def deriv_func_to_min(args):        
         min_func = to_min
-        res = lambda_out_array(map(lambda x: function_wrapper(sympy_2_numpy(x)), deriv_sympy_func(min_func)))
+        res = lambda_out_array(map(lambda x: function_wrapper(sympy_2_numpy(x), 1), deriv_sympy_func(min_func)), 1)
         return array_stretcher(res(args).real)
-    x0 =  [np.pi/3.0, 0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5]
-    psi_cons = complex_wrapper(lambda p : np.vdot(p[1:], p[1:]).real - 1)
-    psi_cons_deriv = array_stretcher(complex_wrapper(lambda x: [0, 2*abs(x[1]), 2*abs(x[2]), 2*abs(x[3]), 2*abs(x[4])]))
-    print deriv_numpy(x0)
+    x0 =  [np.pi/3.0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5]
+    psi_cons = complex_wrapper(lambda p : np.vdot(p[1:], p[1:]).real - 1, 1)
+    psi_cons_deriv = array_stretcher(complex_wrapper(lambda x: [0, 2*abs(x[1]), 2*abs(x[2]), 2*abs(x[3]), 2*abs(x[4])], 1), 1)
+    print len(complex_array_wrapper(x0, 1))
     cons = (\
-    #{'type': 'ineq', 'fun' : lambda p: p[0],\
-    #'jac' : lambda p: [1, 0, 0, 0, 0]},
-    #{'type': 'ineq', 'fun' : lambda p: 2*np.pi - p[0],\
-    #'jac' : lambda p: [-1, 0, 0, 0, 0]},
-    {'type': 'ineq', 'fun' : function_wrapper(n_det),\
+    {'type': 'ineq', 'fun' : function_wrapper(n_det, 1),\
     'jac' : deriv_numpy}, 
     {'type': 'eq', 'fun' : psi_cons,'jac' : psi_cons_deriv})
-    #bnds = ( (0, 2*np.pi), (-1, 1), (-1, 1), (-1, 1), (-1, 1))    
     res = minimize(func_to_min, x0, \
     jac=False,\
     constraints=cons, method='SLSQP', options={'disp': True})
@@ -303,22 +291,10 @@ n_uo = lambda alpha, beta : get_n_u(eta1, alpha, True) * \
 get_n_o(eta2, beta, False)
 n = n_oe(0, theta) + n_ou(0, theta) + n_eo(theta, 0) + \
 n_uo(theta, 0) + n_oo(theta, theta) - n_oo(0, 0)
-
-#print'n = {}'.format(latex(n))
-#B = get_B(eta, theta)
-#print 'b = {}'.format(B)
-#print'det(n) = {}'.format(latex(n.det()))
-#print 'det(B) = {}'.format(B.det())
 n_fun = lambdify(theta, n.det(), 'numpy')
 det_fun = lambdify(theta, n.det(), 'sympy')
-#plotting.plot3d(re(n.det()), (eta, 0.01, 1), (theta, 0, 2*pi), \
-#xlabel=r'values of $\eta$',ylabel=r'values of $\theta$', title=r'$\det\mathcal{B}$')
 
 eigenvalues = eigenvalues_analyse()
-
-#opt_ang = different_eta_3rd_level_min(n.det(), eigenvalues)
-#print opt_ang
-#all_opt_min(n.det(), eigenvalues)
 
 psi1, psi2, psi3, psi4 = symbols('psi_1 psi_2 psi_3 psi_4')
 r, omega = symbols('r omega')
@@ -334,13 +310,3 @@ to_min = quant_mean[0] / sqrt(quant_std[0])
 opt_val = eta_K_opt(n.det(), to_min, quant_mean[0])
 to_min = quant_mean[0]
 opt_val = eta_K_opt(n.det(), to_min, quant_mean[0])
-
-#m = quant_mean.subs([(eta1, opt_val[0]), (eta2, opt_val[1]), (theta, opt_val[2]),\
-#(psi1, opt_val[3]), (psi2, opt_val[4]), (psi3, opt_val[5]), (psi4, opt_val[6])])[0]
-#s = sqrt(re(quant_std.subs([(eta1, opt_val[0]), (eta2, opt_val[1]), (theta, opt_val[2]),\
-#(psi1, opt_val[3]), (psi2, opt_val[4]), (psi3, opt_val[5]), (psi4, opt_val[6])])[0]))
-#d = n.det().subs([(eta1, opt_val[0]), (eta2, opt_val[1]), (theta, opt_val[2]),\
-#(psi1, opt_val[3]), (psi2, opt_val[4]), (psi3, opt_val[5]), (psi4, opt_val[6])])
-#print simplify(re(m))
-#print simplify(s)
-#print simplify(re(d))

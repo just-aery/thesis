@@ -20,30 +20,34 @@ class ImaginaryPrinter(LambdaPrinter):
 def sympy_to_numpy(variables):
     return lambda expr: lambdify(variables, expr, modules='numpy', printer=ImaginaryPrinter)
 
-def array_stretcher_helper(arr):
+def array_stretcher_helper(arr, from_i):
     res = []
+    c = 0
     for i in arr:
         res.append(i)
-        res.append(0)
+        if c >= from_i:
+            res.append(0)
+        c += 1
     return np.array(res)
     
-array_stretcher = lambda f: (lambda arg: array_stretcher_helper(f(arg)))
+array_stretcher = lambda f, from_i: (lambda arg: array_stretcher_helper(f(arg), from_i))
 
 def lambda_out_array_helper(expr):
     return lambda arg: np.array(map(lambda e: e(arg), expr))
 
-lambda_out_array = lambda arg: array_stretcher(lambda_out_array_helper(arg))
+lambda_out_array = lambda arg, from_i: array_stretcher(lambda_out_array_helper(arg), from_i)
     
 def array_to_args(f, arg):
     n = len(arg)
     args = [arg[i] for i in range(n)]
     return f(*(args)).real
     
-complex_array_wrapper = lambda arg: [arg[i] + arg[i+1]*1j for i in range(0, len(arg), 2)]
+def complex_array_wrapper(arg, from_i): 
+    return arg[0:from_i] + [arg[i] + arg[i+1]*1j for i in range(from_i, len(arg), 2)]
     
-function_wrapper = lambda f: (lambda arg: array_to_args(f, complex_array_wrapper(arg)))
+function_wrapper = lambda f, from_i: (lambda arg: array_to_args(f, complex_array_wrapper(arg, from_i)))
 
-complex_wrapper = lambda f: (lambda arg: f(complex_array_wrapper(arg)))
+complex_wrapper = lambda f, from_i: (lambda arg: f(complex_array_wrapper(arg, from_i)))
 
 
 
