@@ -214,17 +214,17 @@ def K_opt_min(det, to_min, mean_cons):
     def deriv_func_to_min(args):        
         min_func = to_min
         res = lambda_out_array(map(lambda x: function_wrapper(sympy_2_numpy(x), 1), deriv_sympy_func(min_func)), 1)
-        return array_stretcher(res(args).real)
+        return res(args).real
     x0 =  [np.pi/3.0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5]
     psi_cons = complex_wrapper(lambda p : np.vdot(p[1:], p[1:]).real - 1, 1)
     psi_cons_deriv = array_stretcher(complex_wrapper(lambda x: [0, 2*abs(x[1]), 2*abs(x[2]), 2*abs(x[3]), 2*abs(x[4])], 1), 1)
-    print len(complex_array_wrapper(x0, 1))
+    print deriv_func_to_min(x0)
     cons = (\
     {'type': 'ineq', 'fun' : function_wrapper(n_det, 1),\
     'jac' : deriv_numpy}, 
     {'type': 'eq', 'fun' : psi_cons,'jac' : psi_cons_deriv})
     res = minimize(func_to_min, x0, \
-    jac=False,\
+    jac=deriv_func_to_min,\
     constraints=cons, method='SLSQP', options={'disp': True})
     print res.x
     return res.x#-function_wrapper(n_det)(res.x)

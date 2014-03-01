@@ -42,8 +42,10 @@ def array_to_args(f, arg):
     args = [arg[i] for i in range(n)]
     return f(*(args)).real
     
-def complex_array_wrapper(arg, from_i): 
-    return arg[0:from_i] + [arg[i] + arg[i+1]*1j for i in range(from_i, len(arg), 2)]
+def complex_array_wrapper(arg, from_i):
+    a = arg[0:from_i]
+    b = [arg[i] + arg[i+1]*1j for i in range(from_i, len(arg), 2)]
+    return  np.append(a, b)
     
 function_wrapper = lambda f, from_i: (lambda arg: array_to_args(f, complex_array_wrapper(arg, from_i)))
 
