@@ -215,10 +215,10 @@ def K_opt_min(det, to_min, mean_cons):
         min_func = to_min
         res = lambda_out_array(map(lambda x: function_wrapper(sympy_2_numpy(x), 1), deriv_sympy_func(min_func)), 1)
         return res(args).real
-    x0 =  [np.pi/3.0, 0, 0.5, 0, 0.5, 0, 0.5, 0, 0.5]
+    s = np.sqrt(8)
+    x0 =  [np.pi/3.0, s, s, s, s, s, s, s, s]
     psi_cons = complex_wrapper(lambda p : np.vdot(p[1:], p[1:]).real - 1, 1)
     psi_cons_deriv = array_stretcher(complex_wrapper(lambda x: [0, 2*abs(x[1]), 2*abs(x[2]), 2*abs(x[3]), 2*abs(x[4])], 1), 1)
-    print deriv_func_to_min(x0)
     cons = (\
     {'type': 'ineq', 'fun' : function_wrapper(n_det, 1),\
     'jac' : deriv_numpy}, 
@@ -227,7 +227,7 @@ def K_opt_min(det, to_min, mean_cons):
     jac=deriv_func_to_min,\
     constraints=cons, method='SLSQP', options={'disp': True})
     print res.x
-    return res.x#-function_wrapper(n_det)(res.x)
+    return res.x
     
     
 def K_opt_min2(det, to_min, mean_cons):
@@ -252,7 +252,7 @@ def K_opt_min2(det, to_min, mean_cons):
     bnds = ((0, 2*np.pi), (0, 1), (0, 2*np.pi))
     res = minimize(func_to_min, [np.pi/3.0, 0.001, 0], \
     jac=False,\
-    constraints=cons, bounds=bnds, method='SLSQP', options={'disp': True})
+    constraints=cons, bounds=bnds, method='L-BFGS-B', options={'disp': True})
     print res.x
     return func_to_min(res.x)
     
@@ -270,6 +270,95 @@ def eta_K_opt(det, to_min, mean_cons):
         #res.append(res2)
     print res
     return res
+    
+def bruteforce_K_opt(det, to_min, mean_cons):
+    vars = [theta, psi1, psi2, psi3, psi4]
+    sympy_2_numpy = sympy_to_numpy(tuple(vars))
+    n_det = function_wrapper(sympy_2_numpy(re(det)), 1)
+    psi_cons = complex_wrapper(lambda p : np.vdot(p, p).real, 0)
+    def func_to_min(args):
+        return function_wrapper(sympy_2_numpy(to_min), 1)(args).real
+    def d(args):
+        return np.sum([a**2 for a in args])
+    psi_range = [ 0.01*x - 1 for x in range(0, 200, 5)]
+    min_val = 0
+    min_x = [0 for i in range(0, 10)]
+    for psi1_re in psi_range:
+        for psi1_im in psi_range:
+            x1 = [psi1_re, psi1_im]
+            if d(x1) > 1:
+                continue
+            for psi2_re in psi_range:
+                for psi2_im in psi_range:
+                    x2 = x1 + [psi2_re, psi2_im]
+                    if d(x2) > 1:
+                        continue
+                    for psi3_re in psi_range:
+                        for psi3_im in psi_range:
+                            x3 = x2 + [psi3_re, psi3_im]
+                            if d(x3) > 1:
+                                continue
+                            for psi4_re in psi_range:
+                                for psi4_im in psi_range:
+                                    x4 = x3 + [psi4_re, psi4_im]
+                                    if psi_cons(x4) != 1:
+                                        continue
+                                    for ang in [0.1*np.pi*a for a in range(0, 20)]:
+                                        x = [ang] + x4
+                                        if (n_det(x) >= -10**(-8)):
+                                            continue
+                                        val = func_to_min(x)
+                                        print val
+                                        if val < min_val:    
+                                            min_val = val
+                                            min_x = x
+                                            print min_val
+    return min_x
+    
+def bruteforce_sphere_K_opt(det, to_min, mean_cons):
+    vars = [theta, psi1, psi2, psi3, psi4]
+    sympy_2_numpy = sympy_to_numpy(tuple(vars))
+    n_det = function_wrapper(sympy_2_numpy(re(det)), 1)
+    psi_cons = complex_wrapper(lambda p : np.vdot(p, p).real, 0)
+    def func_to_min(args):
+        return function_wrapper(sympy_2_numpy(to_min), 1)(args).real
+    psi_range = [0.1*np.pi*a for a in range(0, 20)]
+    min_val = 0
+    min_x = 0
+    def get_x(f):
+        v = [0.0 for i in range(8)]
+        v[0] = np.cos(f[0])
+        for i in range(1, 7):
+            v[i] = np.prod([np.sin(y) for y in f[0:i]]) * np.cos(f[i])
+        v[7] = np.prod([np.sin(y) for y in f])
+        print 'f = {}, v = {}'.format(f, v)
+        return v
+    f = [0.0 for i in range(7)]
+    x_val = [0.0 for i in range(9)]
+    for psi1_re in psi_range:
+        for psi1_im in psi_range:
+            f[0:2] = [psi1_re, psi1_im]
+            for psi2_re in psi_range:
+                for psi2_im in psi_range:
+                    f[2:4] = [psi2_re, psi2_im]
+                    for psi3_re in psi_range:
+                        for psi3_im in psi_range:
+                            f[4:6] = [psi3_re, psi3_im]
+                            for psi4_re in psi_range:
+                                #for psi4_im in psi_range:
+                                f[6] = psi4_re
+                                x_val[1:9] = get_x(f)
+                                for a in psi_range:
+                                    x_val[0] = a
+                                    if (n_det(x_val) >= -10**(-8)):
+                                        continue
+                                    val = func_to_min(x_val)
+                                    #print val
+                                    if val < min_val:    
+                                        min_val = val
+                                        min_x = x_val
+                                     #   print min_val
+    return min_x
     
 init_printing()
 eta = Symbol('eta', integer=True)
@@ -304,8 +393,13 @@ quant_mean = psi.T * n * psi
 quant_std = psi.T * n * n * psi - quant_mean*quant_mean
 #to_min = -quant_mean**2 + quant_std
 #to_min = sqrt(re(quant_std[0])) - quant_mean[0]
-#to_min = quant_mean[0]**2 / quant_std[0]
-to_min = quant_mean[0] / sqrt(quant_std[0])
+to_min = quant_mean[0]**2 / quant_std[0]
+#to_subs = [(eta1, 0.6), (eta2, 0.6), (theta, np.pi), (psi1, 0.5j), (psi2, 0.5j), (psi3, 0.5j), (psi4, 0.5j)]
+#subs_to_min = quant_std.subs(to_subs)
+#print simplify(subs_to_min[0])
+#print 'quant_mean: {}'.format(latex(simplify(quant_mean[0])))
+#print 'quant_std: {}'.format(latex(simplify(quant_std[0])))
+#to_min = quant_mean[0] / sqrt(quant_std[0])
 # [0] is because the resut of matrix multiplication is always matrix here
 opt_val = eta_K_opt(n.det(), to_min, quant_mean[0])
 to_min = quant_mean[0]
