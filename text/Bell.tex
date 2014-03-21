@@ -1,0 +1,57 @@
+\documentclass[12pt]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+
+
+\begin{document}
+
+\paragraph{Some problems in quantum mechanics theory} According to the quantum mechanics theory before any measurements are made(for example of electron's spin) a system doesn't have determine(but yet unknown) state like in case of classical mechanics. Such system stands in the superposition of some mutually exclusive quantum states. In case of electron its spin can be measured with some probability as "+" and with some probability as "-".
+
+According to the Copenhagen interpretation in the time of measurement quantum system collapses into single state "+" or single state "-". If we have one source that produces electron-positron pairs theirs spins must be opposite. If in case of measure of the electron spin it state collapses to "+" then in this moment positron's spin must became determine and must be equal "-". Even if it stands in its own position far from paired electron it will be simultaneously affected by it.
+
+The principle of locality states that physical processes occurring at one place should have no immediate effect on the elements of reality at another location. The paradox is if quantum mechanics completely describes the state of electron by a wave function it leads to violation of the principle of locality.
+
+There are several approaches to resolve this paradox. The first is to accept that quantum mechanics is an incomplete theory. In other words there are some elements of reality which are not described but only statistical approximated by the current theory. Such a theory is called hidden variables theory. The second way is to accept the fact that real world has nonlocality. This way rejects local realism theory.
+
+\paragraph{Bell's theorem} The whole Bell's theory is about accordance between predictions of quantum mechanics and classical probability theory. Bell inequalities concern measurements made by observers on pairs of particles that have interacted and then separated. Bell concern that in the real world there are some hidden variables for observed particles. That means that observed results which are correctly predicted by quantum mechanics are random variables depending on some hidden state of reality. 
+
+The theorem in different variants is based on one of the statements: 
+\begin{enumerate}
+\item Bell's inequality: for every random variables $\xi_a(\omega)$, $\xi_b(\omega)$, $\xi_c(\omega)$ which can only be equal $\pm 1$ the following inequality is performed
+$$| \langle\xi_a,\xi_b\rangle -  \langle\xi_c,\xi_b\rangle | \leq 1 - \langle\xi_a,\xi_c\rangle$$
+where $\langle\xi_a,\xi_b\rangle$ is a covariation between two random variables.
+
+\item  Clauser-Horne-Shimony-Holt inequality: for every random variables $\xi_j(\omega)$ and $\xi'_j(\omega)$ such as $|\xi_j(\omega)| \leq 1$ and $|\xi'_j(\omega)| \leq 1$ the following inequality is performed
+$$\langle\xi_1,\xi'_1\rangle + \langle\xi_1,\xi'_2\rangle + \langle\xi_2,\xi'_1\rangle -  \langle\xi_2,\xi'_2\rangle \leq 2$$
+\end{enumerate}
+
+To connect quantum mechanics predictions and classical probability theory Bell made some assumptions about mapping between two models. With them and quantum mechanic formalism these inequalities are violated. Some experiments were performed and their results also violate inequalities from the classical probability theory.
+
+If this theorem is correct then either quantum mechanics or local realism is wrong, as they are mutually exclusive.
+
+\paragraph{Possible interpretations of the Bell theorem} 
+\begin{enumerate}
+\item Quantum mechanics is complete and nonlocal so it cannot be reduced to the classical theory.
+If this interpretation is true then the state of a partial cannot be represented as random variable $\xi_a(\omega)$ so inequalities cannot be applied to the real measurements. This is the most popular interpretation.
+
+\item Quantum mechanics is incomplete and any complete classical theory is nonlocal.
+If this interpretation is true then the state of a partial cannot be represented as $\xi_a(\omega)$ because it depends of another partial $b$. The representation as $\xi_{a,b}(\omega)$ doesn't give us the same inequalities so there is no paradox between experiments and classical probability theory.
+
+\item Some of Bell's assumptions about accordance between classical and quantum models are wrong. If this interpretation is true then there is no paradox because its proof is incorrect.
+\end{enumerate}
+
+\paragraph{Possible incorrect assumptions in the Bell's theory}
+\begin{enumerate}
+\item It can be contradicted that classical(an integral) and quantum equalities for covariations are equal.
+$$\int_\Omega\xi_a(\omega)\xi_b(\omega)dP_\rho(\omega) \equiv Tr\rho\hat{a}\hat{b}$$
+There are some another variants of the original theorem with another less controversial assumptions.
+\item Domains of the classical and quantum variables are equal. There are two systems - the observed and the observer. The probability measure of states for observed partials concerns microscopic world and the observed probabilities concern macroscopic devices. These two systems can have different degrees of freedom, another parameters or possible values. It's hard to determine dependency between them as in theory there is nothing about it.
+\item In experimental tests of Bell's inequality statistical data was used. That means that a lot of single experiments were made and their results depended of states of observing devices and assumed hidden variables. So there was different physical context of those experiments. If we fix quantum state $\rho$ it is not necessary that it will always correspond to the fixed classical probability distribution because with hidden variable quantum mechanics is only projection and there is no one to one correspondence. There is one to one correspondence only between classical state $\xi$ and a pair $(\rho, C)$ - quantum state and a context. Using that one can see that Bell's inequality is correct only if contexts of different experiments are the same. Because of many parameters probability to get that is zero. So considering context of experiments Bell's inequality has another form and not violated by experiments.
+\end{enumerate}
+
+All of this statements allow to consider that Bell's inequality in its current form doesn't relate to plausible model of correspondence between classical and quantum mechanics. If that it doesn't give any answers about local realism.
+
+\end{document}

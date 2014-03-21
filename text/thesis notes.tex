@@ -1,0 +1,135 @@
+\documentclass[11pt]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+
+\usepackage{amsthm}
+%\newenvironment{proof}[1][Proof]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{example}[1][Example]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{remark}[1][Remark]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%
+%\newcommand{\qed}{\nobreak \ifvmode \relax \else
+%      \ifdim\lastskip<1.5em \hskip-\lastskip
+%      \hskip1.5em plus0em minus0.5em \fi \nobreak
+%      \vrule height0.75em width0.5em depth0.25em\fi}
+
+
+\begin{document}
+
+\section{Introduction}
+One of the foundations of classical mechanics is a principle of local realism. Locality stands that any object can be affected only by its nearest local space and there is no action that can be transferred faster than the light speed. Realism refers to a philosophical position that all objects have their own attributes which are independent from any measurements and have pre-existing values. These postulates are not only confirmed by classical physical experiments, intuitively they are plausible assumptions on the real world.
+
+According to the Heisenberg principle of quantum mechanics both position and momentum(and any other pair which has nonzero commutator) cannot be known simultaneously. It means that before any measure system doesn't have precise state since it doesn't know what is going to be measured - position or momentum.
+
+This contradiction of the local realism principle was criticised by Einstein, Podolsky and Rosen(EPR paradox). They showed using quantum mechanics formalism and hypothetical experiment that it is possible to know both position and momentum for one particle by measure of the entangled particle. The paradox shows that either quantum mechanics is incomplete and there are some yet unknown parameters of reality or local realism assumption is wrong. 
+
+Further illustrations of contradictions between classical and quantum models of real world were given by Bell in the form of statistical inequalities which can be tested experimentally. The question about the existence of locality and realism seems to be a philosophical question about the nature of the reality but it was formulated using mathematical formalism and then tested experimentally. The first experiments were made by Freedman and Clauser in 1972 and despite the fact, that Bell's inequalities were violated according to quantum mechanics predictions in most of experiments, the process is still ongoing.
+
+The main reason of further tests is that as any experiment Bell's test cannot be performed with 100\% efficiency of detectors and without any noise in the detector response. Considering efficiency and background Eberhard developed his inequality \cite{Eberhard} that can be used for experiments without efficiency loophole. One of the experiment using this special Bell inequality is described in \cite{Zeilinger}.
+
+This thesis is devoted to mathematical modelling of conditions
+including such parameters which are used by experimenters as the detection efficiency and setting of angles of polarization beam splitters.
+
+\section{Required elements of functional analysis and theory of generalized functions}
+\subsection{Generalized functions}
+The concept of generalized function is the extension to the notion of  functions. It can be described using the following definition.
+
+\begin{definition}
+Bump function - is a real-valued function $f$ which has continuous derivatives of all orders and equals to zero outside some bounded region(has compact support).
+\end{definition}
+Consider the set of such functions $K$. Assume that the sequence of bump functions $\varphi_1,\varphi_2\ldots$ tends to zero in the $K$ space if all of this functions equal to zero outside the same bounded region and each sequence of them and their derivatives tends uniformly to zero.
+
+One of the examples of such functions is the sequence $\varphi_\nu(x) = \frac{1}{\nu}\varphi(x, a)$ where 
+\[
+\varphi(x, a) = \left\{
+\begin{aligned}
+&e^{-\frac{a^2}{a^2 - x^2}},&\ x<a\\
+&0,&\ \mbox{otherwise}\\
+\end{aligned} \right. .
+\]
+It and all its derivatives uniformly tend to zero and all function in the sequence become zero in the region where $x \geq a$.
+
+\begin{definition}
+We are given a generalized function $f$ if there is a rule according to which for every bump function $\varphi$ we have a mapping to the a number $(f, \varphi)$ that satisfies following conditions:
+\begin{enumerate}
+\item Linearity - $(f, \alpha_1\varphi_1 + \alpha_2\varphi_2) = (f, \alpha_1\varphi_1) + (f, \alpha_2\varphi_2)$;
+\item Continuity - if some sequence of bump functions $\varphi_1,\varphi_2,\ldots$ tends to zero in the space $K$ then the sequence of numbers $(f, \varphi_1), (f, \varphi_2), \ldots$ converges to zero in $\mathbb{R}$.
+\end{enumerate}
+\end{definition}
+
+For example, consider a function $f$ which is absolutely integrable in every finite region of $\mathbb{R}^n$. With this function for every bump function $\varphi$ we can map a number 
+\begin{equation}
+(f, \varphi) = \int_{\mathbb{R}^n} f(x)\varphi(x) dx. \label{eq:non-singular-generalized}
+\end{equation}
+
+Another example of generalized function is Dirac delta function $\delta(x)$:
+\begin{equation}
+(\delta, \varphi) = \int_{-\infty}^{+\infty} \delta(x)\varphi(x) dx = \varphi(0). \label{eq:delta-function}
+\end{equation}
+
+Generalized functions that cannot be represented in the form \eqref{eq:non-singular-generalized} called singular. Delta function is an example of singular functions.
+
+\subsection{Dirac delta function and its properties}
+
+Every singular function can be represented as a limit a sequence of nonsingular generalized functions.
+\begin{definition}
+The sequence of generalized functions $f_1, f_2,\ldots f_\nu,\ldots$ converges to generalized function $f$ if
+\[
+\lim_{\nu\to\infty} (f_\nu, \varphi) = (f, \varphi).
+\]
+\end{definition}
+
+
+\section{Mathematical formalism of quantum mechanics}
+
+\section{Einstein-Podolsky-Rosen paradox}
+Einstein-Podolsky-Rosen paradox was published in 1935 as the criticism of some statements in the Coppenhagen interpretation of quantum mechanics. The main principle of this interpretation holds that any quantum system can be described as wave-function and after measure it collapses to one of its eigenstates with some probabilities. Moreover, Heisenberg uncertainty principle stands that position of a particle and its momentum are incompatible and they cannot be measured jointly with good precision. Einstein was not agree with probabilistic measurement outcomes and his paper was an attempt to show contradictions in quantum mechanics.
+
+The article is based on a thought experiment with the following initial conditions. Consider two systems $S_1$, $S_2$, both with the state space $L_2(\mathbb{R})$ and the source which produces particles for these systems. Superposition of these systems can be represented as a quantum state from the tensor product of its single Hilbert spaces.
+Operator will $A$ denote an observable on $S_1$ with its eigenvalues $\{a_k\}$ and eigenvectors $\{\varphi_k(x_1)\}$. Operator $B$ will denote another observable on the same system with eigenvalues $\{b_k\}$ and eigenvectors $\{\psi_k(x_1)\}$. 
+
+In the common case of two Hilbert spaces $H_1$ and $H_2$ and their basis vectors $\{e_k\}$ and $\{f_k\}$ respectively the state $\varphi = \varphi_1\otimes\varphi_2$ can be represented in the form:
+\[
+\varphi = \sum_{k, m}c_{k, m}e_k\otimes f_m.
+\]
+If $H_1 = H_2 = L_2(\mathbb{R})$ its tensor product is $L_2(\mathbb{R})\otimes L_2(\mathbb{R}) = L(\mathbb{R}^2)$. For this space such state $\varphi$ can be represented in the form
+\[
+\varphi (x_1, x_2) = \sum_{k, m}c_{k, m}e_k(x_1)f_m(x_2)
+\]
+or for the continuous case it is
+\[
+\varphi (x_1, x_2) = \int u(x, x_1)v(x, x_2)dx.
+\]
+
+Suppose we want to execute the measurement of $A$. Before measure the particle is in the state $\psi(x_1, x_2) = \sum_k v_k(x_2)\varphi_k(x_1)$. According to von Neumann projection postulate after measurement the system will collapse to the precise state $\psi = \varphi_m(x_1)v_m(x_2)$. It means that after measuring on $S_1$ the second system will also have determinate state $v_m(x_2)$. But in conditions where two detector are very far from each other(so they cannot have impact on each other according to locality principle) it means that the second system has to have such state $v_m(x_2)$ not only before measurement but always.
+
+Suppose after all that we've changed our decision and we want to measure $B$ on $S_1$ instead of $A$. By analogy for the previous consideration, after measure the system will collapse to the state $\psi = \zeta_n(x_1)u_n(x_2)$ which means that in this case the second system will have state $u_n(x_2)$. And again, it has to have such state independently of the measurement on the first system i.e. it stands in this state even before any measurements.
+
+After that thought experiments we can conclude that the second system has 2 wave-functions $v_m(x_2)$ and $u_n(x_2)$. The paradox is that we can construct such states that cannot be known simultaneously according to the Heisenberg principle. Here we present an example from the original paper \cite{EPR}.
+
+Consider the state $\psi(x_1, x_2) = \int e^{\frac{ip}{\hbar}(x_1+x_2-x_0)}$ where $x_0$ is a constant. On one side, it can be represented in the form $\psi(x_1, x_2) = \int\varphi(p, x_1)v(p, x_2)dp$ where $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$ and $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$. 
+
+Momentum operator is defined by $\hat{p} = \dfrac{\hbar}{i}\dfrac{d}{dx}$. Its eigenfunction is $\psi = e^{\frac{i\lambda}{\hbar}x}$ for eigenvalue $\lambda$. After the measure of $A$ in the first system its state will collapse to its eigenfunction $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$. The state of the second system $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$ is an eigenfunction of momentum operator, corresponding to the eigenvalue $-p$. 
+
+On another side considering state can be represented as $\psi(x_1, x_2) = \delta(x_1 + x_2 - x_0) = \hbar\int\delta(x - x_1)\delta (x - x_2 + x_0)dx = \int\zeta(x, x_1)u(x, x_2)dx$. More information about delta-functions can be found in the appendix.
+
+Position operator in the second system is defined by $\hat{x_2}f = x_2f$. Its eigenfunction is $\delta(x - \lambda)$ for the eigenvalue $\lambda$. After the measure of $B$ in the first system its state will collapse to the eigenfunction $\zeta(x, x_1) = \delta(x - x_1)$. The state of the second system $u(x, x_2) = \delta(x - x_2 + x_0)$ is also an eigenfunction of position operator, corresponding to the eigenvalue $x + x_0$.
+
+At this point authors conclude that both position and momentum in the second system are elements of reality since they couldn't be affected by measures on the first system. But Heisenberg principle stands that they can't be known both i.e. can't be both elements of reality simultaneously. 
+
+The question of this paradox - do quantum mechanics provide a complete description of the physical reality. But since local realism assumption is used, another explanation of this paradox can be found with rejection of the local realism.
+
+\bibliography{literature.bib}
+\bibliographystyle{amsplain}
+\end{document}
