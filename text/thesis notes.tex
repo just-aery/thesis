@@ -24,6 +24,7 @@
 %      \hskip1.5em plus0em minus0.5em \fi \nobreak
 %      \vrule height0.75em width0.5em depth0.25em\fi}
 
+\usepackage{enumitem}
 
 \begin{document}
 
@@ -42,8 +43,13 @@ This thesis is devoted to mathematical modelling of conditions
 including such parameters which are used by experimenters as the detection efficiency and setting of angles of polarization beam splitters.
 
 \section{Required elements of functional analysis and theory of generalized functions}
+\subsection{Hilber space}
+To define
+\begin{definition}
+Hilbert space $\mathcal{H}$ is a complex vector space with an inner product and which is complete with the norm $\|x\| = \sqrt{(x, x)}$
+\end{definition}
 \subsection{Generalized functions}
-The concept of generalized function is the extension to the notion of  functions. It can be described using the following definition.
+The concept of generalized function is the extension to the notion of  functions. Here we present a description of it from \cite{gelfand}.
 
 \begin{definition}
 Bump function - is a real-valued function $f$ which has continuous derivatives of all orders and equals to zero outside some bounded region(has compact support).
@@ -90,8 +96,66 @@ The sequence of generalized functions $f_1, f_2,\ldots f_\nu,\ldots$ converges t
 \]
 \end{definition}
 
+Dirac delta function \eqref{eq:delta-function} can be defined as a limit of nonsingular functional sequence $f_\nu$ with the following properties:
+\begin{enumerate}
+\item $\forall M > 0:\ \forall a, b\ |a| \leq M,\ |b| \leq M$ integral 
+\[
+ \left| \int_a^b f_\nu(\xi)d\xi \right| \leq C(M)
+\]
+\item for every fixed $a, b > 0$
+\[
+\lim_{\nu\to\infty} \int_a^bf_\nu(\xi)d\xi = \left\{
+\begin{aligned}
+&0,&\ a < b < 0 \mbox{ or } 0 < a < b,\\
+&1,&\ a < 0 < b\\
+\end{aligned} \right. .
+\]
+\end{enumerate}
+One example of such functions is the sequence 
+\[
+f_\epsilon(x) = \dfrac{1}{\pi} \dfrac{\epsilon}{x^2 + \epsilon^2}
+\]
+where $\epsilon\to 0$.
+
+Delta function has some useful properties:
+\begin{enumerate}
+\item $\int _{-\infty}^{+\infty} f(x)\delta(x - x_0)dx = f(x_0)$,
+\item $\delta\left(\dfrac{x}{a}\right) = |a|\delta(x)$,
+\item another way to define $\delta(x)$ is to compute its fourier transformation using \eqref{eq:delta-function}:
+\[
+\tilde{\delta}(\omega) = \int_{-\infty}^{+\infty}\dfrac{e^{i\omega t}}{\sqrt{2\pi}}\delta(t)dt = \dfrac{1}{\sqrt{2\pi}}.
+\]
+From the above equation one can find that 
+\[
+\delta(t) = \int_{-\infty}^{+\infty}\dfrac{e^{-i\omega t}}{\sqrt{2\pi}}\tilde{\delta}(\omega)d\omega = \int_{-\infty}^{+\infty}\dfrac{e^{-i\omega t}}{2\pi}d\omega.
+\]
+This equation can be used as another form of defining dirac delta function.
+\end{enumerate}
+
 
 \section{Mathematical formalism of quantum mechanics}
+The mathematical formalizm of quantum mechanics can be formulated as a list of postulates which are based on the theory of self-adjoint operator on complex Hilbert space $\mathcal{H}$. 
+\begin{enumerate}[label=\bfseries Postulate \arabic*:, align=left]
+  \item Quantum state $\psi$ that also called vawe-function is a vector of a complex Hilbert space such that $\langle\psi\rangle = 1$. This vector completely describes the state of quantum system.
+  \item A physical observable $a$ in quantum mechanics is represented as a self-adjoint oerator $\hat{a}$ in $\mathcal{H}$. Different observables are represented with different operators.
+  \item Observable $a$ can take values with some probabilities from the spectrum of operator $\hat{a}$. In case of discrete spectrum this operator can be written in the form 
+  \[
+  \hat{a} = \sum_m a_mP_m^a
+  \]
+    where $P_m^a$ is an orthogonal projetor corresponding to $a_m$.
+  \item Born's rule - if $\hat{a}$ is a self-adjoint operator with discrete spectrum then the probability to obtain an eigenvalue $a_m$ after a measurerement can be calculated using formula
+  \[
+  P(a = a_m) = \| P_m^a\psi\|^2.
+  \]
+  \item The time evolution of the quantum state $\psi$ satisfies the Schr\"{o}dinger equation
+  \[
+  i\hbar \dfrac{d}{dt}\psi(t) = \mathcal{\hat{H}}\psi(t)
+  \] 
+  with the initial condition $\psi(0) = \psi_0$ and
+  where $\mathcal{\hat{H}}$ is a self-adjoint operator representing energy of the system.
+  \item 
+\end{enumerate}
+
 
 \section{Einstein-Podolsky-Rosen paradox}
 Einstein-Podolsky-Rosen paradox was published in 1935 as the criticism of some statements in the Coppenhagen interpretation of quantum mechanics. The main principle of this interpretation holds that any quantum system can be described as wave-function and after measure it collapses to one of its eigenstates with some probabilities. Moreover, Heisenberg uncertainty principle stands that position of a particle and its momentum are incompatible and they cannot be measured jointly with good precision. Einstein was not agree with probabilistic measurement outcomes and his paper was an attempt to show contradictions in quantum mechanics.
