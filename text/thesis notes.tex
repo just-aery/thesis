@@ -10,10 +10,15 @@
 %\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
 
 \usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+
 %\newenvironment{proof}[1][Proof]{\begin{trivlist}
 %\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
-\newenvironment{definition}[1][Definition]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{definition}[1][Definition]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{theorem}[1][Theorem]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 %\newenvironment{example}[1][Example]{\begin{trivlist}
 %\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 %\newenvironment{remark}[1][Remark]{\begin{trivlist}
@@ -26,139 +31,450 @@
 
 \usepackage{enumitem}
 
+\DeclareMathOperator{\Tr}{Tr}
+
+
 \begin{document}
 
 \section{Introduction}
 One of the foundations of classical mechanics is a principle of local realism. Locality stands that any object can be affected only by its nearest local space and there is no action that can be transferred faster than the light speed. Realism refers to a philosophical position that all objects have their own attributes which are independent from any measurements and have pre-existing values. These postulates are not only confirmed by classical physical experiments, intuitively they are plausible assumptions on the real world.
 
-According to the Heisenberg principle of quantum mechanics both position and momentum(and any other pair which has nonzero commutator) cannot be known simultaneously. It means that before any measure system doesn't have precise state since it doesn't know what is going to be measured - position or momentum.
+According to the Heisenberg principle of quantum mechanics both position and momentum(and any other pair which has nonzero commutator) cannot be known simultaneously. It means that for a quantum system, the values of position and momentum cannot be be assigned to it before measurement, Thus, as a consequence of the Heisenberg principle, in quantum world there is no place for realism.
+%before any measure system doesn't have precise state since it doesn't know what is going to be measured - position or momentum.
 
-This contradiction of the local realism principle was criticised by Einstein, Podolsky and Rosen(EPR paradox). They showed using quantum mechanics formalism and hypothetical experiment that it is possible to know both position and momentum for one particle by measure of the entangled particle. The paradox shows that either quantum mechanics is incomplete and there are some yet unknown parameters of reality or local realism assumption is wrong. 
+However, his position was criticised by Einstein, Podolsky and Rosen(EPR paradox)\cite{EPR}. They showed using quantum mechanics formalism and hypothetical experiment that it is possible to know both position and momentum for one particle by measurement of the entangled particle. The paradox shows that either quantum mechanics is incomplete and there are some yet unknown parameters("hidden variables") or the locality assumption is wrong. 
 
-Further illustrations of contradictions between classical and quantum models of real world were given by Bell in the form of statistical inequalities which can be tested experimentally. The question about the existence of locality and realism seems to be a philosophical question about the nature of the reality but it was formulated using mathematical formalism and then tested experimentally. The first experiments were made by Freedman and Clauser in 1972 and despite the fact, that Bell's inequalities were violated according to quantum mechanics predictions in most of experiments, the process is still ongoing.
+Further evidence of contradiction between classical and quantum models of real world was given by Bell and other authors in the form of statistical inequalities which can be tested experimentally. At the very beginning the question about the existence of locality and realism seemed to be a philosophical question about the nature of the reality, but after it was formulated using mathematical formalism and then tested experimentally. The first experiments were made by Freedman and Clauser in 1972 and despite the fact, that Bell's inequalities were violated according to quantum mechanics predictions in most of experiments, the process is still ongoing.
 
 The main reason of further tests is that as any experiment Bell's test cannot be performed with 100\% efficiency of detectors and without any noise in the detector response. Considering efficiency and background Eberhard developed his inequality \cite{Eberhard} that can be used for experiments without efficiency loophole. One of the experiment using this special Bell inequality is described in \cite{Zeilinger}.
 
-This thesis is devoted to mathematical modelling of conditions
-including such parameters which are used by experimenters as the detection efficiency and setting of angles of polarization beam splitters.
+This thesis is devoted to mathematical modelling of parameters which are used by experimenters as the detection efficiency and setting of angles of polarization beam splitters.
 
 \section{Required elements of functional analysis and theory of generalized functions}
-\subsection{Hilber space}
-To define
-\begin{definition}
-Hilbert space $\mathcal{H}$ is a complex vector space with an inner product and which is complete with the norm $\|x\| = \sqrt{(x, x)}$
-\end{definition}
-\subsection{Generalized functions}
-The concept of generalized function is the extension to the notion of  functions. Here we present a description of it from \cite{gelfand}.
+\subsection{Hilbert space and linear operator on it}
+Here we present some basic definitions of function analysis which can be used in quantum mechanics formalism. Our presentation will be brief and not detailed, see, e.g. \cite{advanced_la}, for details.
 
 \begin{definition}
-Bump function - is a real-valued function $f$ which has continuous derivatives of all orders and equals to zero outside some bounded region(has compact support).
-\end{definition}
-Consider the set of such functions $K$. Assume that the sequence of bump functions $\varphi_1,\varphi_2\ldots$ tends to zero in the $K$ space if all of this functions equal to zero outside the same bounded region and each sequence of them and their derivatives tends uniformly to zero.
-
-One of the examples of such functions is the sequence $\varphi_\nu(x) = \frac{1}{\nu}\varphi(x, a)$ where 
-\[
-\varphi(x, a) = \left\{
-\begin{aligned}
-&e^{-\frac{a^2}{a^2 - x^2}},&\ x<a\\
-&0,&\ \mbox{otherwise}\\
-\end{aligned} \right. .
-\]
-It and all its derivatives uniformly tend to zero and all function in the sequence become zero in the region where $x \geq a$.
-
-\begin{definition}
-We are given a generalized function $f$ if there is a rule according to which for every bump function $\varphi$ we have a mapping to the a number $(f, \varphi)$ that satisfies following conditions:
+For the complex vector space $V$ inner (scalar) product $\langle\cdot,\cdot\rangle$ is a map $V\times V \to \mathbb{C}$ that satisfies conditions:
 \begin{enumerate}
-\item Linearity - $(f, \alpha_1\varphi_1 + \alpha_2\varphi_2) = (f, \alpha_1\varphi_1) + (f, \alpha_2\varphi_2)$;
-\item Continuity - if some sequence of bump functions $\varphi_1,\varphi_2,\ldots$ tends to zero in the space $K$ then the sequence of numbers $(f, \varphi_1), (f, \varphi_2), \ldots$ converges to zero in $\mathbb{R}$.
+\item Conjugate symmetry - $\langle x, y\rangle = \overline{\langle y, x\rangle}$,
+\item It is positively defined - $\langle x, y\rangle \geq 0$ and $\langle x, y\rangle = 0 \Leftrightarrow x = y$,
+\item Linearity - $\langle x, ay\rangle = a\langle x, y\rangle$ where $a\in\mathbb{C}$, and $\langle x, y_1 + y_2\rangle = \langle x, y_1\rangle + \langle x, y_2\rangle$.
 \end{enumerate}
 \end{definition}
 
-For example, consider a function $f$ which is absolutely integrable in every finite region of $\mathbb{R}^n$. With this function for every bump function $\varphi$ we can map a number 
+\begin{definition}
+Hilbert space $H$ is a complex vector space with an inner product which is complete with respect to the norm $\|x\| = \sqrt{\langle x, x\rangle}$
+\end{definition}
+
+The space $H = \mathbb{C}^n$ with an inner product defined by $\langle\psi, \varphi \rangle = \sum_{i = 1}^n \overline{\psi_i}\varphi_i$. Another well-known example is the functional space $H = L_2(\mathbb{R}^n, dx)$ of square integrable function with respect to the Lebegue measure. In this space inner product is defined by $\langle\psi, \varphi \rangle = \int_{\mathbb{R}^n}\overline{\psi(x)}\varphi(x) dx$.
+
+Another important notion which is widely used in quantum mechanics theory is the notion of a linear operator.
+\begin{definition}
+Linear operator $A$ on a Hilbert space $H$ is a map $H \to H$ that has the following properties:
+\begin{enumerate}
+\item $\forall \psi_1,\psi_2\in H: A(\psi_1 + \psi_2) = A\psi_1 + A\psi_2 $
+\item $\forall\lambda\in\mathbb{C}, \psi\in H: A(\lambda\psi) = \lambda A\psi$
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+For a linear operator $A$, its adjoint operator $A^*$ is denoted with the aid of the equality $\langle A\psi,\varphi\rangle = \langle\psi, A^*\varphi\rangle$. Operator $A$ is called self-adjoint if $A^* = A$.
+\end{definition}
+
+\begin{definition}
+Let $V$ be a vector space over $\mathbb{C}$ and let $A$ be an operator on $V$.
+\begin{enumerate}
+\item A scalar $\lambda\in \mathbb{C}$ is an eigenvalue of $A$ if there exists a nonzero vector $\psi\in V$ for which
+\[
+A\psi = \lambda\psi.
+\]
+\item Such a vector $\psi$ is called an eigenvector of $A$.
+\item In some cases there are several different eigenvectors associated with the same eigenvalue $\lambda$. They together with the zero vector form a subspace of $V$ called the eigenspace of $\lambda$.
+\item The set of all eigenvalues of an operator is called the spectrum.
+\end{enumerate}
+\end{definition}
+
+For self-adjoint operators in Hilbert space the following theorem holds.
+\begin{theorem}
+For every self-adjoint operator $A$ in complex Hilbert space $H$:
+\begin{enumerate}
+\item All its eigenvalues are real,
+\item In $H$ there is an orthonormal basis consisting of its eigenvectors.
+\end{enumerate}
+\end{theorem}
+
+Another useful operator on Hilbert space is a projector operator.
+\begin{definition}
+Let $H_0$ be a linear subspace of $H$. Operator $\pi: H \to H - H_0$ is called a projector if $\pi^* = \pi$ and $\pi^2 = \pi$. It projects $H$ orthogonally onto $H_0 = \pi(H)$.
+\end{definition}
+Let $\{e_1, \ldots, e_n\}$ be a basis in $H$ and $\{e_1, \ldots e_m\}$ a basis in $H_0$. If $e_j \in H_0$ then $\pi e_j = e_j$ and if $e_j\in H_0^\perp$ then $\pi e_j = 0$. For an arbitrary element $\psi\in H$, the projector operator acts as: 
+\[
+\pi\psi = \sum_{i = 1}^m z_ie_i, \mbox{ where } z_i = \langle e_i, \psi\rangle.
+\]
+
+\subsection{Tensor product}
+Let $H_1$ be a vector space with an orthogonal basis system $\{e_1, \ldots e_n\}$ and let $H_2$ be another vector space with an orthogonal basis $\{f_1,\ldots f_m\}$. We will use formal symbol $\otimes$ to construct a new orthogonal basis from the set of ordered pairs $(e_i, f_j)$ in a new vector space:
 \begin{equation}
-(f, \varphi) = \int_{\mathbb{R}^n} f(x)\varphi(x) dx. \label{eq:non-singular-generalized}
+\{e_i \otimes f_j | e_i \in H_1, f_j \in H_2\}. \label{eq:tensor_basis}
 \end{equation}
 
-Another example of generalized function is Dirac delta function $\delta(x)$:
-\begin{equation}
-(\delta, \varphi) = \int_{-\infty}^{+\infty} \delta(x)\varphi(x) dx = \varphi(0). \label{eq:delta-function}
-\end{equation}
-
-Generalized functions that cannot be represented in the form \eqref{eq:non-singular-generalized} called singular. Delta function is an example of singular functions.
-
-\subsection{Dirac delta function and its properties}
-
-Every singular function can be represented as a limit a sequence of nonsingular generalized functions.
 \begin{definition}
-The sequence of generalized functions $f_1, f_2,\ldots f_\nu,\ldots$ converges to generalized function $f$ if
-\[
-\lim_{\nu\to\infty} (f_\nu, \varphi) = (f, \varphi).
-\]
+The set of formal sums of the form
+\begin{equation}
+\psi = \sum_{i,j}z_{i,j}e_i\otimes f_j,\ \sum_{i, j}|z_{i,j}|^2 < \infty,\  z_{i,j} \in \mathbb{C}
+\label{eq:tensor_element}
+\end{equation}
+with naturally defined operation of addition and multiplication by scalar is called the tensor product of $H_1$ and $H_2$ and denoted by the symbol $H = H_1\otimes H_2$
 \end{definition}
 
-Dirac delta function \eqref{eq:delta-function} can be defined as a limit of nonsingular functional sequence $f_\nu$ with the following properties:
-\begin{enumerate}
-\item $\forall M > 0:\ \forall a, b\ |a| \leq M,\ |b| \leq M$ integral 
+If $H_1$ and $H_2$ are Hilbert spaces then $H = H_1\otimes H_2$ is also Hilbert space with the inner product defined by
 \[
- \left| \int_a^b f_\nu(\xi)d\xi \right| \leq C(M)
+\langle\psi, \varphi\rangle = \langle \sum_{i,j}z_{i,j}e_i\otimes f_j, \sum_{k,l}v_{k,l}e_k\otimes f_l \rangle = \sum_{i, j}\sum_{k, l}\overline{z_{i,j}}v_{k,l} \langle e_i\otimes f_j, e_k\otimes f_l \rangle,
 \]
-\item for every fixed $a, b > 0$
+where a scalar product of basis vectors is defined by
 \[
-\lim_{\nu\to\infty} \int_a^bf_\nu(\xi)d\xi = \left\{
-\begin{aligned}
-&0,&\ a < b < 0 \mbox{ or } 0 < a < b,\\
-&1,&\ a < 0 < b\\
-\end{aligned} \right. .
+\langle e_i\otimes f_j, e_k\otimes f_l \rangle \overset{\mbox{def}}= \langle e_i, e_k\rangle \cdot \langle f_j, f_l \rangle = \delta_{i, k}\delta_{j, l}.
 \]
-\end{enumerate}
-One example of such functions is the sequence 
-\[
-f_\epsilon(x) = \dfrac{1}{\pi} \dfrac{\epsilon}{x^2 + \epsilon^2}
-\]
-where $\epsilon\to 0$.
 
-Delta function has some useful properties:
-\begin{enumerate}
-\item $\int _{-\infty}^{+\infty} f(x)\delta(x - x_0)dx = f(x_0)$,
-\item $\delta\left(\dfrac{x}{a}\right) = |a|\delta(x)$,
-\item another way to define $\delta(x)$ is to compute its fourier transformation using \eqref{eq:delta-function}:
-\[
-\tilde{\delta}(\omega) = \int_{-\infty}^{+\infty}\dfrac{e^{i\omega t}}{\sqrt{2\pi}}\delta(t)dt = \dfrac{1}{\sqrt{2\pi}}.
-\]
-From the above equation one can find that 
-\[
-\delta(t) = \int_{-\infty}^{+\infty}\dfrac{e^{-i\omega t}}{\sqrt{2\pi}}\tilde{\delta}(\omega)d\omega = \int_{-\infty}^{+\infty}\dfrac{e^{-i\omega t}}{2\pi}d\omega.
-\]
-This equation can be used as another form of defining dirac delta function.
-\end{enumerate}
+For the elements $\psi_1, \psi_2$ from spaces $H_1$ and $H_2$, correspondingly, the tensor product is given by
+\begin{equation}
+\psi_1 \otimes \psi_2 = \left(\sum_ix_ie_i\right) \otimes \left(\sum_jy_jf_j\right) \overset{\mbox{def}}= \sum_{i, j} x_iy_j \cdot e_i \otimes f_j \in H_1 \otimes H_2.
+\label{eq:tensor_factorizable}
+\end{equation}
+Elements of $H = H_1\otimes H_2$ which can be written in the form \eqref{eq:tensor_factorizable} are called factorizable elements. But space $H$ does not consist only of factorizable elements. Here we construct an example of a vector that cannot be written in the form  \eqref{eq:tensor_factorizable}.
 
+Consider Hilbert space $H_1\otimes H_2$, where $H_i$ are Hilbert spaces with the basis $\{e_1, e_2\}$. Let us show that the following quantum state $\psi$ is not factorizable
+\[
+	\psi = \frac{e_1 \otimes e_2 + e_2 \otimes e_1}{2} \ne \psi_1 \otimes \psi_2
+\]
+for any pair $\psi_1, \psi_2$.
+\begin{proof}
+Let assume that $\psi$ can be represented as $\psi = \psi_1\otimes\psi_2$ where
+$\psi_1$ and $\psi_2$ are represented as
+\begin{gather*}
+	\psi_1 = a_1 e_1 + a_2 e_2,\ a_i\in \mathbb{C},\ |a_1|^2 + |a_2|^2 = 1 \\
+	\psi_2 = b_1 e_1 + b_2 e_2, b_i\in \mathbb{C}, |b_1|^2 + |b_2|^2 = 1.
+\end{gather*}
+Such a $\psi$ can be represented as
+\begin{eqnarray*}
+	\psi_1 \otimes \psi_2 &=& (a_1 e_1 + a_2 e_2) \otimes (b_1 e_1 + b_2 e_2) = \\ &=&  
+	a_1 b_1 \cdot e_1 \otimes e_1 + a_1 b_2 \cdot e_1 \otimes e_2 + 
+	a_2 b_1 \cdot e_2 \otimes e_1 + a_2 b_2 \cdot e_2 \otimes e_2.
+\end{eqnarray*}
+One should solve the following system of equations to find the coefficients $a_1$, $a_2$, $b_1$, $b_2$:
+$$
+\begin{cases}
+a_1 b_2 = \frac12 \\
+a_2 b_1 = \frac12 \\
+a_1 b_1 = 0 \\
+a_2 b_2 = 0
+\end{cases}
+$$
+which is inconsistent. Therefore $\psi$ is not factorizable.
+\end{proof}
+ 
+\begin{definition}
+Consider two linear operators $A_1: H_1\to H_1$ and $A_2: H_2\to H_2$. The tensor product of these operators is defined by the equality
+\[
+(A_1\otimes A_2)(\psi_1\otimes \psi_2) = A_1\psi_1 \otimes A_2\psi_2.
+\]
+%In case of operators $A_1, A_2$ are written in a matrix form as $A^1, A^2$ correspondingly their tensor product is defined by a Kronecker product of two matrices:
+%\[
+%A_1\otimes A_2 = 
+%\begin{pmatrix}
+%a^1_{1,1}\cdot A^2 & \ldots & a^1_{1,n}\cdot A^2\\
+%\ldots & \ldots & \ldots\\
+%a^1_{n,1}\cdot A^2 & \ldots & a^1_{n,n}\cdot A_2
+%\end{pmatrix}.
+%\]
+\end{definition}
+
+
+%\subsection{Generalized functions}
+%The concept of generalized function is the extension to the notion of  functions. Here we present a description of it from \cite{gelfand}.
+%
+%\begin{definition}
+%Bump function - is a real-valued function $f$ which has continuous derivatives of all orders and equals to zero outside some bounded region(has compact support).
+%\end{definition}
+%Consider the set of such functions $K$. Assume that the sequence of bump functions $\varphi_1,\varphi_2\ldots$ tends to zero in the $K$ space if all of this functions equal to zero outside the same bounded region and each sequence of them and their derivatives tends uniformly to zero.
+%
+%One of the examples of such functions is the sequence $\varphi_\nu(x) = \frac{1}{\nu}\varphi(x, a)$ where 
+%\[
+%\varphi(x, a) = \left\{
+%\begin{aligned}
+%&e^{-\frac{a^2}{a^2 - x^2}},&\ x<a\\
+%&0,&\ \mbox{otherwise}\\
+%\end{aligned} \right. .
+%\]
+%It and all its derivatives uniformly tend to zero and all function in the sequence become zero in the region where $x \geq a$.
+%
+%\begin{definition}
+%We are given a generalized function $f$ if there is a rule according to which for every bump function $\varphi$ we have a mapping to the a number $(f, \varphi)$ that satisfies following conditions:
+%\begin{enumerate}
+%\item Linearity - $(f, \alpha_1\varphi_1 + \alpha_2\varphi_2) = (f, \alpha_1\varphi_1) + (f, \alpha_2\varphi_2)$;
+%\item Continuity - if some sequence of bump functions $\varphi_1,\varphi_2,\ldots$ tends to zero in the space $K$ then the sequence of numbers $(f, \varphi_1), (f, \varphi_2), \ldots$ converges to zero in $\mathbb{R}$.
+%\end{enumerate}
+%\end{definition}
+%
+%For example, consider a function $f$ which is absolutely integrable in every finite region of $\mathbb{R}^n$. With this function for every bump function $\varphi$ we can map a number 
+%\begin{equation}
+%(f, \varphi) = \int_{\mathbb{R}^n} f(x)\varphi(x) dx. \label{eq:non-singular-generalized}
+%\end{equation}
+%
+%Another example of generalized function is Dirac delta function $\delta(x)$:
+%\begin{equation}
+%(\delta, \varphi) = \int_{-\infty}^{+\infty} \delta(x)\varphi(x) dx = \varphi(0). \label{eq:delta-function}
+%\end{equation}
+%
+%Generalized functions that cannot be represented in the form \eqref{eq:non-singular-generalized} called singular. Delta function is an example of singular functions.
+%
+%\subsection{Dirac delta function and its properties}
+%
+%Every singular function can be represented as a limit a sequence of nonsingular generalized functions.
+%\begin{definition}
+%The sequence of generalized functions $f_1, f_2,\ldots f_\nu,\ldots$ converges to generalized function $f$ if
+%\[
+%\lim_{\nu\to\infty} (f_\nu, \varphi) = (f, \varphi).
+%\]
+%\end{definition}
+%
+%Dirac delta function \eqref{eq:delta-function} can be defined as a limit of nonsingular functional sequence $f_\nu$ with the following properties:
+%\begin{enumerate}
+%\item $\forall M > 0:\ \forall a, b\ |a| \leq M,\ |b| \leq M$ integral 
+%\[
+% \left| \int_a^b f_\nu(\xi)d\xi \right| \leq C(M)
+%\]
+%\item for every fixed $a, b > 0$
+%\[
+%\lim_{\nu\to\infty} \int_a^bf_\nu(\xi)d\xi = \left\{
+%\begin{aligned}
+%&0,&\ a < b < 0 \mbox{ or } 0 < a < b,\\
+%&1,&\ a < 0 < b\\
+%\end{aligned} \right. .
+%\]
+%\end{enumerate}
+%One example of such functions is the sequence 
+%\[
+%f_\epsilon(x) = \dfrac{1}{\pi} \dfrac{\epsilon}{x^2 + \epsilon^2}
+%\]
+%where $\epsilon\to 0$.
+%
+%Delta function has some useful properties:
+%\begin{enumerate}
+%\item $\int _{-\infty}^{+\infty} f(x)\delta(x - x_0)dx = f(x_0)$,
+%\item $\delta\left(\dfrac{x}{a}\right) = |a|\delta(x)$,
+%\item another way to define $\delta(x)$ is to compute its Fourier transformation using \eqref{eq:delta-function}:
+%\[
+%\tilde{\delta}(\omega) = \int_{-\infty}^{+\infty}\dfrac{e^{i\omega t}}{\sqrt{2\pi}}\delta(t)dt = \dfrac{1}{\sqrt{2\pi}}.
+%\]
+%From the above equation one can find that 
+%\[
+%\delta(t) = \int_{-\infty}^{+\infty}\dfrac{e^{-i\omega t}}{\sqrt{2\pi}}\tilde{\delta}(\omega)d\omega = \int_{-\infty}^{+\infty}\dfrac{e^{-i\omega t}}{2\pi}d\omega.
+%\]
+%This equation can be used as another form of defining dirac delta function.
+%\end{enumerate}
+%
 
 \section{Mathematical formalism of quantum mechanics}
-The mathematical formalizm of quantum mechanics can be formulated as a list of postulates which are based on the theory of self-adjoint operator on complex Hilbert space $\mathcal{H}$. 
+\subsection{Postulates of quantum mechanics }
+The mathematical formalism of quantum mechanics can be formulated as a list of postulates \cite{Khrennikov_information} which are based on the theory of self-adjoint operator on complex Hilbert space $H$. 
 \begin{enumerate}[label=\bfseries Postulate \arabic*:, align=left]
-  \item Quantum state $\psi$ that also called vawe-function is a vector of a complex Hilbert space such that $\langle\psi\rangle = 1$. This vector completely describes the state of quantum system.
-  \item A physical observable $a$ in quantum mechanics is represented as a self-adjoint oerator $\hat{a}$ in $\mathcal{H}$. Different observables are represented with different operators.
-  \item Observable $a$ can take values with some probabilities from the spectrum of operator $\hat{a}$. In case of discrete spectrum this operator can be written in the form 
+  \item A quantum state $\psi$ is a vector of a complex Hilbert space such that $\langle\psi, \psi\rangle = 1$. This vector completely describes the state of a quantum system.
+  \item A physical observable $a$ is represented as a self-adjoint operator $A$ in $H$. Different observables are represented by different operators.
+  \item If an observable is represented by the operator $A$ then results of observation are given by the spectrum of $A$. In case of totally discrete spectrum the self-adjoint operator can be written in the form 
   \[
-  \hat{a} = \sum_m a_mP_m^a
+  A = \sum_m a_m\pi_m^A
   \]
-    where $P_m^a$ is an orthogonal projetor corresponding to $a_m$.
-  \item Born's rule - if $\hat{a}$ is a self-adjoint operator with discrete spectrum then the probability to obtain an eigenvalue $a_m$ after a measurerement can be calculated using formula
+    where $\pi_m^A$ is an orthogonal projector onto an eigenspace corresponding to the eigenvalue $a_m$.
+  \item Born's rule - if $A$ is a self-adjoint operator with discrete spectrum then the probability to obtain an eigenvalue $a_m$ after measurement can be calculated by using the formula
   \[
-  P(a = a_m) = \| P_m^a\psi\|^2.
+  P(a = a_m) = \| \pi_m^a\psi\|^2.
   \]
+  \item 
+  Consider a quantum state $\psi$ and a self-adjoint operator $A$. Eigenvectors of $A$ with its eigenvalues $\{a_m\}$ form a basis in the Hilbert space $H$: $\{ \varphi: A\varphi = a_m\varphi\}$ so this state can be represented as $H = H_1\oplus H_2\oplus\ldots H_k$. Projector $\pi_m^A: H\to H_m$ equals to 
+  \[
+  \pi_m^A = \sum_{l = 1}^{n_m}\langle\psi,\varphi_{ml}\rangle\varphi_{ml}
+  \]
+  where $\varphi_{ml}$ - $l$-th eigenvector from $H_m$.
+  Then quantum state of a system collapses to state $\psi_m$:
+  \[
+  \psi_m = \frac{\pi_m^A\psi}{ \| \pi_m^a\psi\|}
+  \] 
+  after a measurement with a result $A \to a_m$.
   \item The time evolution of the quantum state $\psi$ satisfies the Schr\"{o}dinger equation
   \[
-  i\hbar \dfrac{d}{dt}\psi(t) = \mathcal{\hat{H}}\psi(t)
+  i\hbar \dfrac{d}{dt}\psi(t) = \mathcal{\mathcal{H}}\psi(t)
   \] 
   with the initial condition $\psi(0) = \psi_0$ and
-  where $\mathcal{\hat{H}}$ is a self-adjoint operator representing energy of the system.
-  \item 
+  where $\mathcal{H}$ is a self-adjoint operator representing the energy of the system.
+  \item If there are two quantum systems int Hilbert spaces $H_1$ and $H_2$, then the state space of the compound system is given by $H_1 \otimes H_2$.  
 \end{enumerate}
+\begin{definition}
+If a state $\psi\in H_1\otimes H_2$ is not factorizable in the form $\psi = \psi_1\otimes\psi_2$ where $\psi_1\in H_1, \psi_2\in H_2$ then it is called entangled.
+\end{definition}  
+Consider Hilbert 2-dimensional spaces $H_1 = H_2$ the basis $\{e_1, e_2\}$. One of the examples of entanglement is 
+\[
+\psi = \frac{e_1\otimes e_2 + e_2\otimes e_1}{2}.
+\]
+It was shown before that in that state $\psi$ cannot be factorizable as $\psi = \psi_1\otimes\psi_2$.
 
+Another example is $\psi = e_1\otimes e_2 + e_1 \otimes e_1 + 2e_2 \otimes e_1$.
+
+
+\subsection{Density operator}
+
+To describe a behaviour of a systems in entangled state we will use the notion of a density operator from \cite{Khrennikov_information}.
+
+For a pure state $\psi$ we can define an orthogonal projection operator: $P_\psi: P_\psi\varphi = \langle \psi, \varphi \rangle \psi$. It has following properties:
+\begin{enumerate}
+\item $P_\psi$ is hermitian. 
+\begin{proof}
+$\langle P_\psi\varphi, v\rangle = \langle \langle\psi,\varphi\rangle \psi, v\rangle = \overline{\langle\psi,\varphi\rangle} \langle\psi, v\rangle = \langle\psi, v\rangle \langle\varphi,\psi\rangle  = \langle\varphi, \langle\psi, v\rangle\psi\rangle = \langle\varphi, P_\psi v \rangle$
+\end{proof}
+\item $P_\psi \geq 0$.
+\begin{proof}
+$\langle P_\psi\varphi, \varphi\rangle = \overline{\langle\psi,\varphi\rangle} \langle\psi, \varphi\rangle = |\langle\psi, \varphi\rangle|^2 \geq 0$
+\end{proof}
+\item $\Tr P_\psi = 1$ where $\Tr A = \sum_k \langle Ae_k, e_k\rangle$ and $\{e_k\}$ is an orthogonal basis.
+\begin{proof}
+$\Tr P_\psi = \sum_{k = 1}^n \langle \langle \psi, e_k\rangle\psi, e_k\rangle = \sum_k \overline{\langle\psi, e_k\rangle}\langle\psi, e_k\rangle = \sum_k\psi_k^2 = 1$
+\end{proof}
+\item $P_\psi^2 = P_\psi$
+\begin{proof}
+$P_\psi^2\varphi = \langle\psi, \langle\psi, \varphi\rangle \psi\rangle \psi = \langle\psi, \varphi\rangle \langle\psi, \psi\rangle\psi = \langle\psi, \varphi\rangle\psi = P_\psi\varphi $
+\end{proof}
+\end{enumerate}
+In the common case for any state(entangled or pure) we can construct an operator
+\[
+\rho = \sum_ip_iP_{\psi_i},
+\]
+where $p_i$ represents probability to obtain $\psi_i$ after a measurement.
+
+One can easily show that operator $\rho$ satisfies properties 1-3 using corresponding properties 1-3 for each operator $P_{\psi_i}$. In the common case property 4 of projection operator is violated. For example, let us take density operator $\rho = \cfrac 12P_{\psi_1} + \cfrac 12P_{\psi_2}$ where $\psi_1 = (1, 0)^T$ and $\psi_2 = (0, 1)^T$. Let's find the square of this operator:
+\[
+\rho^2\varphi = \frac 12\langle\psi_1, \rho\varphi\rangle\psi_1 + \frac 12\langle\psi_2, \rho\varphi\rangle\psi_2 =
+\]
+\[
+= \frac 12\langle\psi_1, \frac 12\langle\psi_1, \varphi\rangle\psi_1 + \frac 12\langle\psi_2, \varphi\rangle\psi_2 \rangle\psi_1 + \frac 12\langle\psi_2, \frac 12\langle\psi_1, \varphi\rangle\psi_1 + \frac 12\langle\psi_2, \varphi\rangle\psi_2 \rangle\psi_2 =
+\]
+\[
+ = 
+\frac 14\langle\psi_1, \langle\psi_1,\varphi\rangle\psi_1\rangle\psi_1 + \frac 14\langle\psi_1, \langle\psi_2,\varphi\rangle\psi_2\rangle\psi_1 +
+\frac 14\langle\psi_2, \langle\psi_1,\varphi\rangle\psi_1\rangle\psi_2 + \frac 14\langle\psi_2, \langle\psi_2,\varphi\rangle\psi_2\rangle\psi_2
+\]
+The final result is:
+\[
+\rho^2\varphi = \frac 14 \langle\psi_1, \varphi\rangle\psi_1 + \frac 14\langle\psi_2, \varphi\rangle\psi_2 = \frac 12\rho \neq \rho.
+\]
+
+
+Density operator $\rho$ also can be written in the form $\rho = \sum_i p_i|e_i\rangle\langle e_i|$ where $|e_i\rangle$ denotes vector and $\langle e_i|$ scalar product with the vector $e_i$. 
+
+\subsection{Elements of quantum probability theory}
+In quantum mechanics the result of measurement depends on a state of a system which was before it collapsed to some pure state according to the measure result. It means that values of quantum probabilities, expectations, standard deviations etc. depend not only on observable but also on the initial state of the system which is described by density operator.
+
+Consider $A$ - observable with eigenvalues $\{a_1,\ldots a_n\}$ and eigenvectors $\{f_1,\ldots f_n\}$, $\psi$ - state of a system. Then the probability to obtain $a_i$ after a measure is given by
+\[
+P(A = a_i) = |\langle\psi, f_i\rangle|^2 = \Tr \rho_\psi A_i
+\]
+where $A_i = |f_i\rangle \langle f_i|$.
+\begin{proof}
+$\Tr \rho_\psi A_i = \sum_j \langle\rho_\psi A_if_j, f_j\rangle = \langle \langle\rho_\psi, f_i\rangle, f_i\rangle = \langle \langle \psi, f_i\rangle\psi, f_i\rangle = $\\
+$= \overline{\langle\psi, f_i\rangle} \langle\psi, f_i\rangle = |\langle\psi, f_i\rangle|^2.$
+\end{proof}
+For the mixture state probability by definition is given by the same formula
+\[
+P(A = a_i) = \Tr \rho |f_i\rangle \langle f_i|.
+\]
+
+Quantum expectation value is defined by the following formula
+\[
+\overline{A_\rho} \equiv \langle A\rangle = \langle A\rho, \rho\rangle = \Tr\rho A.
+\]
+Quantum dispersion is defined the same was as in classical probability theory:
+\[
+\sigma^2_{A_\rho} = \overline{\left(A_\rho - \overline{A_\rho}\right)^2} = \overline{A^2_\rho} - \overline{A_\rho}^2.
+\] 
+
+\subsection{Heisenberg's uncertainty principle}
+Uncertainty principle of quantum mechanics states that there is a limit of a precision with which some of physical parameters of a system can be known together. This limit does not depend on a precision of used measurement devices or on a level of technology, it is fundamental and presents in any case.
+
+For the first time uncertainty principle was formulated by Werner Heisenberg in 1927. He discovered that the more precisely the position of a particle can be measured, the less precisely the momentum can be determined.
+
+In 1928 it was formulated as an inequality:
+\[
+\sigma_x\sigma_p \geq \frac{\hbar}{2},
+\]
+where $\sigma_x$ is a standard deviation of position, $\sigma_p$ is a standard deviation of momentum and $\hbar$ is a Planck constant.
+
+The most general form of uncertainty principle is given by Schr\"{o}dinger inequality:
+\begin{equation}
+\sigma_A^2\sigma_B^2 \geq \left| \frac{1}{2}\langle\{A, B\}\rangle - \langle A\rangle\langle B\rangle \right|^2 + \left| \frac{1}{2i}\langle [A, B]\rangle\right|^2,
+\label{eq:Schrodinger_ineq}
+\end{equation}
+where $[A, B] = AB - BA$ - commutator operator and $\{A, B\} = AB + BA$ - anti-commutator operator.
+
+\begin{proof}
+For the derivation of the inequality we will use Cauchy-Schwartz inequality for scalar product:
+\begin{equation}
+|\langle f, g\rangle |^2 \leq \langle f, f\rangle \langle g, g\rangle. \label{eq:Caushy-Schwartz}
+\end{equation}
+
+Quantum dispersion $\sigma^2_A$ of self-adjoint operator $A$ can be found using formula:
+\[
+\sigma_A^2 = \langle (A - \langle A\rangle)^2\psi, \psi\rangle = \langle  (A - \langle A\rangle)\psi,  (A - \langle A\rangle)\psi\rangle.
+\]
+We denote $f = (A - \langle A\rangle)\psi$, $g = (B - \langle B\rangle)\psi$, then for the lest side of \eqref{eq:Caushy-Schwartz} we have
+\[
+|\langle f, g\rangle |^2 = |\langle (A - \langle A\rangle)\psi, (B - \langle B\rangle)\psi\rangle |^2 = |\langle (B - \langle B\rangle)(A - \langle A\rangle)\psi, \psi |^2 = 
+\]
+\[
+= | \langle BA\psi, \psi\rangle - \langle B\rangle\langle A\rangle - \langle A\rangle \langle B\rangle + \langle A\rangle\langle B\rangle |^2 = | \langle BA\rangle - \langle A\rangle\langle B\rangle |^2.
+\]
+As any other complex number the left side of inequality can be written as
+\[
+|\langle f, g\rangle |^2 = \left| \frac{1}{2}(\langle f, g\rangle + \overline{\langle f, g\rangle})\right|^2 + \left| \frac{1}{2i}(\langle f, g\rangle - \overline{\langle f, g\rangle})\right|^2, 
+\]
+where $\overline{\langle f, g\rangle})$ is described by
+\[
+\overline{\langle f, g\rangle}) = \overline{\langle BA\psi, \psi\rangle} - \langle A\rangle\langle B\rangle = \langle\psi, BA\psi\rangle - \langle A\rangle\langle B\rangle = \langle AB\psi, \psi\rangle - \langle A\rangle\langle B\rangle.
+\]
+Putting it all together to the inequality \eqref{eq:Caushy-Schwartz} we have an expression from Schr\"{o}dinger inequality \eqref{eq:Schrodinger_ineq}:
+\[
+\left| \frac{1}{2}(\langle BA\rangle - \langle A\rangle\langle B\rangle + \langle AB\rangle - \langle A\rangle\langle B\rangle)\right|^2 + \left| \frac{1}{2i}(\langle BA\rangle - \langle A\rangle\langle B\rangle - \langle AB\rangle + \langle A\rangle\langle B\rangle)\right|^2 \leq \sigma_A^2\sigma_B^2
+\]
+\[
+\Leftrightarrow \left| \frac{1}{2}\langle\{A, B\}\rangle - \langle A\rangle\langle B\rangle \right|^2 + \left| \frac{1}{2i}\langle [A, B]\rangle\right|^2 \leq \sigma_A^2\sigma_B^2
+\]
+\end{proof}
+
+In quantum mechanics position operator has the form
+\[
+(\hat{x}f) = x\cdot f(x)
+\]
+and momentum operator is defined by
+\[
+(\hat{p}f) = \frac{\hbar}{i}\frac{df}{dx}.
+\]
+It the common case Robertson inequality can be derived from \eqref{eq:Schrodinger_ineq}:
+\[
+\sigma_A^2\sigma_B^2 \geq \frac{1}{4}|[A, B]|^2.
+\]
+
+Commutator operator of position and momentum is 
+\[
+[\hat{x}, \hat{p}]f(x) = (\hat{x}\hat{p} - \hat{p}\hat{x})f(x) = x\frac{\hbar}{i}\frac{df(x)}{dx} - \frac{\hbar}{i}\frac{d xf(x)}{dx} = i\hbar If(x),
+\]
+where $I$ is an identity operator. Then in this case Robertson inequality becomes Heisenberg's uncertainty principle:
+\[
+\sigma_A^2\sigma_B^2 \geq \frac{1}{4}\hbar^2.
+\]
+
+From the derivation of Heisenberg's principle it is clear that one can construct nontrivial Robertson inequality for every operators $A$ and $B$ which have nonzero commutator. It is also clear that the result formula does not depend on technology or any conditions during measurement, it is a fundamental property for some pairs of quantum operators such as position and momentum.
 
 \section{Einstein-Podolsky-Rosen paradox}
-Einstein-Podolsky-Rosen paradox was published in 1935 as the criticism of some statements in the Coppenhagen interpretation of quantum mechanics. The main principle of this interpretation holds that any quantum system can be described as wave-function and after measure it collapses to one of its eigenstates with some probabilities. Moreover, Heisenberg uncertainty principle stands that position of a particle and its momentum are incompatible and they cannot be measured jointly with good precision. Einstein was not agree with probabilistic measurement outcomes and his paper was an attempt to show contradictions in quantum mechanics.
+Einstein-Podolsky-Rosen paradox(EPR-paradox) was published in 1935 as the criticism of some statements in the Copenhagen interpretation of quantum mechanics. The main principle of this interpretation holds that any quantum system can be described as wave-function and after measure it collapses to one of its eigenstates with some probabilities. Moreover, Heisenberg's uncertainty principle stands that position of a particle and its momentum are incompatible and they cannot be measured jointly with good precision. Einstein was not agree with probabilistic measurement outcomes and his paper was an attempt to show contradictions in quantum mechanics.
 
 The article is based on a thought experiment with the following initial conditions. Consider two systems $S_1$, $S_2$, both with the state space $L_2(\mathbb{R})$ and the source which produces particles for these systems. Superposition of these systems can be represented as a quantum state from the tensor product of its single Hilbert spaces.
 Operator will $A$ denote an observable on $S_1$ with its eigenvalues $\{a_k\}$ and eigenvectors $\{\varphi_k(x_1)\}$. Operator $B$ will denote another observable on the same system with eigenvalues $\{b_k\}$ and eigenvectors $\{\psi_k(x_1)\}$. 
@@ -180,20 +496,177 @@ Suppose we want to execute the measurement of $A$. Before measure the particle i
 
 Suppose after all that we've changed our decision and we want to measure $B$ on $S_1$ instead of $A$. By analogy for the previous consideration, after measure the system will collapse to the state $\psi = \zeta_n(x_1)u_n(x_2)$ which means that in this case the second system will have state $u_n(x_2)$. And again, it has to have such state independently of the measurement on the first system i.e. it stands in this state even before any measurements.
 
-After that thought experiments we can conclude that the second system has 2 wave-functions $v_m(x_2)$ and $u_n(x_2)$. The paradox is that we can construct such states that cannot be known simultaneously according to the Heisenberg principle. Here we present an example from the original paper \cite{EPR}.
+After that thought experiments we can conclude that the second system has 2 wave-functions $v_m(x_2)$ and $u_n(x_2)$. The paradox is that we can construct such states that cannot be known simultaneously according to the Heisenberg's principle. Here we present an example from the original paper \cite{EPR}.
 
 Consider the state $\psi(x_1, x_2) = \int e^{\frac{ip}{\hbar}(x_1+x_2-x_0)}$ where $x_0$ is a constant. On one side, it can be represented in the form $\psi(x_1, x_2) = \int\varphi(p, x_1)v(p, x_2)dp$ where $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$ and $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$. 
 
 Momentum operator is defined by $\hat{p} = \dfrac{\hbar}{i}\dfrac{d}{dx}$. Its eigenfunction is $\psi = e^{\frac{i\lambda}{\hbar}x}$ for eigenvalue $\lambda$. After the measure of $A$ in the first system its state will collapse to its eigenfunction $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$. The state of the second system $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$ is an eigenfunction of momentum operator, corresponding to the eigenvalue $-p$. 
 
-On another side considering state can be represented as $\psi(x_1, x_2) = \delta(x_1 + x_2 - x_0) = \hbar\int\delta(x - x_1)\delta (x - x_2 + x_0)dx = \int\zeta(x, x_1)u(x, x_2)dx$. More information about delta-functions can be found in the appendix.
+On another side considering state can be represented as $\psi(x_1, x_2) = \delta(x_1 + x_2 - x_0) = \hbar\int\delta(x - x_1)\delta (x - x_2 + x_0)dx = \int\zeta(x, x_1)u(x, x_2)dx$. 
 
 Position operator in the second system is defined by $\hat{x_2}f = x_2f$. Its eigenfunction is $\delta(x - \lambda)$ for the eigenvalue $\lambda$. After the measure of $B$ in the first system its state will collapse to the eigenfunction $\zeta(x, x_1) = \delta(x - x_1)$. The state of the second system $u(x, x_2) = \delta(x - x_2 + x_0)$ is also an eigenfunction of position operator, corresponding to the eigenvalue $x + x_0$.
 
-At this point authors conclude that both position and momentum in the second system are elements of reality since they couldn't be affected by measures on the first system. But Heisenberg principle stands that they can't be known both i.e. can't be both elements of reality simultaneously. 
+At this point authors conclude that both position and momentum in the second system are elements of reality since they couldn't be affected by measures on the first system. But Heisenberg's principle stands that they can't be known both i.e. can't be both elements of reality simultaneously. 
 
 The question of this paradox - do quantum mechanics provide a complete description of the physical reality. But since local realism assumption is used, another explanation of this paradox can be found with rejection of the local realism.
 
+\section{Bell inequalities}
+One of possible solutions of the EPR-paradox is that the quantum mechanics theory is not complete, the actual state of a system is described not only by its quantum state $\psi$ but also by some hidden, i.e. yet unknown, variables. In this case all probabilistic predictions of quantum mechanics can be explained by existing of some unknown degrees of freedom. Using that assumption one can conclude that reality can still have deterministic nature as well as probabilistic.
+
+John Bell in his paper \cite{Bell} assumed that there are some hidden variables $\omega$ and measurement results are random variables which depend on it. He formulated statistical inequality that contradicts with quantum mechanical predictions.
+
+Covariance of two variables can be found using the following classical probabilistic formula:
+\[
+\langle \xi, \eta \rangle = \int_\Omega \xi(\omega)\eta(\omega)dP(\omega).
+\]
+
+\begin{theorem}
+Consider $\xi_a(\omega)$, $\xi_b(\omega)$, $\xi_c(\omega)$ be discrete random variables which can only be equal $\pm 1$. Then the following inequality is performed:
+\[
+| \langle\xi_a,\xi_b\rangle -  \langle\xi_c,\xi_b\rangle | \leq 1 - \langle\xi_a,\xi_c\rangle.
+\]
+\end{theorem}
+
+\begin{proof}
+Using covariation formula we obtain:
+\[
+| \langle\xi_a,\xi_b\rangle -  \langle\xi_c,\xi_b\rangle | = \left| \int_\Omega\xi_a\xi_b dP - \int_\Omega\xi_c\xi_b dP\right| = \left|\int_\Omega (xi_a - xi_c)\xi_bdP \right|.
+\]
+After multiplying it by $\xi_a^2 = 1$ we have:
+\[
+\left|\int_\Omega (1 - \xi_a\xi_c)\xi_a\xi_bdP \right|.
+\]
+And finally, using that $|\xi_i| = 1$ we get the desired result:
+\[
+\left|\int_\Omega (1 - \xi_a\xi_c)\xi_a\xi_bdP \right| \leq  \left|\int_\Omega (1 - \xi_a\xi_c)dP\right| = 1 - \langle \xi_a\xi_c\rangle.
+\]
+\end{proof}
+
+After Bell's paper some other inequalities were formulated. Wigner inequality is more suitable for testing.
+\begin{theorem}
+For random variables form the previous theorem the following inequality is performed:
+\[
+P(\xi_a = +1, \xi_b = +1) + P(\xi_b = -1, \xi_c = +1) \geq P(\xi_a = -1, \xi_c = +1).
+\]
+\end{theorem}
+
+\begin{proof}
+The first probability can be written as 
+\[
+P(\xi_a = +1, \xi_b = +1) = P(\xi_a = +1, \xi_b = +1, \xi_c = +1) + P(\xi_a = +1, \xi_b = +1, \xi_c = -1),
+\]
+analogously, the second one can be written as
+\[
+P(\xi_b = -1, \xi_c = +1) = P(\xi_a = +1, \xi_b = -1, \xi_c = +1) + P(\xi_a = -1, \xi_b = -1, \xi_c = +1).
+\]
+Then
+\[
+P(\xi_a = +1, \xi_b = +1) + P(\xi_b = -1, \xi_c = +1) = P(\xi_a = +1, \xi_b = +1, \xi_c = +1) + 
+\] 
+\[
+ + P(\xi_a = +1, \xi_b = +1, \xi_c = -1) + P(\xi_a = +1, \xi_b = -1, \xi_c = +1) + P(\xi_a = -1, \xi_b = -1, \xi_c = +1) = 
+\]
+\[
+ =  P(\xi_a = +1, \xi_c = +1) + P(\xi_a = +1, \xi_b = +1, \xi_c = -1) + P(\xi_a = -1, \xi_b = -1, \xi_c = +1)\geq
+\]
+\[
+ \geq P(\xi_a = +1, \xi_c = +1).
+\]
+\end{proof}
+
+Another example of an inequality of Bell type is Clauser-Horne-Shimony-Holt inequality.
+\begin{theorem}
+For every random variables $\xi_j(\omega)$ and $\xi'_j(\omega)$ such as $|\xi_j(\omega)| \leq 1$ and $|\xi'_j(\omega)| \leq 1$ the following inequality is performed
+\[
+\langle\xi_1,\xi'_1\rangle + \langle\xi_1,\xi'_2\rangle + \langle\xi_2,\xi'_1\rangle -  \langle\xi_2,\xi'_2\rangle \leq 2
+\]
+\end{theorem}
+
+\begin{proof}
+For real numbers bounded by 1 the following inequality holds:
+\[
+\xi_1\xi_1' + \xi_1\xi_2' + \xi_2\xi_1' - \xi_2\xi_2' \leq 2.
+\]
+After integrating it we obtain Clauser-Horne-Shimony-Holt inequality.
+
+\end{proof}
+
+One of the main points why Bell inequality is so interesting is that such statistical inequalities can be tested in experiments. And if classical and quantum predictions are incompatible one can check that experiment results satisfies one of predictions. But if we want to compare results of two theories we have to present a mechanism of mapping between two models. To connect quantum mechanics predictions and classical probability theory Bell made some assumptions and with them and quantum mechanic formalism these inequalities are violated. Some experiments were performed and their results also violate inequalities from the classical probability theory. 
+
+Let us construct an example of such violation from \cite{Khrennikov_information}. Consider a two-particle system in state $\psi = \frac{1}{\sqrt{2}}(|+-\rangle - |-+\rangle)$ and a spin operator that measures a spin of one particle
+\[
+\sigma(\theta) = \cos\theta\sigma_z + \sin\theta\sigma_x,
+\] 
+where $\sigma_x$ and $\sigma_z$ - Pauli matrices:
+\[
+\sigma_x = 
+\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix},\ \sigma_z = 
+\begin{pmatrix}
+1 & 0\\
+0 & -1
+\end{pmatrix}.
+\]
+So for the whole system operator $\sigma(\theta) \otimes I$ measures a spin of the first particle and $I \otimes \sigma(\theta)$ of the second particle.
+Then
+\[
+P_\psi(\sigma(\theta_1) = + 1, \sigma(\theta_2) = +1) = \cos^2\frac{\theta_1 - \theta_2}{2},
+\]
+\[
+P_\psi(\sigma(\theta_3) = + 1, \sigma(\theta_2) = -1) = \sin^2\frac{\theta_3 - \theta_2}{2},
+\]
+\[
+P_\psi(\sigma(\theta_1) = + 1, \sigma(\theta_3) = +1) = \cos^2\frac{\theta_1 - \theta_3}{2}.
+\]
+In this case Wigner inequality has the form:
+\[
+\cos^2\frac{\theta_1 - \theta_2}{2} + \sin^2\frac{\theta_3 - \theta_2}{2} \geq  \cos^2\frac{\theta_1 - \theta_3}{2}.
+\]
+We take $\theta_1 = 0$, $\theta_2 = 6\theta$, $\theta_3 = 2\theta$ and we get the following inequality which is violated for some sufficiently large $\theta$:
+\[
+\cos^2 3\theta + \sin^2 2\theta \geq cos^2 \theta.
+\]
+
+This violation is called Bell theorem.  If this theorem is correct then quantum mechanics , or locality, or realism is wrong, as they are mutually exclusive. 
+
+Here there are some popular interpretations of Bell's results:
+\begin{enumerate}
+\item Quantum mechanics is complete and nonlocal so it cannot be reduced to the classical theory.
+If this interpretation is true then the state of a partial cannot be represented as random variable $\xi_a(\omega)$ so inequalities cannot be applied to the real measurements. This is the most popular interpretation.
+
+\item Quantum mechanics is incomplete and any complete classical theory is nonlocal.
+If this interpretation is true then the state of a partial cannot be represented as $\xi_a(\omega)$ because it depends of another partial $b$. The representation as $\xi_{a,b}(\omega)$ doesn't give us the same inequalities so there is no paradox between experiments and classical probability theory.
+
+\item Some of Bell's assumptions about accordance between classical and quantum models are wrong. If this interpretation is true then there is no paradox because its proof is incorrect.
+\end{enumerate}
+
+In \cite{Khrennikov_information} it is shown that in Bell's theory there can be some incorrect assumptions in the way of accordance between classical and quantum probabilities.
+
+Firstly, It can be contradicted that classical(an integral) and quantum equalities for covariations are equal.
+$$\int_\Omega\xi_a(\omega)\xi_b(\omega)dP_\rho(\omega) \equiv Tr\rho\hat{a}\hat{b}$$
+But for other variants of Bell theorem this postulate was replaced by less controversial.
+
+Secondly, domains of classical and quantum variables can be nonequal. There are two systems - the observed and the observer. The probability measure of states for observed partials concerns microscopic world and the observed probabilities concern macroscopic devices. These two systems can have different degrees of freedom, another parameters or possible values. It's hard to determine dependency between them as in theory there is nothing about it.
+
+Moreover, in experimental tests of Bell's inequality statistical data was used. That means that a lot of single experiments were made and their results depended of states of observing devices and assumed hidden variables. So there was different physical context of those experiments. If we fix quantum state $\rho$ it is not necessary that it will always correspond to the fixed classical probability distribution because with hidden variable quantum mechanics is only projection and there is no one to one correspondence. There is one to one correspondence only between classical state $\xi$ and a pair $(\rho, C)$ - quantum state and a context. Using that one can see that Bell's inequality is correct only if contexts of different experiments are the same. Because of many parameters probability to get that is zero. So considering context of experiments Bell's inequality has another form and not violated by experiments.
+
+Another problem with Bell inequalities is experimental data precision. To check something detectors have to have enough efficiency and not give false positive results. Since there is no device without these problems, it is better to have a statistical model which can deal with such experimental errors. One of such models was presented in the Eberhard's article \cite{Eberhard}.
+
+%\section{Eberhard inequality}
+%In the paper of Eberhard \cite{Eberhard} a Bell experiment is considered that is performed on entangled states of two photons. For both particles instead of spins polarization measurements are made using Nicol prisms. If photon is polarized horizontally then the ordinary trajectory is applied, otherwise photons polarized in the vertical plane are detected in the extraordinary trajectory.In front of prisms devices are set up that can rotate the plane of photon polarization. The angle of polarization plane rotation of the first particle is denoted by $\alpha$, and for the second particle it is called $\beta$.
+%
+%Eberhard's approach allows to take into account values of detector efficiency $\eta$ and background noise $\zeta$ before any optimization for such experiment. Here we present a derivation of Eberhard inequality from his paper. 
+%
+%%It is shown that Bell inequality requires an efficiency $\eta > 2(\sqrt{2} - 1) \approx 82.2\%$. Eberhard inequality still can be used with less efficiency values.
+%
+%For the described experiment there are four different setups of polarization planes: $(\alpha_1, \beta_1), (\alpha_2, \beta_1), (\alpha_, \beta_2), (\alpha_2, \beta_2)$ where the first item in the pair denotes values of $\alpha$ and the second one $\beta$ values. There are also three possible fates of photon after performing the experiment. Photon that is detected in the ordinary beam is counted with an index (o), photon that is detected in the extraordinary beam is counted with an index (e) and undetected photon is denoted by (u). Therefore for a system with two particles there are nine types of events with can be obtained for every measure.
+
+
+
+
+
 \bibliography{literature.bib}
-\bibliographystyle{amsplain}
+\bibliographystyle{ieeetr}
 \end{document}

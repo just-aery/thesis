@@ -69,8 +69,8 @@ function ret = K_opt_min(det, to_min, mean_cons)
     vars = [theta, psi1, psi2, psi3, psi4];
     sympy_2_numpy = sympy_to_numpy(vars);
     deriv_sympy_func = diff_sympy_func(vars);
-    n_det = sympy_2_numpy(-real(det));
-    deriv_sympy = deriv_sympy_func(-real(det));
+    n_det = sympy_2_numpy(real(det));
+    deriv_sympy = deriv_sympy_func(real(det));
     deriv_numpy = lambda_out_array(map( @(x) function_wrapper(sympy_2_numpy(x), 2), deriv_sympy), 2);
     function r = func_to_min(args)
         f = function_wrapper(sympy_2_numpy(to_min), 2);
@@ -81,16 +81,17 @@ function ret = K_opt_min(det, to_min, mean_cons)
     x0 =  [pi/3.0, sqrt_8, sqrt_8, sqrt_8, sqrt_8, sqrt_8, sqrt_8, sqrt_8, sqrt_8];
     psi_cons = complex_wrapper( @(p) sum(conj(p(2:end)) .* p(2:end)) - 1, 2);
     psi_cons_deriv = array_stretcher(complex_wrapper( @(x) [0, 2*abs(x(2)), 2*abs(x(3)), 2*abs(x(4)), 2*abs(x(5))], 2), 2);
-    function [c,ceq, gc, gceq] = mycon(x)
+    function [c,ceq] = mycon(x)
         f = function_wrapper(n_det, 2);
-        c =  f(x) % Compute nonlinear inequalities at x.
-        ceq = psi_cons(x) % Compute nonlinear equalities at x.
-        x
-        gc = deriv_numpy(x)'
-        gceq = psi_cons_deriv(x)'
+        c =  f(x); % Compute nonlinear inequalities at x.
+        ceq = psi_cons(x); % Compute nonlinear equalities at x.
+        gc = deriv_numpy(x)';
+        gceq = psi_cons_deriv(x)';
     end
-    options = optimset('Algorithm', 'interior-point', 'Display','iter','GradObj', 'off', 'GradConstr', 'on');
-    res = fmincon(@func_to_min, x0, [], [], [], [], [], [], @mycon, options)
+    %options = optimset('Algorithm', 'interior-point', 'Display','iter','GradObj', 'off', 'GradConstr', 'off');
+    %res = fmincon(@func_to_min, x0, [], [], [], [], [], [], @mycon, options)
+    options = optimset('Display','iter','GradObj', 'off', 'GradConstr', 'off');
+    ga(@func_to_min, 9, [], [], [], [], [], [], @mycon, options)
     %jac=deriv_func_to_min,\
     %constraints=cons, method='SLSQP', options={'disp': True})
     

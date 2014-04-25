@@ -78,7 +78,7 @@ function ret = basics()
     quant_std = psi' * n * n * psi - quant_mean*quant_mean;
     to_min = quant_mean;% / sqrt(quant_std);
     function ret = eta_K_opt(det, to_min, mean_cons)
-        etas =  0.01* (66:1:100);
+        etas =  0.01* (68:2:100);
         res = [];
         for e1 = etas
             e1
