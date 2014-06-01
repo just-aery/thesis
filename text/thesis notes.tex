@@ -289,7 +289,7 @@ The mathematical formalism of quantum mechanics can be formulated as a list of p
     where $\pi_m^A$ is an orthogonal projector onto an eigenspace corresponding to the eigenvalue $a_m$.
   \item Born's rule - if $A$ is a self-adjoint operator with discrete spectrum then the probability to obtain an eigenvalue $a_m$ after measurement can be calculated by using the formula
   \[
-  P(a = a_m) = \| \pi_m^a\psi\|^2.
+  P(a = a_m) = \| \pi_m^A\psi\|^2.
   \]
   \item 
   Consider a quantum state $\psi$ and a self-adjoint operator $A$. Eigenvectors of $A$ with its eigenvalues $\{a_m\}$ form a basis in the Hilbert space $H$: $\{ \varphi: A\varphi = a_m\varphi\}$ so this state can be represented as $H = H_1\oplus H_2\oplus\ldots H_k$. Projector $\pi_m^A: H\to H_m$ equals to 
@@ -299,7 +299,7 @@ The mathematical formalism of quantum mechanics can be formulated as a list of p
   where $\varphi_{ml}$ - $l$-th eigenvector from $H_m$.
   Then quantum state of a system collapses to state $\psi_m$:
   \[
-  \psi_m = \frac{\pi_m^A\psi}{ \| \pi_m^a\psi\|}
+  \psi_m = \frac{\pi_m^A\psi}{ \| \pi_m^A\psi\|}
   \] 
   after a measurement with a result $A \to a_m$.
   \item The time evolution of the quantum state $\psi$ satisfies the Schr\"{o}dinger equation
