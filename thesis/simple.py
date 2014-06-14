@@ -452,6 +452,6 @@ def multilple_deltas():
 #eberhard_repeat()
 #one_delta()
 #eberhard_different_etas()
-multilple_deltas()
+#multilple_deltas()
 
 
