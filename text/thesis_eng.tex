@@ -826,8 +826,9 @@ where $0 \leq r \leq 1$, $\alpha_1 = \omega / 2 - 90^\circ$ and $\beta_1 = \omeg
 
 %\chapter{Результаты}
 
-\section{Оптимизация параметров неравенства Эберхарда}
-Для каждого значения $\eta$ найдем параметры $r, \omega, \theta$, при которых неравенство нарушается наиболее сильно. Для этого будем минимизировать функцию $J_{\mathcal{B}}(r, \omega, \theta) / N$ с помощью метода Нелдера-Мида. 
+\section{Eberhard inequality parameters optimization}
+For every $\eta$ let us find parameters $r, \omega, \theta$ for which inequality violates most strongly.
+To do so we will minimize $J_{\mathcal{B}}(r, \omega, \theta) / N$ function using Nelder-Mead method.
 
 \begin{table}[h]
 \centering
@@ -843,34 +844,43 @@ $\eta$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J_{\mathcal{B}} / N$
 0.95 & 0.87067 & 22.141 & 44.6958 & -0.142436\\\hline
 1 & 0.999997 & 22.5 & 45 & -0.207107\\\hline
 \end{tabular}
-\caption{Оптимальные значения параметров для $J_{\mathcal{B}} / N$ из неравенства Эберхарда}
+\caption{Optmimal parameters values for $J_{\mathcal{B}} / N$ from Eberhard inequality}
 \label{tab:Eberhard_repeat}
 \end{table}
 
-Значения, полученные в ходе оптимизации $J_{\mathcal{B}}(r, \omega, \theta) / N$, представлены в таблице \ref{tab:Eberhard_repeat}. В ходе оптимизации значения для $\zeta$ брались равными нулю, так как этот параметр вносит константный вклад в значение $J_{\mathcal{B}} / N$, равный $2\zeta$, он увеличивает его на фиксированную величину вне зависимости от остальных параметров, а значит, не влияет на результат оптимизации. Таким образом, значения из таблицы \ref{tab:Eberhard_repeat} совпадают со значениями, полученными Эберхардом для ненулевого уровня фона, и параметры, при которых наблюдается максимальное нарушение неравенства для $\zeta = 0$ совпадают с параметрами, при которых неравенство нарушается и $\zeta$ максимально.
+Values obtained while optimizing $J_{\mathcal{B}}(r, \omega, \theta) / N$ are shown in the 
+Table~\ref{tab:Eberhard_repeat}. During optimization process  $\zeta$ values were equaled to zero, 
+because this parameter brings constant contribution to the $J_{\mathcal{B}} / N$ being equal to 
+$2\zeta$, it increases $J_{\mathcal{B}} / N$ value by a constant regardless of other parameters, 
+therefore not affecting optimization result. Thus values from Table~\ref{tab:Eberhard_repeat} 
+match values obtained by Eberhard for non-zero context level, and parameters for which inequality 
+violates the most strongly for $\zeta = 0$ match with parameters for which inequality violates 
+and $\zeta$ has the maximum value.
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{theta.eps}
-\caption{Оптимизированные значения для $\theta$ при разных величинах эффективности детекторов}
+\caption{Optimized $\theta$ values for various detectors efficiency values}
 \label{fig:theta_opt}
 \end{figure}
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{r.eps}
 \includegraphics[scale=0.7]{omega.eps}
-\caption{Оптимизированные значения для $r$ и $\omega$ при разных величинах эффективности детекторов}
+\caption{Optimized $r$ and $\omega$ values for various detectors efficiency values}
 \label{fig:psi_opt}
 \end{figure}
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{J.eps}
-\caption{Оптимизированные значения для $J_{\mathcal{B}}/N$ при разных величинах эффективности детекторов}
+\caption{Optimized $J_{\mathcal{B}}/N$ values for various detector efficiency values}
 \label{fig:J_opt}
 \end{figure}
 
-На рисунках \ref{fig:theta_opt}, \ref{fig:psi_opt} изображены зависимости найденных параметров от эффективности, на рисунке \ref{fig:J_opt} - найденные минимальные значения функции.
+At Fig. \ref{fig:theta_opt}, \ref{fig:psi_opt} relations between obtained parameters and efficiency 
+are shown, at \ref{fig:J_opt} -- minimum function values obtained.
 
-В реальных экспериментах чаще возникает ситуация, когда детекторы имеют разные значения эффективностей, в этом случае формулы \eqref{eq:Eberhard_n_start}-\eqref{eq:Eberhard_n_finish} преобразуются к виду:
+In real experiments detectors more often have different efficiency values, in this case 
+formulas \eqref{eq:Eberhard_n_start}-\eqref{eq:Eberhard_n_finish} can be written as:
 \begin{eqnarray*}
 n_{oo}(\alpha_1, \beta_1) = N\frac{\eta_1\eta_2}{4}\psi^\dagger[I + \sigma(\alpha_1)][I + \tau(\beta_1)]\psi,\\
 n_{oe}(\alpha_1, \beta_2) = N\frac{\eta_1\eta_2}{4}\psi^\dagger[I + \sigma(\alpha_1)][I - \tau(\beta_2)]\psi,\\
@@ -882,24 +892,25 @@ n_{oo}(\alpha_2, \beta_2) = N\frac{\eta_1\eta_2}{4}\psi^\dagger[I + \sigma(\alph
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{theta3d.eps}
-\caption{Оптимизированные значения для $\theta$ для случая различающихся эффективностей детекторов}
+\caption{Optimized $\theta$ values for different detector efficiencies case}
 \label{fig:theta_opt_3d}
 \end{figure}
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{r3d.eps}
 \includegraphics[scale=0.7]{omega3d.eps}
-\caption{Оптимизированные значения для $r$ и $\omega$ для случая различающихся эффективностей детекторов}
+\caption{Optimized $r$ and $\omega$ values for different detector efficiencies case}
 \label{fig:psi_opt_3d}
 \end{figure}
 
 \begin{figure}[t]
 \includegraphics[scale=0.7]{J3d.eps}
-\caption{Оптимизированные значения для $J_{\mathcal{B}}/N$ для случая различающихся эффективностей детекторов}
+\caption{Optimized $J_{\mathcal{B}}/N$ values for different detector efficiencies case}
 \label{fig:J_opt_3d}
 \end{figure}
 
-На рисунках \ref{fig:theta_opt_3d} - \ref{fig:J_opt_3d} изображены значения оптимальных параметров, а также минимизируемой функции для случая различающихся эффективностей.
+At Fig.\ref{fig:theta_opt_3d} - \ref{fig:J_opt_3d} optimal parameters are shown, together with 
+the minimised function for different detector efficiencies case.
 
 \begingroup
 \small
@@ -985,48 +996,58 @@ $\eta_1$ & $\eta_2$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J_{\mathcal{B}}
 1 & 0.9 & 0.863896 & 22.1002 & 44.661 & -0.139755 & 0.0698776\\\hline
 1 & 0.95 & 0.933431 & 22.4101 & 44.924 & -0.172546 & 0.086273\\\hline
 1 & 1 & 0.999997 & 22.5 & 45 & -0.207107 & 0.103553\\\hline
-\caption{Значения оптимальных параметров для случая различающихся эффективностей}
+\caption{Optimal parameters values for different detector efficiencies case}
 \label{tab:different_etas}
 \end{longtable}
 
 \endgroup
 
-Значения параметров, полученные в ходе оптимизации, а также значения максимально допустимого уровня шума представлены в таблице \ref{tab:different_etas}. Чем выше каждое значение эффективности в отдельности, тем сильнее может быть нарушено неравенство. Минимальные значения эффективностей, при которых нарушение возможно, близки к значению $\eta_1 = \eta_2 = 0.67$, что согласуется с результатами Эберхарда.
+Parameters values obtained during optimization process along with maximal allowable noise level 
+are shown in Table~\ref{tab:different_etas}. The bigger each value of efficiency separately, the more 
+strongly inequality can be violated. Minimal efficiency values for which violation is possible are close 
+to  $\eta_1 = \eta_2 = 0.67$ value, matching Eberhard results.
 
 %\clearpage
 
-В общем случае для любого состояния $\psi$, минимизирующего величину мат. ожидания, справедливо следующее утверждение.
+Generally for every state $\psi$ minimizing expectancy value the following corollary holds.
 
 \begin{theorem}
-Квантовое состояние $\psi$, минимизирующее целевую функцию $J$, является собственным вектором матрицы $\mathcal{B}$ и обращает дисперсию в ноль.
+Quantum state $\psi$ minimizing target function $J$ is an eigenvector of matrix $\mathcal{B}$ and 
+transforms dispersion to zero.
 \end{theorem}
 \begin{proof}
-По теореме Куранта-Фишера $\lambda_1 \leq \langle\mathcal{B}\psi, \psi\rangle \leq \lambda_n$, где $\lambda_1, \ldots \lambda_n$ - собственные значения, отсортированные в порядке возрастания. Минимум $J_\mathcal{B} = \langle\mathcal{B}\psi, \psi\rangle = \lambda_1$ достигается, если $\psi = \psi_1$ является собственным вектором. 
+By Courant–Fischer theorem $\lambda_1 \leq \langle\mathcal{B}\psi, \psi\rangle \leq \lambda_n$, where $\lambda_1, \ldots \lambda_n$ -- eigenvalues, sorted in ascending order. Minimum 
+$J_\mathcal{B} = \langle\mathcal{B}\psi, \psi\rangle = \lambda_1$ is reached if $\psi = \psi_1$ is an 
+eigenvector.
 
-Для величины дисперсии в этом случае имеем:
+For the dispersion value in this case we have:
 \[\sigma^2 = \langle B^2\rangle - \langle B\rangle^2 = \psi^\dagger B^2 \psi - \lambda_1^2 = \psi^\dagger B \lambda_1  \psi - \lambda_1^2 = 0.
 \]
 \end{proof}
 
-Это означает, что найденные состояния являются оптимальными не только с точки зрения математического ожидания для количества различных комбинаций измерения поляризации, но и с точки зрения возможного разброса результатов измерений, выраженного через дисперсию.
+It means that the obtained states are optimal not only from mathematical expectancy point of view 
+for various combinations amount of polarization measurements, but also from 
+possible scatter of measurement results expressed in terms of dispersion point of view.
 
-\section{Оптимизация параметров для модели Цайлингера}
-В статье \cite{Zeilinger} рассматривается проверка неравенства Эберхарда применительно к реальному эксперименту. Значения величин $n_{ou}, n_{uo}$ в условиях эксперимента находились по формулам:
+\section{Parameters optimization for Zeilinger model}
+In article \cite{Zeilinger} Eberhard inequality check applied to the real experiment is considered. 
+During experiment conditions $n_{ou}, n_{uo}$ values were found by the following formulas:
 \[
 n_{ou}(\alpha_1, \beta_2) = S_o^A(\alpha_1) - n_{oo}(\alpha_1, \beta_2) - n_{oe}(\alpha_1, \beta_2),
 \]
 \[
 n_{uo}(\alpha_2, \beta_1) = S_o^B(\beta_1) - n_{oo}(\alpha_2, \beta_1) - n_{eo}(\alpha_2, \beta_1),
 \]
-где $S_o^A, S_o^B$ - количество срабатываний в обыкновенном луче для первой и второй системы соответственно.
+where $S_o^A, S_o^B$ -- the amount of clicks in the usual beam for first and second system 
+correspondingly.
 
-В таком случае неравенство Эберхарда принимает вид:
+In this case Eberhard inequality takes form:
 \begin{equation}
 J = -n_{oo}(\alpha_1, \beta_1) + S_o^A(\alpha_1) - n_{oo}(\alpha_1, \beta_2) + S_o^B(\beta_1) - n_{oo}(\alpha_2, \beta_1) + n_{oo}(\alpha_2, \beta_2) \geq 0
 \label{eq:Zeilinger_J}
 \end{equation}
 
-Рассмотрим оператор плотности в качестве квантового состояния системы:
+Consider density operator as a quantum state of the system:
 \[
 \rho = \frac{1}{\sqrt{1+r^2}}
 \begin{vmatrix}
@@ -1036,14 +1057,14 @@ J = -n_{oo}(\alpha_1, \beta_1) + S_o^A(\alpha_1) - n_{oo}(\alpha_1, \beta_2) + S
 0 & 0 & 0 & 0
 \end{vmatrix},
 \]
-где $0 \leq r \leq 1$ и $0 \leq V \leq 1$.
-В таком случае предсказания квантовой механики для величин, входящих в состав неравенства, принимают следующий вид:
+where $0 \leq r \leq 1$ и $0 \leq V \leq 1$.
+In this case predictions of quantum mechanics for values included to inequality become:
 \begin{eqnarray*}
 \tilde{S}_o^A(\alpha_i) = \eta_1 N \Tr[\rho(\hat{P}_A(\alpha_i) \otimes I)]\\
 \tilde{S}_o^B(\beta_i) = \eta_1 N \Tr[\rho(I \otimes \hat{P}_B(\beta_i))]\\
 \tilde{n}_{oo}(\alpha_i, \beta_i) = \eta_1\eta_2 N \Tr[\rho(\hat{P}_A(\alpha_i) \otimes \hat{P}_B(\beta_i))],
 \end{eqnarray*}
-где $\hat{P}_A, \hat{P}_B$ - операторы проектирования на направление обыкновенного луча для первой и второй призмы:
+where $\hat{P}_A, \hat{P}_B$ -- projection operators on usual beam direction for the first and second prism:
 \[
 \hat{P}(\gamma) = 
 \begin{pmatrix}
@@ -1052,7 +1073,7 @@ J = -n_{oo}(\alpha_1, \beta_1) + S_o^A(\alpha_1) - n_{oo}(\alpha_1, \beta_2) + S
 \end{pmatrix}.
 \]
 
-С учетом ложных срабатываний за время $T$ значения $S_o^A, S_o^B$ принимают вид:
+With regard to false clicks during time $T$ $S_o^A, S_o^B$ values take form:
 \[
 S_o^A(\alpha_i) = \tilde{S}_o^A(\alpha_i) + \zeta T,
 \]
@@ -1060,7 +1081,10 @@ S_o^A(\alpha_i) = \tilde{S}_o^A(\alpha_i) + \zeta T,
 S_o^B(\beta_i) = \tilde{S}_o^B(\beta_i) + \zeta T.
 \]
 
-Помимо шума модель Цайлингера учитывает несостыковку во времени, когда пары из разных запусков детектируются как сопряженные события. Введем величину временного окна $\tau_c$, в пределах которого должны быть задетектированы сопряженные события. В таком случае значения $n_{oo}(\alpha_i, \beta_i)$ находятся по формулам:
+Besides noise Zeilinger model also considers inconsistencies in time when pairs from different 
+launches are detected as a conjugate events. Let us introduce temporary window value $\tau_c$, within 
+which conjugate events must be detected. In this case $n_{oo}(\alpha_i, \beta_i)$ can be found using 
+the following formulas:
 \[
 n_{oo}(\alpha_i, \beta_i) = \tilde{n}_{oo}(\alpha_i, \beta_i) + n_{oo}^{acc}(\alpha_i, \beta_i),
 \]
@@ -1068,75 +1092,95 @@ n_{oo}(\alpha_i, \beta_i) = \tilde{n}_{oo}(\alpha_i, \beta_i) + n_{oo}^{acc}(\al
 n_{oo}^{acc}(\alpha_i, \beta_i) = S_o^A(\alpha_i)S_o^B(\beta_i)\frac{\tau_c}{T}\left(1 - \frac{\tilde{n}_{oo}(\alpha_i, \beta_i)}{S_o^A(\alpha_i)}\right) \left( 1 - \frac{\tilde{n}_{oo}(\alpha_i, \beta_i)}{S_o^B(\beta_i)}\right).
 \]
 
-Для данной модели была проведена оптимизация функции $J$ \eqref{eq:Zeilinger_J}, в ходе которой для заданных значений параметров эксперимента($\eta_1, \eta_2, r, V, T, \tau_c, N, \zeta$) были найдены значения углов, минимизирующие целевую функцию.
+For this model an optimization for $J$ \eqref{eq:Zeilinger_J} was done, during which angle values 
+minimising target function were found for selected values of experimental parameters 
+($\eta_1, \eta_2, r, V, T, \tau_c, N, \zeta$).
 
 \begin{table}
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline 
  & $\alpha_1, ^\circ$ & $\alpha_2, ^\circ$ & $\beta_1, ^\circ$ & $\beta_2, ^\circ$ & $J$ \\ 
 \hline 
-Результаты из статьи & 85.6 & 118.0 & -5.4 & 25.9 & -120191 \\ 
+Results from the article & 85.6 & 118.0 & -5.4 & 25.9 & -120191 \\ 
 \hline 
-Результаты оптимизации & 85.0 & 115.1 & -4.0 & 27.4 & -126060 \\ 
+Results of optimization & 85.0 & 115.1 & -4.0 & 27.4 & -126060 \\ 
 \hline 
 \end{tabular}
-\caption{Сравнение оптимальных параметров с параметрами, представленными в статье \cite{Zeilinger}}
+\caption{Optimal parameters comparison with ones from Zeilinger article \cite{Zeilinger}}
 \label{tab:Zeilinger_parameters}
 \end{table}
 
-Результаты оптимизации представлены в таблице \ref{tab:Zeilinger_parameters}. Согласно полученным значениям, оптимальные величины углов установки призм отличаются от представленных в \cite{Zeilinger} и позволяют нарушить неравенство сильнее.
+Optimization results are shown in Table~\ref{tab:Zeilinger_parameters}. According to obtained values, 
+optimal angle values for prism installation differ from given in \cite{Zeilinger} and let inequality to be 
+violated stronger.
 
-\section{Нахождение параметров неравенства в случае погрешностей при установке значений углов}
-В общем случае квантовый оператор $A$ может быть представлен через спектральную декомпозицию как $A = \int_{-\infty}^{+\infty}\lambda dE_\lambda$. Тогда его мат. ожидание для состояния $\psi$ представимо в виде:
+\section{Inequality parameters search in the case of errors when setting angle values}
+Generally quantum operator $A$ can be represented using spectral decomposition as 
+$A = \int_{-\infty}^{+\infty}\lambda dE_\lambda$. Then it's mathematical expectancy value for $\psi$ 
+state can be expressed as:
 \[
 \overline{A}_\psi = \int_{-\infty}^{+\infty}\lambda dp_\psi (\lambda),
 \]
-где $dp_\psi (\lambda) = d\langle E_\lambda\psi, \psi\rangle$ - распределение вероятностей для соответствующего спектрального разложения и квантового состояния. Поэтому для фиксированного $\psi$ квантовая наблюдаемая может рассматриваться как классическая случайна величина с распределением вероятностей
+where $dp_\psi (\lambda) = d\langle E_\lambda\psi, \psi\rangle$ -- probability distribution for the 
+corresponding spectral expansion and quantum state. Therefore for fixed $\psi$ quantum observable 
+can be regarded as classical random variable with probabilities distribution
 $p_\psi (O) = \int_O d\langle E_\lambda\psi, \psi\rangle, O\in \mathbb{R}$.
 
-Рассмотрим следующую проблему. Пусть наблюдаемая $A$ зависит от некоторой классической случайной величины $\omega: A = A(\omega)$, что соответствует случаю, когда значения углов положения призм не могут быть выставлены точно в ходе экспериментов. В таком случае спектральное разложение $A(\omega) = \int_{-\infty}^{+\infty}\lambda dE_\lambda(\omega)$ и функция плотности распределения $dp_\psi (\lambda|\omega) = d\langle E_\lambda(\omega)\psi, \psi\rangle$ также зависят от этого случайного параметра. Для любого фиксированного $\omega$ также выполняется условие $\int_{-\infty}^{+\infty}dp_\psi (\lambda|\omega) = 1$.
+Consider the following problem. Let observable $A$ to depend on some classical random variable 
+$\omega: A = A(\omega)$ corresponding to the case when angle values for the prisms positions 
+cannot be exactly set during experiments. In this case spectral decomposition 
+$A(\omega) = \int_{-\infty}^{+\infty}\lambda dE_\lambda(\omega)$ and density distribution function 
+$dp_\psi (\lambda|\omega) = d\langle E_\lambda(\omega)\psi, \psi\rangle$ also depends on 
+this random variable. For every fixed $\omega$ also 
+$\int_{-\infty}^{+\infty}dp_\psi (\lambda|\omega) = 1$ condition holds.
 
-Пусть случайная величина $\omega$ описывается с помощью вероятностного пространства $(\Omega, \mathcal{F}, P)$, где $\Omega$ - множество элементарных событий, $\mathcal{F}$ - $\sigma$-алгебра событий и $P$ - вероятностная мера. Значение мат. ожидания величины $A(\omega)$ примет вид:
+Let random variable $\omega$ be described using probability space $(\Omega, \mathcal{F}, P)$, 
+where $\Omega$ -- set of elementary events, $\mathcal{F}$ - $\sigma$-algebra of events and 
+$P$ is the probability measure. Mathematical expectancy value of $A(\omega)$ becomes:
 \[
 \overline{A}_\psi(\omega) = \int_\Omega\left[\int_{-\infty}^{+\infty}\lambda dp_\psi (\lambda|\omega)\right] dP(\omega) = \int_\Omega\langle A(\omega)\psi, \psi\rangle dP(\omega) = \mathbf{\tilde{E}}[ \langle A(\omega)\psi, \psi\rangle],
 \]
-где $\mathbf{\tilde{E}}[\cdot]$ - классическое математическое ожидание.
+where $\mathbf{\tilde{E}}[\cdot]$ -- classical mathematical expectancy.
 
-Аналогично получаем выражение для дисперсии $A(\omega)$:
+Similarly we obtained an expression for dispersion $A(\omega)$:
 \[
 \sigma^2(A) = \mathbf{\tilde{E}}[ \langle A^2(\omega)\psi, \psi\rangle - \langle A(\omega)\psi, \psi\rangle^2].
 \]
 
-Будем считать, что реальная величина разности углов $\theta$ в эксперименте равномерно распределена на отрезке вокруг желаемого значения. В этом случае $\theta' = \theta + \xi$, где $\xi$ - случайная величина, равномерно распределенная на отрезке $[-\delta; \delta]$, $\delta > 0$ - параметр разброса. Тогда
+Consider real value of $\theta$ angles' difference to be uniformly distributed at the sector around 
+the desired value in the experiment. In this case $\theta' = \theta + \xi$, where $\xi$ -- random variable, 
+uniformly distributed at $[-\delta; \delta]$ sector, $\delta > 0$ -- scatter parameter. Then
 \[
 J_\mathcal{B} = \frac{1}{2\delta}\int_{-\delta}^\delta \langle \mathcal{B}(r, \omega, \theta + x)\psi, \psi \rangle dx
-\] и
+\] and
 \[
 \sigma^2 = \frac{1}{2\delta}\int_{-\delta}^\delta (\langle \mathcal{B}^2(r, \omega, \theta + x)\psi, \psi \rangle - \langle \mathcal{B}(r, \omega, \theta + x)\psi, \psi \rangle^2) dx.
 \]
 
-
-Рассмотрим также целевую функцию, которая будет учитывать относительный разброс получаемых значений, выраженный через коэффициент вариации $J / \sigma$. Это позволит получить параметры, при которых при некотором разбросе экспериментальных данных относительная величина будет минимальной.
+Consider also target function that takes into account relative scatter of values obtained, expressed with 
+$J / \sigma$ variance coefficient. It enables us to obtain parameters for which  relative value will be minimal 
+with some scatter of experimental data.
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{theta_ang.eps}
-\caption{Оптимизированные значения для $\theta$ для различных значений $\delta$ в случае $\theta' = \theta + \xi$}
+\caption{Optimized values for $\theta$ for various $\delta$ values case of $\theta' = \theta + \xi$}
 \label{fig:theta_ang}
 \end{figure}
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{r_ang.eps}
 \includegraphics[scale=0.7]{omega_ang.eps}
-\caption{Оптимизированные значения для $r$ и $\omega$ для различных значений $\delta$ в случае $\theta' = \theta + \xi$}
+\caption{Optimized values for $r$ and $\omega$ for various $\delta$ values case of $\theta' = \theta + \xi$}
 \label{fig:psi_ang}
 \end{figure}
 
 \begin{figure}[t]
 \includegraphics[scale=0.7]{J_ang.eps}
-\caption{Оптимизированные значения для $J_{\mathcal{B}}/N$ для различных значений $\delta$ в случае $\theta' = \theta + \xi$}
+\caption{Optimized values for $J_{\mathcal{B}}/N$ for various $\delta$ values case of $\theta' = \theta + \xi$}
 \label{fig:J_ang}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begingroup
 \small
