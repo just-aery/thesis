@@ -30,6 +30,13 @@
 %      \vrule height0.75em width0.5em depth0.25em\fi}
 
 \usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{afterpage}
+
+\usepackage{subfig}
+\usepackage{graphicx}
+\graphicspath{ {./imgs/} }
 
 \DeclareMathOperator{\Tr}{Tr}
 
@@ -80,6 +87,8 @@ Linear operator $A$ on a Hilbert space $H$ is a map $H \to H$ that has the follo
 \end{enumerate}
 \end{definition}
 
+Let us assume that Hilbert space has finite dimension to simplify further considerations.
+
 \begin{definition}
 For a linear operator $A$, its adjoint operator $A^*$ is denoted with the aid of the equality $\langle A\psi,\varphi\rangle = \langle\psi, A^*\varphi\rangle$. Operator $A$ is called self-adjoint if $A^* = A$.
 \end{definition}
@@ -106,6 +115,10 @@ For every self-adjoint operator $A$ in complex Hilbert space $H$:
 \end{enumerate}
 \end{theorem}
 
+\begin{definition}
+A self-adjoint bounded operator is called positive if it has only non-negative eigenvalues in its spectrum.
+\end{definition}
+
 Another useful operator on Hilbert space is a projector operator.
 \begin{definition}
 Let $H_0$ be a linear subspace of $H$. Operator $\pi: H \to H - H_0$ is called a projector if $\pi^* = \pi$ and $\pi^2 = \pi$. It projects $H$ orthogonally onto $H_0 = \pi(H)$.
@@ -124,7 +137,7 @@ Let $H_1$ be a vector space with an orthogonal basis system $\{e_1, \ldots e_n\}
 \begin{definition}
 The set of formal sums of the form
 \begin{equation}
-\psi = \sum_{i,j}z_{i,j}e_i\otimes f_j,\ \sum_{i, j}|z_{i,j}|^2 < \infty,\  z_{i,j} \in \mathbb{C}
+\psi = \sum_{i,j}z_{i,j}e_i\otimes f_j,\ z_{i,j} \in \mathbb{C}
 \label{eq:tensor_element}
 \end{equation}
 with naturally defined operation of addition and multiplication by scalar is called the tensor product of $H_1$ and $H_2$ and denoted by the symbol $H = H_1\otimes H_2$
@@ -153,7 +166,7 @@ Consider Hilbert space $H_1\otimes H_2$, where $H_i$ are Hilbert spaces with the
 for any pair $\psi_1, \psi_2$.
 \begin{proof}
 Let assume that $\psi$ can be represented as $\psi = \psi_1\otimes\psi_2$ where
-$\psi_1$ and $\psi_2$ are represented as
+$\psi_1$ and $\psi_2$ can be written as weighted sums of basis vectors:
 \begin{gather*}
 	\psi_1 = a_1 e_1 + a_2 e_2,\ a_i\in \mathbb{C},\ |a_1|^2 + |a_2|^2 = 1 \\
 	\psi_2 = b_1 e_1 + b_2 e_2, b_i\in \mathbb{C}, |b_1|^2 + |b_2|^2 = 1.
@@ -164,7 +177,7 @@ Such a $\psi$ can be represented as
 	a_1 b_1 \cdot e_1 \otimes e_1 + a_1 b_2 \cdot e_1 \otimes e_2 + 
 	a_2 b_1 \cdot e_2 \otimes e_1 + a_2 b_2 \cdot e_2 \otimes e_2.
 \end{eqnarray*}
-One should solve the following system of equations to find the coefficients $a_1$, $a_2$, $b_1$, $b_2$:
+One should solve the following system of equations to find coefficients $a_1$, $a_2$, $b_1$, $b_2$:
 $$
 \begin{cases}
 a_1 b_2 = \frac12 \\
@@ -280,16 +293,16 @@ Consider two linear operators $A_1: H_1\to H_1$ and $A_2: H_2\to H_2$. The tenso
 
 \section{Mathematical formalism of quantum mechanics}
 \subsection{Postulates of quantum mechanics }
-The mathematical formalism of quantum mechanics can be formulated as a list of postulates \cite{Khrennikov_information} which are based on the theory of self-adjoint operator on complex Hilbert space $H$. 
+The mathematical formalism of quantum mechanics can be formulated as a list of postulates \cite{Khrennikov_information} which are based on the theory of self-adjoint operator on complex Hilbert space $H$. The following list of postulates and principles is called Copenhagen interpretation of quantum mechanics.
 \begin{enumerate}[label=\bfseries Postulate \arabic*:, align=left]
-  \item A quantum state $\psi$ is a vector of a complex Hilbert space such that $\langle\psi, \psi\rangle = 1$. This vector completely describes the state of a quantum system.
+  \item A quantum state $\psi$ is a vector of a complex Hilbert space such that $\langle\psi, \psi\rangle = 1$. This vector completely describes the state of a quantum system. Two vectors which differ by a factor of $\gamma = e^{i\varphi}$ describe the same quantum state.
   \item A physical observable $a$ is represented as a self-adjoint operator $A$ in $H$. Different observables are represented by different operators.
-  \item If an observable is represented by the operator $A$ then results of observation are given by the spectrum of $A$. In case of totally discrete spectrum the self-adjoint operator can be written in the form 
+  \item If an observable is represented by the operator $A$ then results of observation are given by the spectrum of $A$. Any self-adjoint operator can be written in the form 
   \[
   A = \sum_m a_m\pi_m^A
   \]
     where $\pi_m^A$ is an orthogonal projector onto an eigenspace corresponding to the eigenvalue $a_m$.
-  \item Born's rule - if $A$ is a self-adjoint operator with discrete spectrum then the probability to obtain an eigenvalue $a_m$ after measurement can be calculated by using the formula
+  \item Born's rule - if $A$ is a self-adjoint operator then the probability to obtain an eigenvalue $a_m$ after measurement can be calculated by using the formula
   \[
   P(a = a_m) = \| \pi_m^A\psi\|^2.
   \]
@@ -309,7 +322,7 @@ The mathematical formalism of quantum mechanics can be formulated as a list of p
   i\hbar \dfrac{d}{dt}\psi(t) = \mathcal{\mathcal{H}}\psi(t)
   \] 
   with the initial condition $\psi(0) = \psi_0$ and
-  where $\mathcal{H}$ is a self-adjoint operator representing the energy of the system.
+  where $\mathcal{H}$ is a self-adjoint positive operator representing the energy of the system.
   \item If there are two quantum systems int Hilbert spaces $H_1$ and $H_2$, then the state space of the compound system is given by $H_1 \otimes H_2$.  
 \end{enumerate}
 \begin{definition}
@@ -323,10 +336,34 @@ It was shown before that in that state $\psi$ cannot be factorizable as $\psi = 
 
 Another example is $\psi = e_1\otimes e_2 + e_1 \otimes e_1 + 2e_2 \otimes e_1$.
 
+\begin{proof}
+Let us assume that $\psi$ is represented in the form $\psi = \psi_1\otimes\psi_2$, where $\psi_1$ and $\psi_2$ can be written as a weighted sum of basis vectors:
+\begin{gather*}
+	\psi_1 = a_1 e_1 + a_2 e_2,\ a_i\in \mathbb{C},\ |a_1|^2 + |a_2|^2 = 1 \\
+	\psi_2 = b_1 e_1 + b_2 e_2, b_i\in \mathbb{C}, |b_1|^2 + |b_2|^2 = 1.
+\end{gather*}
+For this $\psi$ one can construct that:
+\begin{eqnarray*}
+	\psi_1 \otimes \psi_2 &=& (a_1 e_1 + a_2 e_2) \otimes (b_1 e_1 + b_2 e_2) = \\ &=&  
+	a_1 b_1 \cdot e_1 \otimes e_1 + a_1 b_2 \cdot e_1 \otimes e_2 + 
+	a_2 b_1 \cdot e_2 \otimes e_1 + a_2 b_2 \cdot e_2 \otimes e_2.
+\end{eqnarray*}
+One should solve the following system of equations to find coefficients $a_1$, $a_2$, $b_1$, $b_2$:
+$$
+\begin{cases}
+a_1 b_2 = \frac{1}{\sqrt{6}} \\
+a_2 b_1 = \frac{2}{\sqrt{6}} \\
+a_1 b_1 = \frac{1}{\sqrt{6}} \\
+a_2 b_2 = 0
+\end{cases},
+$$
+which is inconsistent. Therefore the assumption is false and $\psi$ is not factorizable.
+\end{proof}
+
 
 \subsection{Density operator}
 
-To describe a behaviour of a systems in entangled state we will use the notion of a density operator from \cite{Khrennikov_information}.
+To describe a behaviour of an ensemble of quantum states where each state is obtained with some probability we will use the notion of a density operator from \cite{Khrennikov_information}.
 
 For a pure state $\psi$ we can define an orthogonal projection operator: $P_\psi: P_\psi\varphi = \langle \psi, \varphi \rangle \psi$. It has following properties:
 \begin{enumerate}
@@ -347,13 +384,13 @@ $\Tr P_\psi = \sum_{k = 1}^n \langle \langle \psi, e_k\rangle\psi, e_k\rangle = 
 $P_\psi^2\varphi = \langle\psi, \langle\psi, \varphi\rangle \psi\rangle \psi = \langle\psi, \varphi\rangle \langle\psi, \psi\rangle\psi = \langle\psi, \varphi\rangle\psi = P_\psi\varphi $
 \end{proof}
 \end{enumerate}
-In the common case for any state(entangled or pure) we can construct an operator
+In the common case for any state or ensemble of states we can construct an operator
 \[
 \rho = \sum_ip_iP_{\psi_i},
 \]
-where $p_i$ represents probability to obtain $\psi_i$ after a measurement.
+where $p_i > 0,\ \sum_ip_i = 1$ represents probability to obtain $\psi_i$ after a measurement.
 
-One can easily show that operator $\rho$ satisfies properties 1-3 using corresponding properties 1-3 for each operator $P_{\psi_i}$. In the common case property 4 of projection operator is violated. For example, let us take density operator $\rho = \cfrac 12P_{\psi_1} + \cfrac 12P_{\psi_2}$ where $\psi_1 = (1, 0)^T$ and $\psi_2 = (0, 1)^T$. Let's find the square of this operator:
+One can easily show that operator $\rho$ satisfies properties 1-3 using corresponding properties 1-3 for each operator $P_{\psi_i}$. In the common case property 4 of projection operator is violated. For example, let us take density operator $\rho = \cfrac 12P_{\psi_1} + \cfrac 12P_{\psi_2}$ where $\psi_1 = (1, 0)^T$ and $\psi_2 = (0, 1)^T$. Let us find the square of this operator:
 \[
 \rho^2\varphi = \frac 12\langle\psi_1, \rho\varphi\rangle\psi_1 + \frac 12\langle\psi_2, \rho\varphi\rangle\psi_2 =
 \]
@@ -371,12 +408,12 @@ The final result is:
 \]
 
 
-Density operator $\rho$ also can be written in the form $\rho = \sum_i p_i|e_i\rangle\langle e_i|$ where $|e_i\rangle$ denotes vector and $\langle e_i|$ scalar product with the vector $e_i$. 
+Density operator $\rho$ also can be written in the form $\rho\psi = \sum_i p_i\langle e_i, \psi\rangle e_i$. 
 
 \subsection{Elements of quantum probability theory}
-In quantum mechanics the result of measurement depends on a state of a system which was before it collapsed to some pure state according to the measure result. It means that values of quantum probabilities, expectations, standard deviations etc. depend not only on observable but also on the initial state of the system which is described by density operator.
+In quantum mechanics the result of a measurement depends on a state of a system that it had before it collapsed to some pure state according to the measurement result. It means that values of quantum probabilities, expectations, standard deviations etc. depend not only on an observable but also on an initial state of a system which is described by a density operator.
 
-Consider $A$ - observable with eigenvalues $\{a_1,\ldots a_n\}$ and eigenvectors $\{f_1,\ldots f_n\}$, $\psi$ - state of a system. Then the probability to obtain $a_i$ after a measure is given by
+Let $A$ be an observable with eigenvalues $\{a_1,\ldots a_n\}$ and eigenvectors $\{f_1,\ldots f_n\}$, where $\psi$ describes the state of the system. Then the probability to obtain $a_i$ after a measurement is given by
 \[
 P(A = a_i) = |\langle\psi, f_i\rangle|^2 = \Tr \rho_\psi A_i
 \]
@@ -394,15 +431,15 @@ Quantum expectation value is defined by the following formula
 \[
 \overline{A_\rho} \equiv \langle A\rangle = \langle A\rho, \rho\rangle = \Tr\rho A.
 \]
-Quantum dispersion is defined the same was as in classical probability theory:
+Quantum dispersion is defined the same way as it is defined in the classical probability theory:
 \[
 \sigma^2_{A_\rho} = \overline{\left(A_\rho - \overline{A_\rho}\right)^2} = \overline{A^2_\rho} - \overline{A_\rho}^2.
 \] 
 
 \subsection{Heisenberg's uncertainty principle}
-Uncertainty principle of quantum mechanics states that there is a limit of a precision with which some of physical parameters of a system can be known together. This limit does not depend on a precision of used measurement devices or on a level of technology, it is fundamental and presents in any case.
+Uncertainty principle of quantum mechanics states that there is a limit of the precision with which some of physical parameters of one system can be known simultaneously. This limit does not depend on the precision of used measurement devices or on the level of technoloy, it is fundamental and presents in any case.
 
-For the first time uncertainty principle was formulated by Werner Heisenberg in 1927. He discovered that the more precisely the position of a particle can be measured, the less precisely the momentum can be determined.
+For the first time uncertainty principle was formulated by Werner Heisenberg in 1927. He discovered that the more precisely the position of a particle can be measured, the less precisely its momentum can be determined.
 
 In 1928 it was formulated as an inequality:
 \[
@@ -410,7 +447,7 @@ In 1928 it was formulated as an inequality:
 \]
 where $\sigma_x$ is a standard deviation of position, $\sigma_p$ is a standard deviation of momentum and $\hbar$ is a Planck constant.
 
-The most general form of uncertainty principle is given by Schr\"{o}dinger inequality:
+The most general form of uncertainty principle is given by the Schr\"{o}dinger inequality:
 \begin{equation}
 \sigma_A^2\sigma_B^2 \geq \left| \frac{1}{2}\langle\{A, B\}\rangle - \langle A\rangle\langle B\rangle \right|^2 + \left| \frac{1}{2i}\langle [A, B]\rangle\right|^2,
 \label{eq:Schrodinger_ineq}
@@ -427,22 +464,22 @@ Quantum dispersion $\sigma^2_A$ of self-adjoint operator $A$ can be found using 
 \[
 \sigma_A^2 = \langle (A - \langle A\rangle)^2\psi, \psi\rangle = \langle  (A - \langle A\rangle)\psi,  (A - \langle A\rangle)\psi\rangle.
 \]
-We denote $f = (A - \langle A\rangle)\psi$, $g = (B - \langle B\rangle)\psi$, then for the lest side of \eqref{eq:Caushy-Schwartz} we have
+We will denote $f = (A - \langle A\rangle)\psi$ and $g = (B - \langle B\rangle)\psi$, then for the left side of \eqref{eq:Caushy-Schwartz} we obtain:
 \[
 |\langle f, g\rangle |^2 = |\langle (A - \langle A\rangle)\psi, (B - \langle B\rangle)\psi\rangle |^2 = |\langle (B - \langle B\rangle)(A - \langle A\rangle)\psi, \psi |^2 = 
 \]
 \[
 = | \langle BA\psi, \psi\rangle - \langle B\rangle\langle A\rangle - \langle A\rangle \langle B\rangle + \langle A\rangle\langle B\rangle |^2 = | \langle BA\rangle - \langle A\rangle\langle B\rangle |^2.
 \]
-As any other complex number the left side of inequality can be written as
+As any other complex number the left side of the inequality can be written as
 \[
 |\langle f, g\rangle |^2 = \left| \frac{1}{2}(\langle f, g\rangle + \overline{\langle f, g\rangle})\right|^2 + \left| \frac{1}{2i}(\langle f, g\rangle - \overline{\langle f, g\rangle})\right|^2, 
 \]
-where $\overline{\langle f, g\rangle})$ is described by
+where $\overline{\langle f, g\rangle})$ is given by
 \[
 \overline{\langle f, g\rangle}) = \overline{\langle BA\psi, \psi\rangle} - \langle A\rangle\langle B\rangle = \langle\psi, BA\psi\rangle - \langle A\rangle\langle B\rangle = \langle AB\psi, \psi\rangle - \langle A\rangle\langle B\rangle.
 \]
-Putting it all together to the inequality \eqref{eq:Caushy-Schwartz} we have an expression from Schr\"{o}dinger inequality \eqref{eq:Schrodinger_ineq}:
+Putting it all together to the inequality \eqref{eq:Caushy-Schwartz} we have an expression from the Schr\"{o}dinger inequality \eqref{eq:Schrodinger_ineq}:
 \[
 \left| \frac{1}{2}(\langle BA\rangle - \langle A\rangle\langle B\rangle + \langle AB\rangle - \langle A\rangle\langle B\rangle)\right|^2 + \left| \frac{1}{2i}(\langle BA\rangle - \langle A\rangle\langle B\rangle - \langle AB\rangle + \langle A\rangle\langle B\rangle)\right|^2 \leq \sigma_A^2\sigma_B^2
 \]
@@ -451,7 +488,7 @@ Putting it all together to the inequality \eqref{eq:Caushy-Schwartz} we have an 
 \]
 \end{proof}
 
-In quantum mechanics position operator has the form
+In quantum mechanics the position operator is given by the formula:
 \[
 (\hat{x}f) = x\cdot f(x)
 \]
@@ -459,7 +496,7 @@ and momentum operator is defined by
 \[
 (\hat{p}f) = \frac{\hbar}{i}\frac{df}{dx}.
 \]
-It the common case Robertson inequality can be derived from \eqref{eq:Schrodinger_ineq}:
+It the common case the Robertson inequality can be derived from \eqref{eq:Schrodinger_ineq}:
 \[
 \sigma_A^2\sigma_B^2 \geq \frac{1}{4}|[A, B]|^2.
 \]
@@ -473,13 +510,13 @@ where $I$ is an identity operator. Then in this case Robertson inequality become
 \sigma_A^2\sigma_B^2 \geq \frac{1}{4}\hbar^2.
 \]
 
-From the derivation of Heisenberg's principle it is clear that one can construct nontrivial Robertson inequality for every operators $A$ and $B$ which have nonzero commutator. It is also clear that the result formula does not depend on technology or any conditions during measurement, it is a fundamental property for some pairs of quantum operators such as position and momentum.
+From the derivation of Heisenberg's principle it is clear that one can construct nontrivial Robertson inequality for every operators $A$ and $B$ which have nonzero commutator. It is also clear that the result formula does not depend on technology or any conditions during measurement, it is a fundamental property of some pairs of quantum operators such as position and momentum.
 
 \section{Einstein-Podolsky-Rosen paradox}
-Einstein-Podolsky-Rosen paradox(EPR-paradox) was published in 1935 as the criticism of some statements in the Copenhagen interpretation of quantum mechanics. The main principle of this interpretation holds that any quantum system can be described as wave-function and after measure it collapses to one of its eigenstates with some probabilities. Moreover, Heisenberg's uncertainty principle stands that position of a particle and its momentum are incompatible and they cannot be measured jointly with good precision. Einstein was not agree with probabilistic measurement outcomes and his paper was an attempt to show contradictions in quantum mechanics.
+Einstein-Podolsky-Rosen paradox(EPR-paradox, \cite{EPR}) was published in 1935 as the criticism of some statements of the Copenhagen interpretation of quantum mechanics. The main principle of this interpretation holds that any quantum system is described as a wave-function and after measurement it collapses to one of its eigenstates with some probability. Moreover, Heisenberg's uncertainty principle stands that position of a particle and its momentum are incompatible and they cannot be measured jointly with good precision. Einstein and his colleagues did not agree with probabilistic measurement outcomes. His paper was an attempt to show some contradictions in quantum mechanics.
 
-The article is based on a thought experiment with the following initial conditions. Consider two systems $S_1$, $S_2$, both with the state space $L_2(\mathbb{R})$ and the source which produces particles for these systems. Superposition of these systems can be represented as a quantum state from the tensor product of its single Hilbert spaces.
-Operator will $A$ denote an observable on $S_1$ with its eigenvalues $\{a_k\}$ and eigenvectors $\{\varphi_k(x_1)\}$. Operator $B$ will denote another observable on the same system with eigenvalues $\{b_k\}$ and eigenvectors $\{\psi_k(x_1)\}$. 
+The article \cite{EPR} is based on a thought experiment with the following initial conditions. Consider two systems $S_1$, $S_2$, both with the state space $L_2(\mathbb{R})$ and a source which produces particles for these systems. The superposition state can be represented as a quantum state from the tensor product of its single Hilbert spaces.
+Operator $A$ with eigenvalues $\{a_k\}$ and eigenvectors $\{\varphi_k(x_1)\}$ will denote an observable on $S_1$. Operator $B$  with eigenvalues $\{b_k\}$ and eigenvectors $\{\psi_k(x_1)\}$ will denote another observable on the same system. 
 
 In the common case of two Hilbert spaces $H_1$ and $H_2$ and their basis vectors $\{e_k\}$ and $\{f_k\}$ respectively the state $\varphi = \varphi_1\otimes\varphi_2$ can be represented in the form:
 \[
@@ -656,18 +693,624 @@ Moreover, in experimental tests of Bell's inequality statistical data was used. 
 
 Another problem with Bell inequalities is experimental data precision. To check something detectors have to have enough efficiency and not give false positive results. Since there is no device without these problems, it is better to have a statistical model which can deal with such experimental errors. One of such models was presented in the Eberhard's article \cite{Eberhard}.
 
-%\section{Eberhard inequality}
-%In the paper of Eberhard \cite{Eberhard} a Bell experiment is considered that is performed on entangled states of two photons. For both particles instead of spins polarization measurements are made using Nicol prisms. If photon is polarized horizontally then the ordinary trajectory is applied, otherwise photons polarized in the vertical plane are detected in the extraordinary trajectory.In front of prisms devices are set up that can rotate the plane of photon polarization. The angle of polarization plane rotation of the first particle is denoted by $\alpha$, and for the second particle it is called $\beta$.
-%
-%Eberhard's approach allows to take into account values of detector efficiency $\eta$ and background noise $\zeta$ before any optimization for such experiment. Here we present a derivation of Eberhard inequality from his paper. 
-%
-%%It is shown that Bell inequality requires an efficiency $\eta > 2(\sqrt{2} - 1) \approx 82.2\%$. Eberhard inequality still can be used with less efficiency values.
-%
-%For the described experiment there are four different setups of polarization planes: $(\alpha_1, \beta_1), (\alpha_2, \beta_1), (\alpha_, \beta_2), (\alpha_2, \beta_2)$ where the first item in the pair denotes values of $\alpha$ and the second one $\beta$ values. There are also three possible fates of photon after performing the experiment. Photon that is detected in the ordinary beam is counted with an index (o), photon that is detected in the extraordinary beam is counted with an index (e) and undetected photon is denoted by (u). Therefore for a system with two particles there are nine types of events with can be obtained for every measure.
+\section{Eberhard inequality}
+
+\subsection{The derivation of the inequality}
+In the paper of Eberhard \cite{Eberhard} a Bell experiment is considered that is performed on entangled states of two photons. For both particles instead of spins polarization measurements are made using Nicol prisms. If photon is polarized horizontally then the ordinary trajectory is applied, otherwise photons polarized in the vertical plane are detected in the extraordinary trajectory. The angle of polarization axis of the first prism is denoted by $\alpha$, and for the second prism it is called $\beta$.
+
+Eberhard's approach allows to take into account values of detector efficiency $\eta$ and background noise $\zeta$ before any optimization for such experiment. Here we present a derivation of Eberhard inequality from his paper. 
+
+%It is shown that Bell inequality requires an efficiency $\eta > 2(\sqrt{2} - 1) \approx 82.2\%$. Eberhard inequality still can be used with less efficiency values.
+
+For the described experiment there are four different setups of polarization planes: \[
+(\alpha_1, \beta_1), (\alpha_2, \beta_1), (\alpha_, \beta_2), (\alpha_2, \beta_2),
+\] 
+where the first item in the pair denotes values of $\alpha$ and the second one $\beta$ values. There are also three possible fates of photon after performing the experiment. Photon that is detected in the ordinary beam is counted with an index (o), photon that is detected in the extraordinary beam is counted with an index (e) and undetected photon is denoted by (u). Therefore for a system with two particles there are nine types of events with can be obtained for every measure.
+
+The derivation of Eberhard's inequality is built on the estimation of the number of events of a certain type with certain prism angles. The key role is played by the assumption of the locality of the considering theory. According to Eberhard, theory can be considered as local if among all possible sequences of observed events it is possible to construct four groups corresponding to the four installation options of polarization planes satisfying the conditions:
+\begin{enumerate}[label=(\roman*)]
+\item The result of the detection of the first photon does not depend on the installed
+polarisation plane of the second and vice versa, i.e. for each event in the sequence results for $(\alpha_i, \beta_1)$ and $(\alpha_i, \beta_2)$ are equal as well as results for $(\alpha_1, \beta_i)$ and $(\alpha_2, \beta_i)$.
+\item  Among all possible variants of four sequences that satisfy the first condition there are some for which all averages and corelations differ from the predictions of the theory by less than ten standard deviations.
+\end{enumerate}
+
+Suppose that the theory is local and such four sequences are found. We will consider only the events, included in them, and will refer to four events, corresponding to a single event number in such sequences, as conjugate events.
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline 
+\multicolumn{2}{|c|}{\multirow{2}{*}{$\alpha / \beta$}}  & \multicolumn{3}{c|}{$\beta_1$} & \multicolumn{3}{c|}{$\beta_2$} \\ 
+\cline{3-8}
+\multicolumn{2}{|c|}{}  & o & u & e & o & u & e \\ 
+\hline 
+\multirow{3}{*}{$\alpha_1$} & o & $\bullet$ & * & * &  & $\oplus$ & $\oplus$ \\ 
+\cline{2-8}
+ & u & * & * & * & * & * & * \\ 
+\cline{2-8}
+ & e & * & * & * & * & * & * \\ 
+\hline 
+\multirow{3}{*}{$\alpha_2$} & o &  & * & * &  & + & + \\ 
+\cline{2-8}
+ & u & $\otimes$ & * & * & $\times$ & $\times$ & $\times$ \\ 
+\cline{2-8}
+ & e & $\otimes$ & * & * & $\times$ & $\times$ & $\times$ \\ 
+\hline 
+\end{tabular} 
+\caption{Possible types of event in Eberhard's experiment}
+\label{tab:Eberhard_table}
+\end{table}
+
+We denote by $ n_{oo} (\alpha_1, \beta_1) $ the number of elements of the first sequence, when both particles have been found in the ordinary beam (cell $ \bullet $ in the table \ref{tab:Eberhard_table}). According to condition (i) for the conjugate event at $ (\alpha_2, \beta_1) $ the second photon has to be detected also in the ordinary beam, as a result of its detection does not depend on $ \alpha $. The same thing applies for the parameters $ (\alpha_1, \beta_2) $, the first photon has to be found in the ordinary beam. Thus, all associated events could not get into the cells of the table \ref{tab:Eberhard_table}, denoted by a *.
+
+Some of the events which conjugate events are included in the $ n_{oo} (\alpha_1, \beta_1) $ are among the number $ n_{uo} (\alpha_2, \beta_1) + n_ {eo} (\ alpha_2, \ beta_1) $ (a $ \otimes $ in the table). Consider only those events that were not there, that is appropriate to the situation when both photons were detected in the ordinary beam for parameters $ (\alpha_1, \beta_1) $ and $ (\alpha_2, \beta_1) $. Their number is greater than or equal to $ n_{oo} (\alpha_1, \beta_1) - n_{uo} (\alpha_2, \beta_1) - n_{eo} (\alpha_2, \beta_1) $. Similarly, we remove from consideration events that are included in the number $ n_{ou} (\alpha_1, \beta_2) + n_{oe} (\alpha_1, \beta_2) $ (a $ \oplus $ in the table).
+
+As a result, we find that the remaining number of events is greater than or equal to $ n_{oo} (\alpha_1, \beta_1) - n_{uo} (\alpha_2, \beta_1) + n_{eo} (\alpha_2, \beta_1) - n_{ou} (\alpha_1, \beta_2) - n_{oe} (\alpha_1, \beta_2) $. Furthermore, according to the condition (i) it is impossible to be detected not in an ordinary beam for any photon from the remaining conjugate events, including the parameters $ (\alpha_2, \beta_2) $. Thus, only events that are among the $n_{oo}(\alpha_2, \beta_2)$ are still in considering. Combining all the above, we obtain the Eberhard's inequality:
+\[
+n_{oo}(\alpha_1, \beta_1) - n_{uo}(\alpha_2, \beta_1) - n_{eo}(\alpha_2, \beta_1) - n_{ou}(\alpha_1, \beta_2) - n_{oe}(\alpha_1, \beta_2) \geq n_{oo}(\alpha_2, \beta_2),
+\]
+or
+\begin{multline}
+J_{\mathcal{B}} = n_{uo}(\alpha_2, \beta_1) + n_{eo}(\alpha_2, \beta_1) + n_{ou}(\alpha_1, \beta_2) \\
++ n_{oe}(\alpha_1, \beta_2) + n_{oo}(\alpha_2, \beta_2) - n_{oo}(\alpha_1, \beta_1) \geq 0.
+\label{eq:Eberhard_inequality}
+\end{multline}
+
+To satisfy the condition (ii), this inequality sould hold for mathematical expectations predicted by the theory. This, in turn, suggests that if quantum mechanics is a local theory (and hence satisfies the conditions (i) - (ii)), then inequality \eqref{eq:Eberhard_inequality} should be performed for its predictions.
+
+\subsection{Eberhard's inequality for quantum mechanics}
+Consider two detectors with efficiency $\eta$, that perform measurements in $N$ experiments. That is, in every experiment each of the detectors detects a photon in one of the trajectories with probability $\eta$. Then for the initial state of the system $\psi$ quantum mechanics predicts the following results:
+\begin{eqnarray} \label{eq:Eberhard_n_start}
+n_{oo}(\alpha_1, \beta_1) = N\frac{\eta^2}{4}\psi^\dagger[I + \sigma(\alpha_1)][I + \tau(\beta_1)]\psi,\\
+n_{oe}(\alpha_1, \beta_2) = N\frac{\eta^2}{4}\psi^\dagger[I + \sigma(\alpha_1)][I - \tau(\beta_2)]\psi,\\
+n_{ou}(\alpha_1, \beta_2) = N[\eta(1 - \eta)/2]\psi^\dagger[I + \sigma(\alpha_1)]\psi,\\ \label{eq:Eberhard_n_ou}
+n_{eo}(\alpha_2, \beta_1) = N\frac{\eta^2}{4}\psi^\dagger[I - \sigma(\alpha_2)][I + \tau(\beta_1)]\psi,\\
+n_{uo}(\alpha_2, \beta_1) = N[\eta(1 - \eta)/2]\psi^\dagger[I + \tau(\beta_1)]\psi,\\ \label{eq:Eberhard_n_uo}
+n_{oo}(\alpha_2, \beta_2) = N\frac{\eta^2}{4}\psi^\dagger[I + \sigma(\alpha_2)][I + \tau(\beta_2)]\psi, \label{eq:Eberhard_n_finish}
+\end{eqnarray}
+where 
+\[
+\sigma(\alpha) = 
+\begin{vmatrix}
+0 & e^{2i(\alpha - \alpha_1)} & 0 & 0\\
+e^{-2i(\alpha - \alpha_1)} & 0 & 0 & 0\\
+0 & 0 & 0 & e^{2i(\alpha - \alpha_1)}\\
+0 & 0 & e^{-2i(\alpha - \alpha_1)} & 0
+\end{vmatrix}
+\] 
+and
+\[
+\tau(\beta) = 
+\begin{vmatrix}
+0 & 0 & e^{2i(\beta - \beta_1)} & 0\\
+0 & 0 & 0 & e^{2i(\beta - \beta_1)}\\
+e^{-2i(\beta - \beta_1)} & 0 & 0 & 0\\
+0 & e^{-2i(\beta - \beta_1)} & 0 & 0
+\end{vmatrix}.
+\]
+
+Thus, we obtain Eberhard's inequality:
+\[
+J_{\mathcal{B}}^{\mbox{ideal}} = n_{uo}(\alpha_2, \beta_1) + n_{eo}(\alpha_2, \beta_1) + n_{ou}(\alpha_1, \beta_2) \\
++ n_{oe}(\alpha_1, \beta_2) + n_{oo}(\alpha_2, \beta_2) - n_{oo}(\alpha_1, \beta_1) \geq 0.
+\]
+
+However, in the reality, in addition to correct detections during experiments some false positives may arise that is called background. In the Eberhard's model it is assumed that the number of false positive detections for events of type (o, o) can be ignored. We assume that the level of background does not depend on $\alpha$ and $\beta$, so for events $n_{uo}(\alpha_2, \beta_1) + n_{eo}(\alpha_2, \beta_1)$ and $n_{ou}(\alpha_1, \beta_2) + n_{oe}(\alpha_1, \beta_2)$, it has the same value $N\zeta$. The resulting inequality takes the form:
+\[
+J_{\mathcal{B}} = J_{\mathcal{B}}^{\mbox{ideal}} + 2N\zeta \geq 0.
+\]
+
+This inequality can be written as $\psi^\dagger\mathcal{B}\psi \geq 0$, where $\mathcal{B}$ is a matrix:
+\[
+\mathcal{B} = 
+\begin{vmatrix}
+2 - \eta + \xi & 1 - \eta & 1 - \eta & A^*B^* - \eta\\
+1 - \eta & 2 - \eta + \xi & AB^* - \eta & 1 - \eta\\
+1 - \eta & A^*B - \eta & 2 - \eta + \xi & 1 - \eta\\
+AB - \eta & 1 - \eta & 1 - \eta & 2 - \eta + \xi
+\end{vmatrix},
+\]
+where $A = \eta/2(e^{2i(\alpha_1-\alpha_2)} - 1)$, $B = e^{2i(\beta_1 - \beta_2)}$, $\xi = 4\zeta/\eta$.
+
+For the implementation of the experiment, which could show a violation of this inequality, we will search for the parameters for which $J_{\mathcal{B}} < 0$. Consider the case when $\zeta = 0$, that is, the detectors do not give false positives, and $\alpha_1 - \alpha_2 = \beta_1 - \beta_2 = \theta$. We will use the following quantum state:
+\[
+\psi = \frac{1}{2\sqrt{1 + r^2}}
+\begin{vmatrix}
+(1+r)e^{-i\omega}\\
+-(1 - r)\\
+-(1 - r)\\
+(1 + r)e^{i\omega}
+\end{vmatrix},
+\]
+where $0 \leq r \leq 1$, $\alpha_1 = \omega / 2 - 90^\circ$ and $\beta_1 = \omega / 2$.
+
+%\chapter{Результаты}
+
+\section{Оптимизация параметров неравенства Эберхарда}
+Для каждого значения $\eta$ найдем параметры $r, \omega, \theta$, при которых неравенство нарушается наиболее сильно. Для этого будем минимизировать функцию $J_{\mathcal{B}}(r, \omega, \theta) / N$ с помощью метода Нелдера-Мида. 
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$\eta$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J_{\mathcal{B}} / N$
+\\\hline
+0.7 & 0.136389 & 3.40081 & 21.4266 & -0.000453562\\\hline
+0.75 & 0.310518 & 9.73143 & 31.9603 & -0.00615095\\\hline
+0.8 & 0.465228 & 14.8979 & 37.9215 & -0.02191\\\hline
+0.85 & 0.607424 & 18.5808 & 41.5341 & -0.0496902\\\hline
+0.9 & 0.741202 & 20.9153 & 43.6381 & -0.0899078\\\hline
+0.95 & 0.87067 & 22.141 & 44.6958 & -0.142436\\\hline
+1 & 0.999997 & 22.5 & 45 & -0.207107\\\hline
+\end{tabular}
+\caption{Оптимальные значения параметров для $J_{\mathcal{B}} / N$ из неравенства Эберхарда}
+\label{tab:Eberhard_repeat}
+\end{table}
+
+Значения, полученные в ходе оптимизации $J_{\mathcal{B}}(r, \omega, \theta) / N$, представлены в таблице \ref{tab:Eberhard_repeat}. В ходе оптимизации значения для $\zeta$ брались равными нулю, так как этот параметр вносит константный вклад в значение $J_{\mathcal{B}} / N$, равный $2\zeta$, он увеличивает его на фиксированную величину вне зависимости от остальных параметров, а значит, не влияет на результат оптимизации. Таким образом, значения из таблицы \ref{tab:Eberhard_repeat} совпадают со значениями, полученными Эберхардом для ненулевого уровня фона, и параметры, при которых наблюдается максимальное нарушение неравенства для $\zeta = 0$ совпадают с параметрами, при которых неравенство нарушается и $\zeta$ максимально.
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{theta.eps}
+\caption{Оптимизированные значения для $\theta$ при разных величинах эффективности детекторов}
+\label{fig:theta_opt}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{r.eps}
+\includegraphics[scale=0.7]{omega.eps}
+\caption{Оптимизированные значения для $r$ и $\omega$ при разных величинах эффективности детекторов}
+\label{fig:psi_opt}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{J.eps}
+\caption{Оптимизированные значения для $J_{\mathcal{B}}/N$ при разных величинах эффективности детекторов}
+\label{fig:J_opt}
+\end{figure}
+
+На рисунках \ref{fig:theta_opt}, \ref{fig:psi_opt} изображены зависимости найденных параметров от эффективности, на рисунке \ref{fig:J_opt} - найденные минимальные значения функции.
+
+В реальных экспериментах чаще возникает ситуация, когда детекторы имеют разные значения эффективностей, в этом случае формулы \eqref{eq:Eberhard_n_start}-\eqref{eq:Eberhard_n_finish} преобразуются к виду:
+\begin{eqnarray*}
+n_{oo}(\alpha_1, \beta_1) = N\frac{\eta_1\eta_2}{4}\psi^\dagger[I + \sigma(\alpha_1)][I + \tau(\beta_1)]\psi,\\
+n_{oe}(\alpha_1, \beta_2) = N\frac{\eta_1\eta_2}{4}\psi^\dagger[I + \sigma(\alpha_1)][I - \tau(\beta_2)]\psi,\\
+n_{ou}(\alpha_1, \beta_2) = N[\eta_1(1 - \eta_2)/2]\psi^\dagger[I + \sigma(\alpha_1)]\psi,\\
+n_{eo}(\alpha_2, \beta_1) = N\frac{\eta_1\eta_2}{4}\psi^\dagger[I - \sigma(\alpha_2)][I + \tau(\beta_1)]\psi,\\
+n_{uo}(\alpha_2, \beta_1) = N[\eta_2(1 - \eta_1)/2]\psi^\dagger[I + \tau(\beta_1)]\psi,\\
+n_{oo}(\alpha_2, \beta_2) = N\frac{\eta_1\eta_2}{4}\psi^\dagger[I + \sigma(\alpha_2)][I + \tau(\beta_2)]\psi.
+\end{eqnarray*}
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{theta3d.eps}
+\caption{Оптимизированные значения для $\theta$ для случая различающихся эффективностей детекторов}
+\label{fig:theta_opt_3d}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{r3d.eps}
+\includegraphics[scale=0.7]{omega3d.eps}
+\caption{Оптимизированные значения для $r$ и $\omega$ для случая различающихся эффективностей детекторов}
+\label{fig:psi_opt_3d}
+\end{figure}
+
+\begin{figure}[t]
+\includegraphics[scale=0.7]{J3d.eps}
+\caption{Оптимизированные значения для $J_{\mathcal{B}}/N$ для случая различающихся эффективностей детекторов}
+\label{fig:J_opt_3d}
+\end{figure}
+
+На рисунках \ref{fig:theta_opt_3d} - \ref{fig:J_opt_3d} изображены значения оптимальных параметров, а также минимизируемой функции для случая различающихся эффективностей.
+
+\begingroup
+\small
+
+\begin{longtable}{|c|c|c|c|c|c|c|}
+\hline
+$\eta_1$ & $\eta_2$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J_{\mathcal{B}}/N$ & $\zeta$
+\\\hline
+\endfirsthead
+
+\hline
+$\eta_1$ & $\eta_2$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J_{\mathcal{B}}/N$ & $\zeta$
+\\\hline
+\endhead
 
 
+\endfoot
+
+\endlastfoot
+
+\hline
+0.65 & 0.65 & 9.73816e-05 & 5.32909e-05 & 0.609422 & 4.13366e-10 & --\\\hline
+0.65 & 0.7 & 0.0325726 & 0.4367 & 10.3918 & -5.37452e-06 & 2.68726e-06\\\hline
+0.65 & 0.75 & 0.122804 & 2.94407 & 20.3249 & -0.000327839 & 0.00016392\\\hline
+0.65 & 0.8 & 0.199412 & 5.64399 & 25.8864 & -0.00152446 & 0.000762231\\\hline
+0.65 & 0.85 & 0.266448 & 8.1196 & 29.7694 & -0.00385363 & 0.00192682\\\hline
+0.65 & 0.9 & 0.326193 & 10.2951 & 32.6807 & -0.00737942 & 0.00368971\\\hline
+0.65 & 0.95 & 0.380046 & 12.1725 & 34.9409 & -0.0120653 & 0.00603265\\\hline
+0.65 & 1 & 0.42905 & 13.7822 & 36.7384 & -0.0178271 & 0.00891353\\\hline
+0.7 & 0.65 & 0.0325721 & 0.436691 & 10.3917 & -5.37452e-06 & 2.68726e-06\\\hline
+0.7 & 0.7 & 0.136389 & 3.40081 & 21.4266 & -0.000453562 & 0.000226781\\\hline
+0.7 & 0.75 & 0.223629 & 6.53572 & 27.3754 & -0.00217282 & 0.00108641\\\hline
+0.7 & 0.8 & 0.299639 & 9.33741 & 31.4432 & -0.00551773 & 0.00275887\\\hline
+0.7 & 0.85 & 0.367155 & 11.7325 & 34.4284 & -0.0105412 & 0.00527059\\\hline
+0.7 & 0.9 & 0.427895 & 13.7454 & 36.6985 & -0.0171516 & 0.0085758\\\hline
+0.7 & 0.95 & 0.48304 & 15.4224 & 38.4617 & -0.0251977 & 0.0125989\\\hline
+0.7 & 1 & 0.533433 & 16.8118 & 39.8493 & -0.034513 & 0.0172565\\\hline
+0.75 & 0.65 & 0.122804 & 2.94407 & 20.3249 & -0.000327839 & 0.00016392\\\hline
+0.75 & 0.7 & 0.223629 & 6.53572 & 27.3754 & -0.00217282 & 0.00108641\\\hline
+0.75 & 0.75 & 0.310518 & 9.73143 & 31.9603 & -0.00615095 & 0.00307547\\\hline
+0.75 & 0.8 & 0.387235 & 12.4151 & 35.2194 & -0.0123604 & 0.0061802\\\hline
+0.75 & 0.85 & 0.455977 & 14.6188 & 37.6299 & -0.0206635 & 0.0103318\\\hline
+0.75 & 0.9 & 0.518149 & 16.4057 & 39.45 & -0.0308332 & 0.0154166\\\hline
+0.75 & 0.95 & 0.574864 & 17.8435 & 40.8423 & -0.0426257 & 0.0213128\\\hline
+0.75 & 1 & 0.626962 & 18.9919 & 41.9138 & -0.0558135 & 0.0279068\\\hline
+0.8 & 0.65 & 0.199412 & 5.64399 & 25.8864 & -0.00152446 & 0.000762231\\\hline
+0.8 & 0.7 & 0.299639 & 9.33741 & 31.4432 & -0.00551773 & 0.00275887\\\hline
+0.8 & 0.75 & 0.387235 & 12.4151 & 35.2194 & -0.0123604 & 0.0061802\\\hline
+0.8 & 0.8 & 0.465228 & 14.8979 & 37.9215 & -0.02191 & 0.010955\\\hline
+0.8 & 0.85 & 0.535462 & 16.8648 & 39.9011 & -0.0338613 & 0.0169307\\\hline
+0.8 & 0.9 & 0.59933 & 18.4036 & 41.3692 & -0.0478775 & 0.0239387\\\hline
+0.8 & 0.95 & 0.657889 & 19.5935 & 42.4623 & -0.063646 & 0.031823\\\hline
+0.8 & 1 & 0.712001 & 20.5014 & 43.274 & -0.0808982 & 0.0404491\\\hline
+0.85 & 0.65 & 0.266448 & 8.1196 & 29.7694 & -0.00385363 & 0.00192682\\\hline
+0.85 & 0.7 & 0.367155 & 11.7325 & 34.4284 & -0.0105412 & 0.00527059\\\hline
+0.85 & 0.75 & 0.455977 & 14.6188 & 37.6299 & -0.0206635 & 0.0103318\\\hline
+0.85 & 0.8 & 0.535462 & 16.8648 & 39.9011 & -0.0338613 & 0.0169307\\\hline
+0.85 & 0.85 & 0.607424 & 18.5808 & 41.5341 & -0.0496902 & 0.0248451\\\hline
+0.85 & 0.9 & 0.673214 & 19.8694 & 42.7109 & -0.0677295 & 0.0338647\\\hline
+0.85 & 0.95 & 0.733924 & 20.817 & 43.552 & -0.087619 & 0.0438095\\\hline
+0.85 & 1 & 0.790464 & 21.4958 & 44.1427 & -0.109064 & 0.0545318\\\hline
+0.9 & 0.65 & 0.326193 & 10.2951 & 32.6807 & -0.00737942 & 0.00368971\\\hline
+0.9 & 0.7 & 0.427895 & 13.7454 & 36.6985 & -0.0171516 & 0.0085758\\\hline
+0.9 & 0.75 & 0.518149 & 16.4057 & 39.45 & -0.0308332 & 0.0154166\\\hline
+0.9 & 0.8 & 0.59933 & 18.4036 & 41.3692 & -0.0478775 & 0.0239387\\\hline
+0.9 & 0.85 & 0.673214 & 19.8694 & 42.7109 & -0.0677295 & 0.0338647\\\hline
+0.9 & 0.9 & 0.741202 & 20.9153 & 43.6381 & -0.0899078 & 0.0449539\\\hline
+0.9 & 0.95 & 0.804477 & 21.6349 & 44.2627 & -0.11402 & 0.0570101\\\hline
+0.9 & 1 & 0.863896 & 22.1002 & 44.661 & -0.139755 & 0.0698776\\\hline
+0.95 & 0.65 & 0.380046 & 12.1725 & 34.9409 & -0.0120653 & 0.00603265\\\hline
+0.95 & 0.7 & 0.48304 & 15.4224 & 38.4617 & -0.0251977 & 0.0125989\\\hline
+0.95 & 0.75 & 0.574864 & 17.8435 & 40.8423 & -0.0426257 & 0.0213128\\\hline
+0.95 & 0.8 & 0.657889 & 19.5935 & 42.4623 & -0.063646 & 0.031823\\\hline
+0.95 & 0.85 & 0.733924 & 20.817 & 43.552 & -0.087619 & 0.0438095\\\hline
+0.95 & 0.9 & 0.804477 & 21.6349 & 44.2627 & -0.11402 & 0.0570101\\\hline
+0.95 & 0.95 & 0.87067 & 22.141 & 44.6958 & -0.142436 & 0.0712182\\\hline
+0.95 & 1 & 0.933431 & 22.4101 & 44.924 & -0.172546 & 0.086273\\\hline
+1 & 0.65 & 0.42905 & 13.7822 & 36.7384 & -0.0178271 & 0.00891353\\\hline
+1 & 0.7 & 0.533433 & 16.8118 & 39.8493 & -0.034513 & 0.0172565\\\hline
+1 & 0.75 & 0.626962 & 18.9919 & 41.9138 & -0.0558135 & 0.0279068\\\hline
+1 & 0.8 & 0.712001 & 20.5014 & 43.274 & -0.0808982 & 0.0404491\\\hline
+1 & 0.85 & 0.790464 & 21.4958 & 44.1427 & -0.109064 & 0.0545318\\\hline
+1 & 0.9 & 0.863896 & 22.1002 & 44.661 & -0.139755 & 0.0698776\\\hline
+1 & 0.95 & 0.933431 & 22.4101 & 44.924 & -0.172546 & 0.086273\\\hline
+1 & 1 & 0.999997 & 22.5 & 45 & -0.207107 & 0.103553\\\hline
+\caption{Значения оптимальных параметров для случая различающихся эффективностей}
+\label{tab:different_etas}
+\end{longtable}
+
+\endgroup
+
+Значения параметров, полученные в ходе оптимизации, а также значения максимально допустимого уровня шума представлены в таблице \ref{tab:different_etas}. Чем выше каждое значение эффективности в отдельности, тем сильнее может быть нарушено неравенство. Минимальные значения эффективностей, при которых нарушение возможно, близки к значению $\eta_1 = \eta_2 = 0.67$, что согласуется с результатами Эберхарда.
+
+%\clearpage
+
+В общем случае для любого состояния $\psi$, минимизирующего величину мат. ожидания, справедливо следующее утверждение.
+
+\begin{theorem}
+Квантовое состояние $\psi$, минимизирующее целевую функцию $J$, является собственным вектором матрицы $\mathcal{B}$ и обращает дисперсию в ноль.
+\end{theorem}
+\begin{proof}
+По теореме Куранта-Фишера $\lambda_1 \leq \langle\mathcal{B}\psi, \psi\rangle \leq \lambda_n$, где $\lambda_1, \ldots \lambda_n$ - собственные значения, отсортированные в порядке возрастания. Минимум $J_\mathcal{B} = \langle\mathcal{B}\psi, \psi\rangle = \lambda_1$ достигается, если $\psi = \psi_1$ является собственным вектором. 
+
+Для величины дисперсии в этом случае имеем:
+\[\sigma^2 = \langle B^2\rangle - \langle B\rangle^2 = \psi^\dagger B^2 \psi - \lambda_1^2 = \psi^\dagger B \lambda_1  \psi - \lambda_1^2 = 0.
+\]
+\end{proof}
+
+Это означает, что найденные состояния являются оптимальными не только с точки зрения математического ожидания для количества различных комбинаций измерения поляризации, но и с точки зрения возможного разброса результатов измерений, выраженного через дисперсию.
+
+\section{Оптимизация параметров для модели Цайлингера}
+В статье \cite{Zeilinger} рассматривается проверка неравенства Эберхарда применительно к реальному эксперименту. Значения величин $n_{ou}, n_{uo}$ в условиях эксперимента находились по формулам:
+\[
+n_{ou}(\alpha_1, \beta_2) = S_o^A(\alpha_1) - n_{oo}(\alpha_1, \beta_2) - n_{oe}(\alpha_1, \beta_2),
+\]
+\[
+n_{uo}(\alpha_2, \beta_1) = S_o^B(\beta_1) - n_{oo}(\alpha_2, \beta_1) - n_{eo}(\alpha_2, \beta_1),
+\]
+где $S_o^A, S_o^B$ - количество срабатываний в обыкновенном луче для первой и второй системы соответственно.
+
+В таком случае неравенство Эберхарда принимает вид:
+\begin{equation}
+J = -n_{oo}(\alpha_1, \beta_1) + S_o^A(\alpha_1) - n_{oo}(\alpha_1, \beta_2) + S_o^B(\beta_1) - n_{oo}(\alpha_2, \beta_1) + n_{oo}(\alpha_2, \beta_2) \geq 0
+\label{eq:Zeilinger_J}
+\end{equation}
+
+Рассмотрим оператор плотности в качестве квантового состояния системы:
+\[
+\rho = \frac{1}{\sqrt{1+r^2}}
+\begin{vmatrix}
+0 & 0 & 0 & 0\\
+0 & 1 & Vr & 0\\
+0 & Vr & r^2 & 0\\
+0 & 0 & 0 & 0
+\end{vmatrix},
+\]
+где $0 \leq r \leq 1$ и $0 \leq V \leq 1$.
+В таком случае предсказания квантовой механики для величин, входящих в состав неравенства, принимают следующий вид:
+\begin{eqnarray*}
+\tilde{S}_o^A(\alpha_i) = \eta_1 N \Tr[\rho(\hat{P}_A(\alpha_i) \otimes I)]\\
+\tilde{S}_o^B(\beta_i) = \eta_1 N \Tr[\rho(I \otimes \hat{P}_B(\beta_i))]\\
+\tilde{n}_{oo}(\alpha_i, \beta_i) = \eta_1\eta_2 N \Tr[\rho(\hat{P}_A(\alpha_i) \otimes \hat{P}_B(\beta_i))],
+\end{eqnarray*}
+где $\hat{P}_A, \hat{P}_B$ - операторы проектирования на направление обыкновенного луча для первой и второй призмы:
+\[
+\hat{P}(\gamma) = 
+\begin{pmatrix}
+\cos^2\gamma & \cos\gamma\sin\gamma\\
+\cos\gamma\sin\gamma & \sin^2\gamma
+\end{pmatrix}.
+\]
+
+С учетом ложных срабатываний за время $T$ значения $S_o^A, S_o^B$ принимают вид:
+\[
+S_o^A(\alpha_i) = \tilde{S}_o^A(\alpha_i) + \zeta T,
+\]
+\[
+S_o^B(\beta_i) = \tilde{S}_o^B(\beta_i) + \zeta T.
+\]
+
+Помимо шума модель Цайлингера учитывает несостыковку во времени, когда пары из разных запусков детектируются как сопряженные события. Введем величину временного окна $\tau_c$, в пределах которого должны быть задетектированы сопряженные события. В таком случае значения $n_{oo}(\alpha_i, \beta_i)$ находятся по формулам:
+\[
+n_{oo}(\alpha_i, \beta_i) = \tilde{n}_{oo}(\alpha_i, \beta_i) + n_{oo}^{acc}(\alpha_i, \beta_i),
+\]
+\[
+n_{oo}^{acc}(\alpha_i, \beta_i) = S_o^A(\alpha_i)S_o^B(\beta_i)\frac{\tau_c}{T}\left(1 - \frac{\tilde{n}_{oo}(\alpha_i, \beta_i)}{S_o^A(\alpha_i)}\right) \left( 1 - \frac{\tilde{n}_{oo}(\alpha_i, \beta_i)}{S_o^B(\beta_i)}\right).
+\]
+
+Для данной модели была проведена оптимизация функции $J$ \eqref{eq:Zeilinger_J}, в ходе которой для заданных значений параметров эксперимента($\eta_1, \eta_2, r, V, T, \tau_c, N, \zeta$) были найдены значения углов, минимизирующие целевую функцию.
+
+\begin{table}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline 
+ & $\alpha_1, ^\circ$ & $\alpha_2, ^\circ$ & $\beta_1, ^\circ$ & $\beta_2, ^\circ$ & $J$ \\ 
+\hline 
+Результаты из статьи & 85.6 & 118.0 & -5.4 & 25.9 & -120191 \\ 
+\hline 
+Результаты оптимизации & 85.0 & 115.1 & -4.0 & 27.4 & -126060 \\ 
+\hline 
+\end{tabular}
+\caption{Сравнение оптимальных параметров с параметрами, представленными в статье \cite{Zeilinger}}
+\label{tab:Zeilinger_parameters}
+\end{table}
+
+Результаты оптимизации представлены в таблице \ref{tab:Zeilinger_parameters}. Согласно полученным значениям, оптимальные величины углов установки призм отличаются от представленных в \cite{Zeilinger} и позволяют нарушить неравенство сильнее.
+
+\section{Нахождение параметров неравенства в случае погрешностей при установке значений углов}
+В общем случае квантовый оператор $A$ может быть представлен через спектральную декомпозицию как $A = \int_{-\infty}^{+\infty}\lambda dE_\lambda$. Тогда его мат. ожидание для состояния $\psi$ представимо в виде:
+\[
+\overline{A}_\psi = \int_{-\infty}^{+\infty}\lambda dp_\psi (\lambda),
+\]
+где $dp_\psi (\lambda) = d\langle E_\lambda\psi, \psi\rangle$ - распределение вероятностей для соответствующего спектрального разложения и квантового состояния. Поэтому для фиксированного $\psi$ квантовая наблюдаемая может рассматриваться как классическая случайна величина с распределением вероятностей
+$p_\psi (O) = \int_O d\langle E_\lambda\psi, \psi\rangle, O\in \mathbb{R}$.
+
+Рассмотрим следующую проблему. Пусть наблюдаемая $A$ зависит от некоторой классической случайной величины $\omega: A = A(\omega)$, что соответствует случаю, когда значения углов положения призм не могут быть выставлены точно в ходе экспериментов. В таком случае спектральное разложение $A(\omega) = \int_{-\infty}^{+\infty}\lambda dE_\lambda(\omega)$ и функция плотности распределения $dp_\psi (\lambda|\omega) = d\langle E_\lambda(\omega)\psi, \psi\rangle$ также зависят от этого случайного параметра. Для любого фиксированного $\omega$ также выполняется условие $\int_{-\infty}^{+\infty}dp_\psi (\lambda|\omega) = 1$.
+
+Пусть случайная величина $\omega$ описывается с помощью вероятностного пространства $(\Omega, \mathcal{F}, P)$, где $\Omega$ - множество элементарных событий, $\mathcal{F}$ - $\sigma$-алгебра событий и $P$ - вероятностная мера. Значение мат. ожидания величины $A(\omega)$ примет вид:
+\[
+\overline{A}_\psi(\omega) = \int_\Omega\left[\int_{-\infty}^{+\infty}\lambda dp_\psi (\lambda|\omega)\right] dP(\omega) = \int_\Omega\langle A(\omega)\psi, \psi\rangle dP(\omega) = \mathbf{\tilde{E}}[ \langle A(\omega)\psi, \psi\rangle],
+\]
+где $\mathbf{\tilde{E}}[\cdot]$ - классическое математическое ожидание.
+
+Аналогично получаем выражение для дисперсии $A(\omega)$:
+\[
+\sigma^2(A) = \mathbf{\tilde{E}}[ \langle A^2(\omega)\psi, \psi\rangle - \langle A(\omega)\psi, \psi\rangle^2].
+\]
+
+Будем считать, что реальная величина разности углов $\theta$ в эксперименте равномерно распределена на отрезке вокруг желаемого значения. В этом случае $\theta' = \theta + \xi$, где $\xi$ - случайная величина, равномерно распределенная на отрезке $[-\delta; \delta]$, $\delta > 0$ - параметр разброса. Тогда
+\[
+J_\mathcal{B} = \frac{1}{2\delta}\int_{-\delta}^\delta \langle \mathcal{B}(r, \omega, \theta + x)\psi, \psi \rangle dx
+\] и
+\[
+\sigma^2 = \frac{1}{2\delta}\int_{-\delta}^\delta (\langle \mathcal{B}^2(r, \omega, \theta + x)\psi, \psi \rangle - \langle \mathcal{B}(r, \omega, \theta + x)\psi, \psi \rangle^2) dx.
+\]
 
 
+Рассмотрим также целевую функцию, которая будет учитывать относительный разброс получаемых значений, выраженный через коэффициент вариации $J / \sigma$. Это позволит получить параметры, при которых при некотором разбросе экспериментальных данных относительная величина будет минимальной.
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{theta_ang.eps}
+\caption{Оптимизированные значения для $\theta$ для различных значений $\delta$ в случае $\theta' = \theta + \xi$}
+\label{fig:theta_ang}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{r_ang.eps}
+\includegraphics[scale=0.7]{omega_ang.eps}
+\caption{Оптимизированные значения для $r$ и $\omega$ для различных значений $\delta$ в случае $\theta' = \theta + \xi$}
+\label{fig:psi_ang}
+\end{figure}
+
+\begin{figure}[t]
+\includegraphics[scale=0.7]{J_ang.eps}
+\caption{Оптимизированные значения для $J_{\mathcal{B}}/N$ для различных значений $\delta$ в случае $\theta' = \theta + \xi$}
+\label{fig:J_ang}
+\end{figure}
+
+
+\begingroup
+\small
+
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|}
+\hline
+$\eta$ & $\delta,^\circ$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J$ & $J_{\delta}$ & $\sigma_{\delta}$ & $K = J_{\delta}/\sigma_{\delta}$
+\endfirsthead
+
+\hline
+$\eta$ & $\delta,^\circ$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J$ & $J_{\delta}$ & $\sigma_{\delta}$ & $K = J_{\delta}/\sigma_{\delta}$\\
+\hline
+\endhead
+
+\hline
+\endfoot
+
+\endlastfoot
+
+\hline
+\multirow{3}{*}{0.7} & \multirow{3}{*}{0.25} & 0.13639 & 3.4008 & 21.427 & -0.00045356 & -0.00045189 & 0.00087956 & -0.51377\\\cline{3-9}
+ &  & 0.13629 & 3.3972 & 21.418 & -0.00045356 & -0.00045189 & 0.00087922 & -0.51397\\\cline{3-9}
+ &  & 0.12395 & 2.9245 & 20.237 & -0.00044085 & -0.00043936 & 0.00083444 & -0.52653\\\hline
+\multirow{3}{*}{0.7} & \multirow{3}{*}{0.5} & 0.13639 & 3.4008 & 21.427 & -0.00045356 & -0.00044688 & 0.0017591 & -0.25404\\\cline{3-9}
+ &  & 0.1361 & 3.3903 & 21.397 & -0.00045355 & -0.00044689 & 0.0017569 & -0.25437\\\cline{3-9}
+ &  & 0.12378 & 2.9192 & 20.221 & -0.00044051 & -0.00043455 & 0.0016676 & -0.26059\\\hline
+\multirow{3}{*}{0.7} & \multirow{3}{*}{0.75} & 0.13639 & 3.4008 & 21.427 & -0.00045356 & -0.00043854 & 0.0026387 & -0.1662\\\cline{3-9}
+ &  & 0.13566 & 3.3739 & 21.357 & -0.00045351 & -0.00043858 & 0.0026307 & -0.16672\\\cline{3-9}
+ &  & 0.1235 & 2.91 & 20.193 & -0.00043993 & -0.00042657 & 0.0024981 & -0.17076\\\hline
+\multirow{3}{*}{0.7} & \multirow{3}{*}{1.0} & 0.13639 & 3.4008 & 21.427 & -0.00045356 & -0.00042685 & 0.0035182 & -0.12132\\\cline{3-9}
+ &  & 0.13513 & 3.3554 & 21.305 & -0.00045341 & -0.000427 & 0.0034994 & -0.12202\\\cline{3-9}
+ &  & 0.12306 & 2.8955 & 20.149 & -0.000439 & -0.00041536 & 0.0033239 & -0.12496\\\hline
+\multirow{3}{*}{0.75} & \multirow{3}{*}{0.25} & 0.31052 & 9.7314 & 31.96 & -0.0061509 & -0.0061468 & 0.0014539 & -4.2279\\\cline{3-9}
+ &  & 0.31047 & 9.729 & 31.956 & -0.0061509 & -0.0061468 & 0.0014537 & -4.2284\\\cline{3-9}
+ &  & 0.28314 & 8.2348 & 29.774 & -0.0059469 & -0.0059433 & 0.0013654 & -4.3528\\\hline
+\multirow{3}{*}{0.75} & \multirow{3}{*}{0.5} & 0.31052 & 9.7314 & 31.96 & -0.0061509 & -0.0061346 & 0.0029077 & -2.1098\\\cline{3-9}
+ &  & 0.31037 & 9.7245 & 31.95 & -0.0061509 & -0.0061346 & 0.0029068 & -2.1104\\\cline{3-9}
+ &  & 0.28301 & 8.2297 & 29.765 & -0.0059453 & -0.0059309 & 0.00273 & -2.1725\\\hline
+\multirow{3}{*}{0.75} & \multirow{3}{*}{0.75} & 0.31052 & 9.7314 & 31.96 & -0.0061509 & -0.0061141 & 0.0043614 & -1.4019\\\cline{3-9}
+ &  & 0.31024 & 9.7187 & 31.939 & -0.0061509 & -0.0061141 & 0.0043587 & -1.4027\\\cline{3-9}
+ &  & 0.28288 & 8.2252 & 29.756 & -0.0059437 & -0.0059113 & 0.0040937 & -1.444\\\hline
+\multirow{3}{*}{0.75} & \multirow{3}{*}{1.0} & 0.31052 & 9.7314 & 31.96 & -0.0061509 & -0.0060854 & 0.0058149 & -1.0465\\\cline{3-9}
+ &  & 0.30998 & 9.7066 & 31.92 & -0.0061509 & -0.0060854 & 0.005808 & -1.0478\\\cline{3-9}
+ &  & 0.28269 & 8.219 & 29.743 & -0.0059414 & -0.0058839 & 0.0054558 & -1.0785\\\hline
+\multirow{3}{*}{0.8} & \multirow{3}{*}{0.25} & 0.46523 & 14.898 & 37.921 & -0.02191 & -0.021904 & 0.0019372 & -11.307\\\cline{3-9}
+ &  & 0.46523 & 14.898 & 37.921 & -0.02191 & -0.021904 & 0.0019372 & -11.307\\\cline{3-9}
+ &  & 0.42475 & 12.175 & 34.602 & -0.020989 & -0.020984 & 0.0017892 & -11.728\\\hline
+\multirow{3}{*}{0.8} & \multirow{3}{*}{0.5} & 0.46523 & 14.898 & 37.921 & -0.02191 & -0.021884 & 0.0038743 & -5.6485\\\cline{3-9}
+ &  & 0.46509 & 14.893 & 37.915 & -0.02191 & -0.021884 & 0.0038737 & -5.6495\\\cline{3-9}
+ &  & 0.42467 & 12.172 & 34.597 & -0.020987 & -0.020964 & 0.0035779 & -5.8594\\\hline
+\multirow{3}{*}{0.8} & \multirow{3}{*}{0.75} & 0.46523 & 14.898 & 37.921 & -0.02191 & -0.021852 & 0.0058112 & -3.7604\\\cline{3-9}
+ &  & 0.46514 & 14.89 & 37.91 & -0.02191 & -0.021852 & 0.0058097 & -3.7614\\\cline{3-9}
+ &  & 0.4246 & 12.171 & 34.594 & -0.020985 & -0.020935 & 0.0053661 & -3.9014\\\hline
+\multirow{3}{*}{0.8} & \multirow{3}{*}{1.0} & 0.46523 & 14.898 & 37.921 & -0.02191 & -0.021808 & 0.0077478 & -2.8147\\\cline{3-9}
+ &  & 0.46492 & 14.885 & 37.901 & -0.02191 & -0.021808 & 0.0077438 & -2.8162\\\cline{3-9}
+ &  & 0.42446 & 12.167 & 34.587 & -0.020981 & -0.020893 & 0.0071529 & -2.9209\\\hline
+\multirow{3}{*}{0.85} & \multirow{3}{*}{0.25} & 0.60742 & 18.581 & 41.534 & -0.04969 & -0.049682 & 0.0023836 & -20.843\\\cline{3-9}
+ &  & 0.60742 & 18.581 & 41.534 & -0.04969 & -0.049682 & 0.0023836 & -20.843\\\cline{3-9}
+ &  & 0.55773 & 14.454 & 36.889 & -0.047039 & -0.047032 & 0.0021555 & -21.82\\\hline
+\multirow{3}{*}{0.85} & \multirow{3}{*}{0.5} & 0.60742 & 18.581 & 41.534 & -0.04969 & -0.049656 & 0.0047671 & -10.417\\\cline{3-9}
+ &  & 0.60742 & 18.581 & 41.532 & -0.04969 & -0.049656 & 0.0047669 & -10.417\\\cline{3-9}
+ &  & 0.55773 & 14.456 & 36.89 & -0.047041 & -0.047012 & 0.0043109 & -10.905\\\hline
+\multirow{3}{*}{0.85} & \multirow{3}{*}{0.75} & 0.60742 & 18.581 & 41.534 & -0.04969 & -0.049614 & 0.0071502 & -6.9388\\\cline{3-9}
+ &  & 0.60728 & 18.572 & 41.523 & -0.04969 & -0.049614 & 0.0071485 & -6.9405\\\cline{3-9}
+ &  & 0.55763 & 14.452 & 36.884 & -0.047034 & -0.046969 & 0.0064651 & -7.2651\\\hline
+\multirow{3}{*}{0.85} & \multirow{3}{*}{1.0} & 0.60742 & 18.581 & 41.534 & -0.04969 & -0.049554 & 0.0095329 & -5.1983\\\cline{3-9}
+ &  & 0.60719 & 18.568 & 41.515 & -0.04969 & -0.049554 & 0.0095291 & -5.2003\\\cline{3-9}
+ &  & 0.55754 & 14.452 & 36.882 & -0.047031 & -0.046916 & 0.0086189 & -5.4434\\\hline
+\multirow{3}{*}{0.9} & \multirow{3}{*}{0.25} & 0.7412 & 20.915 & 43.638 & -0.089908 & -0.089897 & 0.0028018 & -32.086\\\cline{3-9}
+ &  & 0.7412 & 20.915 & 43.638 & -0.089908 & -0.089897 & 0.0028018 & -32.086\\\cline{3-9}
+ &  & 0.68917 & 15.162 & 37.368 & -0.083711 & -0.083703 & 0.0024619 & -34\\\hline
+\multirow{3}{*}{0.9} & \multirow{3}{*}{0.5} & 0.7412 & 20.915 & 43.638 & -0.089908 & -0.089866 & 0.0056033 & -16.038\\\cline{3-9}
+ &  & 0.74119 & 20.912 & 43.633 & -0.089908 & -0.089866 & 0.0056028 & -16.039\\\cline{3-9}
+ &  & 0.68916 & 15.163 & 37.368 & -0.083712 & -0.083678 & 0.0049236 & -16.995\\\hline
+\multirow{3}{*}{0.9} & \multirow{3}{*}{0.75} & 0.7412 & 20.915 & 43.638 & -0.089908 & -0.089815 & 0.0084045 & -10.686\\\cline{3-9}
+ &  & 0.74113 & 20.912 & 43.633 & -0.089908 & -0.089815 & 0.0084036 & -10.688\\\cline{3-9}
+ &  & 0.6891 & 15.162 & 37.366 & -0.083708 & -0.083632 & 0.0073846 & -11.325\\\hline
+\multirow{3}{*}{0.9} & \multirow{3}{*}{1.0} & 0.7412 & 20.915 & 43.638 & -0.089908 & -0.089742 & 0.011205 & -8.009\\\cline{3-9}
+ &  & 0.74109 & 20.905 & 43.626 & -0.089908 & -0.089742 & 0.011202 & -8.011\\\cline{3-9}
+ &  & 0.68901 & 15.16 & 37.361 & -0.083698 & -0.083563 & 0.0098441 & -8.4886\\\hline
+\multirow{3}{*}{0.95} & \multirow{3}{*}{0.25} & 0.87067 & 22.141 & 44.696 & -0.14244 & -0.14242 & 0.0031944 & -44.586\\\cline{3-9}
+ &  & 0.87067 & 22.141 & 44.696 & -0.14244 & -0.14242 & 0.0031944 & -44.586\\\cline{3-9}
+ &  & 0.82898 & 14.374 & 36.245 & -0.12911 & -0.1291 & 0.0026843 & -48.093\\\hline
+\multirow{3}{*}{0.95} & \multirow{3}{*}{0.5} & 0.87067 & 22.141 & 44.696 & -0.14244 & -0.14239 & 0.0063885 & -22.288\\\cline{3-9}
+ &  & 0.87064 & 22.138 & 44.694 & -0.14244 & -0.14239 & 0.0063883 & -22.289\\\cline{3-9}
+ &  & 0.82895 & 14.372 & 36.242 & -0.1291 & -0.12906 & 0.005368 & -24.042\\\hline
+\multirow{3}{*}{0.95} & \multirow{3}{*}{0.75} & 0.87067 & 22.141 & 44.696 & -0.14244 & -0.14233 & 0.0095822 & -14.853\\\cline{3-9}
+ &  & 0.87064 & 22.133 & 44.687 & -0.14244 & -0.14233 & 0.0095806 & -14.856\\\cline{3-9}
+ &  & 0.8289 & 14.371 & 36.239 & -0.12909 & -0.129 & 0.0080509 & -16.023\\\hline
+\multirow{3}{*}{0.95} & \multirow{3}{*}{1.0} & 0.87067 & 22.141 & 44.696 & -0.14244 & -0.14224 & 0.012775 & -11.134\\\cline{3-9}
+ &  & 0.8706 & 22.13 & 44.682 & -0.14244 & -0.14224 & 0.012772 & -11.137\\\cline{3-9}
+ &  & 0.82884 & 14.369 & 36.233 & -0.12907 & -0.12892 & 0.010732 & -12.013\\\hline
+\multirow{3}{*}{1.0} & \multirow{3}{*}{0.25} & 1 & 22.5 & 45 & -0.20711 & -0.20709 & 0.0035626 & -58.13\\\cline{3-9}
+ &  & 1 & 22.5 & 45 & -0.20711 & -0.20709 & 0.0035626 & -58.13\\\cline{3-9}
+ &  & 1 & 11.859 & 33.084 & -0.17763 & -0.17762 & 0.0027502 & -64.585\\\hline
+\multirow{3}{*}{1.0} & \multirow{3}{*}{0.5} & 1 & 22.5 & 45 & -0.20711 & -0.20705 & 0.0071249 & -29.06\\\cline{3-9}
+ &  & 1 & 22.497 & 44.995 & -0.20711 & -0.20705 & 0.0071244 & -29.063\\\cline{3-9}
+ &  & 1 & 11.86 & 33.084 & -0.17763 & -0.1776 & 0.0055003 & -32.289\\\hline
+\multirow{3}{*}{1.0} & \multirow{3}{*}{0.75} & 1 & 22.5 & 45 & -0.20711 & -0.20699 & 0.010687 & -19.368\\\cline{3-9}
+ &  & 0.99997 & 22.493 & 44.992 & -0.20711 & -0.20699 & 0.010685 & -19.371\\\cline{3-9}
+ &  & 1 & 11.86 & 33.081 & -0.17762 & -0.17754 & 0.0082493 & -21.522\\\hline
+\multirow{3}{*}{1.0} & \multirow{3}{*}{1.0} & 1 & 22.5 & 45 & -0.20711 & -0.20689 & 0.014248 & -14.521\\\cline{3-9}
+ &  & 1 & 22.491 & 44.987 & -0.20711 & -0.20689 & 0.014244 & -14.524\\\cline{3-9}
+ &  & 0.99999 & 11.855 & 33.072 & -0.17758 & -0.17744 & 0.010995 & -16.137\\\hline
+ \caption{Сравнение значений параметров при различных способах минимизации: 1 строка - минимизация $J_\mathcal{B}$ без учета $\delta$, 2 строка - минимизация $J(\delta)$, 3 строка - минимизация $K = J(\delta) / \sigma(\delta)$}
+ \label{tab:one_delta}
+\end{longtable}
+\endgroup
+
+Сравнение результатов для различных значений $\delta$ представлены на графиках \ref{fig:theta_ang} - \ref{fig:J_ang}, а также в таблице \ref{tab:one_delta}. Строки в таблице \ref{tab:one_delta} для заданных значений $\eta$ и $\delta$ сгруппированы по три: первая строка - минимизация $J_\mathcal{B}$ без учета $\delta$, вторая строка - минимизация $J(\delta)$, третья строка - минимизация $K = J(\delta) / \sigma(\delta)$. 
+
+Так как реальные значения эффективностей - около $\eta = 0.85$, то из второго графика видно, что значения мат. ожидания не сильно отличаются от случая нулевой эффективности. Кроме того, для различных значений $\delta$ в пределах одного градуса графики почти совпадают.
+
+Усложним модель разброса - будем рассматривать погрешность каждого угла в отдельности. Будем считать, что реальная величина каждого угла в эксперименте равномерно распределена на отрезке вокруг желаемого значения. В этом случае значения мат. ожидания и дисперсии принимают следующий вид:
+\[
+J_\mathcal{B} = \frac{1}{16\delta^4}\int\int\int\int_{-\delta}^\delta \langle \mathcal{B}(x_1, x_2, x_3, x_4)\psi, \psi \rangle dx_1dx_2dx_3dx_4,
+\] 
+\[
+\sigma^2 = \frac{1}{16\delta^4}\int\int\int\int_{-\delta}^\delta (\langle \mathcal{B}^2\psi, \psi \rangle - \langle \mathcal{B}\psi, \psi \rangle^2) dx_1dx_2dx_3dx_4.
+\]
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{theta_4ang.eps}
+\caption{Оптимизированные значения для $\theta$ для различных значений углов}
+\label{fig:theta_4ang}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{r_4ang.eps}
+\includegraphics[scale=0.7]{omega_4ang.eps}
+\caption{Оптимизированные значения для $r$ и $\omega$ для различных значений углов}
+\label{fig:psi_4ang}
+\end{figure}
+
+\begin{figure}[t]
+\includegraphics[scale=0.7]{K_4ang.eps}
+\caption{Оптимизированные значения для $J_{\mathcal{B}}/N$ для различных значений углов}
+\label{fig:J_4ang}
+\end{figure}
+
+\begin{table}
+\small
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+$\eta$ & $\delta,^\circ$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J$ & $J_{\delta}$ & $\sigma_{\delta}$ & $K = J_{\delta}/\sigma_{\delta}$
+\\\hline
+\multirow{3}{*}{0.7} & \multirow{3}{*}{0.25} & 0.136389 & 3.40081 & 21.4266 & -0.000453562 & -0.000444565 & 0.00241554 & -0.184044\\\cline{3-9}
+ &  & 0.136389 & 3.40081 & 21.4266 & -0.000453562 & -0.000444565 & 0.00241554 & -0.184044\\\cline{3-9}
+ &  & 0.137124 & 3.42997 & 21.496 & -0.000453514 & -0.000444515 & 0.00241503 & -0.184062\\\hline
+ \multirow{3}{*}{0.75} & \multirow{3}{*}{0.25} & 0.310518 & 9.73143 & 31.9603 & -0.00615095 & -0.00614082 & 0.00248895 & -2.46724\\\cline{3-9}
+ &  & 0.310518 & 9.73143 & 31.9603 & -0.00615095 & -0.00614082 & 0.00248895 & -2.46724\\\cline{3-9}
+ &  & 0.313658 & 9.91344 & 32.2158 & -0.00614786 & -0.00613773 & 0.00248642 & -2.4685\\\hline
+\multirow{3}{*}{0.8} & \multirow{3}{*}{0.25} & 0.465228 & 14.8979 & 37.9215 & -0.02191 & -0.0218985 & 0.002596 & -8.43546\\\cline{3-9}
+ &  & 0.465228 & 14.8979 & 37.9215 & -0.02191 & -0.0218985 & 0.002596 & -8.43546\\\cline{3-9}
+ &  & 0.469841 & 15.2419 & 38.3231 & -0.0218953 & -0.0218838 & 0.00259252 & -8.44116\\\hline
+\multirow{3}{*}{0.85} & \multirow{3}{*}{0.25} & 0.607424 & 18.5808 & 41.5341 & -0.0496902 & -0.0496772 & 0.00275221 & -18.0499\\\cline{3-9}
+ &  & 0.607424 & 18.5808 & 41.5341 & -0.0496902 & -0.0496772 & 0.00275221 & -18.0499\\\cline{3-9}
+ &  & 0.61123 & 18.9498 & 41.9292 & -0.0496699 & -0.0496569 & 0.00274992 & -18.0576\\\hline
+\multirow{3}{*}{0.9} & \multirow{3}{*}{0.25} & 0.741202 & 20.9153 & 43.6381 & -0.0899078 & -0.0898932 & 0.00296469 & -30.3213\\\cline{3-9}
+ &  & 0.741202 & 20.9153 & 43.6381 & -0.0899078 & -0.0898932 & 0.00296469 & -30.3213\\\cline{3-9}
+ &  & 0.743038 & 21.167 & 43.8961 & -0.0898969 & -0.0898824 & 0.00296395 & -30.3252\\\hline
+\multirow{3}{*}{0.95} & \multirow{3}{*}{0.25} & 0.87067 & 22.141 & 44.6958 & -0.142436 & -0.14242 & 0.00323493 & -44.0258\\\cline{3-9}
+ &  & 0.87067 & 22.141 & 44.6958 & -0.142436 & -0.14242 & 0.00323493 & -44.0258\\\cline{3-9}
+ &  & 0.871004 & 22.2272 & 44.7823 & -0.142435 & -0.142419 & 0.00323486 & -44.0263\\\hline
+\multirow{3}{*}{1.0} & \multirow{3}{*}{0.25} & 0.999997 & 22.5 & 45 & -0.207107 & -0.207089 & 0.0035626 & -58.1286\\\cline{3-9}
+ &  & 0.999997 & 22.5 & 45 & -0.207107 & -0.207089 & 0.0035626 & -58.1286\\\cline{3-9}
+ &  & 0.999999 & 22.4981 & 44.998 & -0.207107 & -0.207089 & 0.0035626 & -58.1286\\\hline
+ \end{tabular}
+\caption{Значения оптимизированных параметров для погрешности в четырех углах в отдельности для случай $\delta = 0.25^\circ$}
+\label{tab:different_deltas}
+\end{table}
+
+
+Результаты проведенной оптимизации представлены на рисунках \ref{fig:theta_4ang} - \ref{fig:J_4ang} и в таблице \ref{tab:different_deltas}, строки которой также сгруппированы по три. Из графиков видно, что добавление разброса почти не изменяет оптимальные параметры. А это означает, что можно сделать предположение, что контроль за величиной углов детекторов можно уменьшить. 
 
 \bibliography{literature.bib}
 \bibliographystyle{ieeetr}
