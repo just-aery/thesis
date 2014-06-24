@@ -50,13 +50,13 @@ However, modern quantum mechanics is questioning the adequacy of the model of lo
 
 However, his position was criticised by Einstein, Podolsky and Rosen(EPR paradox)\cite{EPR}. They showed using quantum mechanics formalism that it is possible to come to the contradiction with the above principle. They presented a hypothetical experiment in which one can accurately determine the position and momentum of a particle, taking measurements for particles in the entangled state, located far enough from each other. The discussion of this paradox raised the question of possible incompleteness of the quantum theory. Perhaps, quantum mechanics does not completely describe the state of the system, and there are still some unknown hidden parameters. Another explanation of the paradox is the rejection of the locality principle.
 
-Further evidence of contradiction between classical and quantum models of real world was given by Bell and other authors in the form of statistical inequalities which can be tested experimentally. At the very beginning the question about the existence of locality and realism seemed to be a philosophical discussion about the nature of the reality, but after it was formulated using mathematical formalism and then tested experimentally. Despite the fact that violations of Bell inequalities predicted by quantum mechanics, were observed in the most of experiments \cite {ASP1}, the process of verification is still not completed \cite {Khrennikov_preprint}.
+Further evidence of contradiction between classical and quantum models of real world was given by Bell and other authors in the form of statistical inequalities which can be tested experimentally. At the very beginning the question about the existence of locality and realism seemed to be a philosophical discussion about the nature of the reality, but after it was formulated using mathematical formalism and then tested experimentally. Despite the fact that violations of Bell inequalities predicted by quantum mechanics, were observed in the most of experiments \cite{ASP1}, the process of verification is still not completed \cite{Khrennikov_preprint}.
 
 The main reason of further tests is that as any experiment, Bell's test cannot be performed with 100\% efficiency of detectors and without any noise in the detector response. An example of inequality that takes into account these types of errors, is an Eberhard's inequality that was presented in the article \cite{Eberhard}. On its basis a number of experiments such as \cite{Zeilinger} was conducted, which also revealed the violation of the predictions of the classical theory.
 
 The main difficulty in such experiments is that violations of inequality require a fairly high efficiency of detectors, special initial state of a quantum system and installation angles of polarization beam splitters. These parameters should be such that the inequality is violated as much as possible. To achieve this result Eberhard used a simple brute-force optimization.
 
-This work is devoted to mathematical modeling of parameters of the Eberhard's inequality using optimization techniques. The main purpose is to consider more general case when the detectors have different efficiencies. In addition, in the article \ cite {Eberhard} the objective function has the sense of mathematical expectation. However, it is also useful to investigate the possible level of variability of the results, expressed in terms of standard deviation. In this paper we consider the optimization of parameters for the Eberhard's inequality using coefficient of variation taking into account possible errors in the setup of angles during the experiment.
+This work is devoted to mathematical modeling of parameters of the Eberhard's inequality using optimization techniques. The main purpose is to consider more general case when the detectors have different efficiencies. In addition, in the article \cite{Eberhard} the objective function has the sense of mathematical expectation. However, it is also useful to investigate the possible level of variability of the results, expressed in terms of standard deviation. In this paper we consider the optimization of parameters for the Eberhard's inequality using coefficient of variation taking into account possible errors in the setup of angles during the experiment.
 
 
 \section{Required elements of functional analysis}
@@ -165,13 +165,13 @@ Consider Hilbert space $H_1\otimes H_2$, where $H_i$ are Hilbert spaces with the
 \]
 for any pair $\psi_1, \psi_2$.
 \begin{proof}
-Let assume that $\psi$ can be represented as $\psi = \psi_1\otimes\psi_2$ where
+Let assume that $\psi$ can be represented by $\psi = \psi_1\otimes\psi_2$ where
 $\psi_1$ and $\psi_2$ can be written as weighted sums of basis vectors:
 \begin{gather*}
 	\psi_1 = a_1 e_1 + a_2 e_2,\ a_i\in \mathbb{C},\ |a_1|^2 + |a_2|^2 = 1 \\
 	\psi_2 = b_1 e_1 + b_2 e_2, b_i\in \mathbb{C}, |b_1|^2 + |b_2|^2 = 1.
 \end{gather*}
-Such a $\psi$ can be represented as
+Such a $\psi$ can be represented by the following equations:
 \begin{eqnarray*}
 	\psi_1 \otimes \psi_2 &=& (a_1 e_1 + a_2 e_2) \otimes (b_1 e_1 + b_2 e_2) = \\ &=&  
 	a_1 b_1 \cdot e_1 \otimes e_1 + a_1 b_2 \cdot e_1 \otimes e_2 + 
@@ -296,7 +296,7 @@ Consider two linear operators $A_1: H_1\to H_1$ and $A_2: H_2\to H_2$. The tenso
 The mathematical formalism of quantum mechanics can be formulated as a list of postulates \cite{Khrennikov_information} which are based on the theory of self-adjoint operator on complex Hilbert space $H$. The following list of postulates and principles is called Copenhagen interpretation of quantum mechanics.
 \begin{enumerate}[label=\bfseries Postulate \arabic*:, align=left]
   \item A quantum state $\psi$ is a vector of a complex Hilbert space such that $\langle\psi, \psi\rangle = 1$. This vector completely describes the state of a quantum system. Two vectors which differ by a factor of $\gamma = e^{i\varphi}$ describe the same quantum state.
-  \item A physical observable $a$ is represented as a self-adjoint operator $A$ in $H$. Different observables are represented by different operators.
+  \item A physical observable $a$ is represented with the aid of a self-adjoint operator $A$ in $H$. Different observables are represented by different operators.
   \item If an observable is represented by the operator $A$ then results of observation are given by the spectrum of $A$. Any self-adjoint operator can be written in the form 
   \[
   A = \sum_m a_m\pi_m^A
@@ -337,7 +337,7 @@ It was shown before that in that state $\psi$ cannot be factorizable as $\psi = 
 Another example is $\psi = e_1\otimes e_2 + e_1 \otimes e_1 + 2e_2 \otimes e_1$.
 
 \begin{proof}
-Let us assume that $\psi$ is represented in the form $\psi = \psi_1\otimes\psi_2$, where $\psi_1$ and $\psi_2$ can be written as a weighted sum of basis vectors:
+Let us assume that $\psi$ is represented by $\psi = \psi_1\otimes\psi_2$, where $\psi_1$ and $\psi_2$ can be written as a weighted sum of basis vectors:
 \begin{gather*}
 	\psi_1 = a_1 e_1 + a_2 e_2,\ a_i\in \mathbb{C},\ |a_1|^2 + |a_2|^2 = 1 \\
 	\psi_2 = b_1 e_1 + b_2 e_2, b_i\in \mathbb{C}, |b_1|^2 + |b_2|^2 = 1.
@@ -513,53 +513,49 @@ where $I$ is an identity operator. Then in this case Robertson inequality become
 From the derivation of Heisenberg's principle it is clear that one can construct nontrivial Robertson inequality for every operators $A$ and $B$ which have nonzero commutator. It is also clear that the result formula does not depend on technology or any conditions during measurement, it is a fundamental property of some pairs of quantum operators such as position and momentum.
 
 \section{Einstein-Podolsky-Rosen paradox}
-Einstein-Podolsky-Rosen paradox(EPR-paradox, \cite{EPR}) was published in 1935 as the criticism of some statements of the Copenhagen interpretation of quantum mechanics. The main principle of this interpretation holds that any quantum system is described as a wave-function and after measurement it collapses to one of its eigenstates with some probability. Moreover, Heisenberg's uncertainty principle stands that position of a particle and its momentum are incompatible and they cannot be measured jointly with good precision. Einstein and his colleagues did not agree with probabilistic measurement outcomes. His paper was an attempt to show some contradictions in quantum mechanics.
+Einstein-Podolsky-Rosen paradox(EPR-paradox, \cite{EPR}) was published in 1935 as the criticism of some statements of the Copenhagen interpretation of quantum mechanics. The main principle of this interpretation holds that any quantum system is described as a wave-function and after measurement it collapses to one of its eigenstates with some probability. Moreover, Heisenberg's uncertainty principle stands that position of a particle and its momentum are incompatible and they cannot be measured simultaneously with good precision. Einstein and his colleagues did not agree with probabilistic measurement outcomes. His paper was an attempt to show some contradictions in quantum mechanics.
 
-The article \cite{EPR} is based on a thought experiment with the following initial conditions. Consider two systems $S_1$, $S_2$, both with the state space $L_2(\mathbb{R})$ and a source which produces particles for these systems. The superposition state can be represented as a quantum state from the tensor product of its single Hilbert spaces.
+The article \cite{EPR} is based on a thought experiment with the following initial conditions. Consider two systems $S_1$, $S_2$, both with the state space $L_2(\mathbb{R})$ and a source which produces particles for these systems. The superposition state can be represented by a quantum state from the tensor product of its single Hilbert spaces.
 Operator $A$ with eigenvalues $\{a_k\}$ and eigenvectors $\{\varphi_k(x_1)\}$ will denote an observable on $S_1$. Operator $B$  with eigenvalues $\{b_k\}$ and eigenvectors $\{\psi_k(x_1)\}$ will denote another observable on the same system. 
 
-In the common case of two Hilbert spaces $H_1$ and $H_2$ and their basis vectors $\{e_k\}$ and $\{f_k\}$ respectively the state $\varphi = \varphi_1\otimes\varphi_2$ can be represented in the form:
+In the common case of two Hilbert spaces $H_1$ and $H_2$ and their basis vectors $\{e_k\}$ and $\{f_k\}$ respectively the state $\varphi = \varphi_1\otimes\varphi_2$ is given by:
 \[
 \varphi = \sum_{k, m}c_{k, m}e_k\otimes f_m.
 \]
-If $H_1 = H_2 = L_2(\mathbb{R})$ its tensor product is $L_2(\mathbb{R})\otimes L_2(\mathbb{R}) = L(\mathbb{R}^2)$. For this space such state $\varphi$ can be represented in the form
+If $H_1 = H_2 = L_2(\mathbb{R})$ its tensor product is $L_2(\mathbb{R})\otimes L_2(\mathbb{R}) = L(\mathbb{R}^2)$. For this space such state $\varphi$ can be represented by the sum:
 \[
-\varphi (x_1, x_2) = \sum_{k, m}c_{k, m}e_k(x_1)f_m(x_2)
+\varphi (x_1, x_2) = \sum_{k, m}c_{k, m}e_k(x_1)f_m(x_2),
 \]
 or for the continuous case it is
 \[
 \varphi (x_1, x_2) = \int u(x, x_1)v(x, x_2)dx.
 \]
 
-Suppose we want to execute the measurement of $A$. Before measure the particle is in the state $\psi(x_1, x_2) = \sum_k v_k(x_2)\varphi_k(x_1)$. According to von Neumann projection postulate after measurement the system will collapse to the precise state $\psi = \varphi_m(x_1)v_m(x_2)$. It means that after measuring on $S_1$ the second system will also have determinate state $v_m(x_2)$. But in conditions where two detector are very far from each other(so they cannot have impact on each other according to locality principle) it means that the second system has to have such state $v_m(x_2)$ not only before measurement but always.
+Suppose we want to execute the measurement of $A$. Before this the particle has the state $\psi(x_1, x_2) = \sum_k v_k(x_2)\varphi_k(x_1)$. According to von Neumann projection postulate after the measurement the system will collapse to a pure state $\psi = \varphi_m(x_1)v_m(x_2)$.  this implies that at the same time the second system will also have a determinate state $v_m(x_2)$. But if two detector are situated far enough from each other(so they cannot have an impact on each other according to the locality principle) the second system has to have such a state $v_m(x_2)$ not only before measurement but always.
 
-Suppose after all that we've changed our decision and we want to measure $B$ on $S_1$ instead of $A$. By analogy for the previous consideration, after measure the system will collapse to the state $\psi = \zeta_n(x_1)u_n(x_2)$ which means that in this case the second system will have state $u_n(x_2)$. And again, it has to have such state independently of the measurement on the first system i.e. it stands in this state even before any measurements.
+Suppose after all that we've changed our decision and we want to measure $B$ in $S_1$ instead of $A$. By analogy for the previous consideration, after the measurement the system will collapse to a state $\psi = \zeta_n(x_1)u_n(x_2)$ and in this case the second system will have state $u_n(x_2)$. And again, it has to have such state independently of the measurement on the first system i.e. it stands in this state even before any measurements.
 
-After that thought experiments we can conclude that the second system has 2 wave-functions $v_m(x_2)$ and $u_n(x_2)$. The paradox is that we can construct such states that cannot be known simultaneously according to the Heisenberg's principle. Here we present an example from the original paper \cite{EPR}.
+After that thought experiments we can conclude that the second system has 2 wave-functions $v_m(x_2)$ and $u_n(x_2)$. The paradox is that we can construct such states that cannot be known simultaneously according to the Heisenberg's principle. Here we present an example from the original article \cite{EPR}.
 
-Consider the state $\psi(x_1, x_2) = \int e^{\frac{ip}{\hbar}(x_1+x_2-x_0)}$ where $x_0$ is a constant. On one side, it can be represented in the form $\psi(x_1, x_2) = \int\varphi(p, x_1)v(p, x_2)dp$ where $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$ and $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$. 
+Consider the state $\psi(x_1, x_2) = \int e^{\frac{ip}{\hbar}(x_1+x_2-x_0)}$ where $x_0$ is a constant. On one side, it can be represented by the following formula: $\psi(x_1, x_2) = \int\varphi(p, x_1)v(p, x_2)dp$, where $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$ and $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$. 
 
-Momentum operator is defined by $\hat{p} = \dfrac{\hbar}{i}\dfrac{d}{dx}$. Its eigenfunction is $\psi = e^{\frac{i\lambda}{\hbar}x}$ for eigenvalue $\lambda$. After the measure of $A$ in the first system its state will collapse to its eigenfunction $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$. The state of the second system $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$ is an eigenfunction of momentum operator, corresponding to the eigenvalue $-p$. 
+Momentum operator is defined by $\hat{p} = \dfrac{\hbar}{i}\dfrac{d}{dx}$. Its eigenfunction is $\psi = e^{\frac{i\lambda}{\hbar}x}$ for eigenvalue $\lambda$. After the measurement of $A$ in the first system its state will collapse to its eigenfunction $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$. The state of the second system $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$ is an eigenfunction of momentum operator, corresponding to the eigenvalue $-p$. 
 
 On another side considering state can be represented as $\psi(x_1, x_2) = \delta(x_1 + x_2 - x_0) = \hbar\int\delta(x - x_1)\delta (x - x_2 + x_0)dx = \int\zeta(x, x_1)u(x, x_2)dx$. 
 
 Position operator in the second system is defined by $\hat{x_2}f = x_2f$. Its eigenfunction is $\delta(x - \lambda)$ for the eigenvalue $\lambda$. After the measure of $B$ in the first system its state will collapse to the eigenfunction $\zeta(x, x_1) = \delta(x - x_1)$. The state of the second system $u(x, x_2) = \delta(x - x_2 + x_0)$ is also an eigenfunction of position operator, corresponding to the eigenvalue $x + x_0$.
 
-At this point authors conclude that both position and momentum in the second system are elements of reality since they couldn't be affected by measures on the first system. But Heisenberg's principle stands that they can't be known both i.e. can't be both elements of reality simultaneously. 
+At this point authors conclude that both position and momentum in the second system are elements of reality since they couldn't be affected by measurementss in the first system. But Heisenberg's principle stands that they cannot be known both i.e. can't be both elements of reality simultaneously. 
 
-The question of this paradox - do quantum mechanics provide a complete description of the physical reality. But since local realism assumption is used, another explanation of this paradox can be found with rejection of the local realism.
+The question of this paradox - do quantum mechanics provide a complete description of the physical reality. Another possible explanation of this paradox can be found with rejection of the locality or realism.
 
 \section{Bell inequalities}
 One of possible solutions of the EPR-paradox is that the quantum mechanics theory is not complete, the actual state of a system is described not only by its quantum state $\psi$ but also by some hidden, i.e. yet unknown, variables. In this case all probabilistic predictions of quantum mechanics can be explained by existing of some unknown degrees of freedom. Using that assumption one can conclude that reality can still have deterministic nature as well as probabilistic.
 
-John Bell in his paper \cite{Bell} assumed that there are some hidden variables $\omega$ and measurement results are random variables which depend on it. He formulated statistical inequality that contradicts with quantum mechanical predictions.
+John Bell in his article \cite{Bell} assumed that there are some hidden variables $\omega$ and measurement results are random variables which depend on it. He formulated statistical inequality that contradicts with quantum mechanical predictions.
 
-Covariance of two variables can be found using the following classical probabilistic formula:
-\[
-\langle \xi, \eta \rangle = \int_\Omega \xi(\omega)\eta(\omega)dP(\omega).
-\]
-
-\begin{theorem}
+Bell inequality is formulated in the following theorem.
+\begin{theorem}[Bell inequality]
 Consider $\xi_a(\omega)$, $\xi_b(\omega)$, $\xi_c(\omega)$ be discrete random variables which can only be equal $\pm 1$. Then the following inequality is performed:
 \[
 | \langle\xi_a,\xi_b\rangle -  \langle\xi_c,\xi_b\rangle | \leq 1 - \langle\xi_a,\xi_c\rangle.
@@ -567,9 +563,13 @@ Consider $\xi_a(\omega)$, $\xi_b(\omega)$, $\xi_c(\omega)$ be discrete random va
 \end{theorem}
 
 \begin{proof}
-Using covariation formula we obtain:
+Covariance of two variables can be found using the following classical probabilistic formula:
 \[
-| \langle\xi_a,\xi_b\rangle -  \langle\xi_c,\xi_b\rangle | = \left| \int_\Omega\xi_a\xi_b dP - \int_\Omega\xi_c\xi_b dP\right| = \left|\int_\Omega (xi_a - xi_c)\xi_bdP \right|.
+\langle \xi, \eta \rangle = \int_\Omega \xi(\omega)\eta(\omega)dP(\omega).
+\]
+Using this we obtain:
+\[
+| \langle\xi_a,\xi_b\rangle -  \langle\xi_c,\xi_b\rangle | = \left| \int_\Omega\xi_a\xi_b dP - \int_\Omega\xi_c\xi_b dP\right| = \left|\int_\Omega (\xi_a - \xi_c)\xi_bdP \right|.
 \]
 After multiplying it by $\xi_a^2 = 1$ we have:
 \[
@@ -581,8 +581,8 @@ And finally, using that $|\xi_i| = 1$ we get the desired result:
 \]
 \end{proof}
 
-After Bell's paper some other inequalities were formulated. Wigner inequality is more suitable for testing.
-\begin{theorem}
+After Bell's article some other inequalities were formulated. For exmaple, Wigner inequality is more suitable for testing because it contains probabilities instead of covariations.
+\begin{theorem}[Wigner inequality]
 For random variables form the previous theorem the following inequality is performed:
 \[
 P(\xi_a = +1, \xi_b = +1) + P(\xi_b = -1, \xi_c = +1) \geq P(\xi_a = -1, \xi_c = +1).
@@ -614,8 +614,8 @@ P(\xi_a = +1, \xi_b = +1) + P(\xi_b = -1, \xi_c = +1) = P(\xi_a = +1, \xi_b = +1
 \end{proof}
 
 Another example of an inequality of Bell type is Clauser-Horne-Shimony-Holt inequality.
-\begin{theorem}
-For every random variables $\xi_j(\omega)$ and $\xi'_j(\omega)$ such as $|\xi_j(\omega)| \leq 1$ and $|\xi'_j(\omega)| \leq 1$ the following inequality is performed
+\begin{theorem}[Clauser-Horne-Shimony-Holt inequality]
+For all random variables $\xi_j(\omega)$ and $\xi'_j(\omega)$ such as $|\xi_j(\omega)| \leq 1$ and $|\xi'_j(\omega)| \leq 1$ the following inequality is performed:
 \[
 \langle\xi_1,\xi'_1\rangle + \langle\xi_1,\xi'_2\rangle + \langle\xi_2,\xi'_1\rangle -  \langle\xi_2,\xi'_2\rangle \leq 2
 \]
@@ -626,13 +626,13 @@ For real numbers bounded by 1 the following inequality holds:
 \[
 \xi_1\xi_1' + \xi_1\xi_2' + \xi_2\xi_1' - \xi_2\xi_2' \leq 2.
 \]
-After integrating it we obtain Clauser-Horne-Shimony-Holt inequality.
+After integrating it we obtain the Clauser-Horne-Shimony-Holt inequality.
 
 \end{proof}
 
-One of the main points why Bell inequality is so interesting is that such statistical inequalities can be tested in experiments. And if classical and quantum predictions are incompatible one can check that experiment results satisfies one of predictions. But if we want to compare results of two theories we have to present a mechanism of mapping between two models. To connect quantum mechanics predictions and classical probability theory Bell made some assumptions and with them and quantum mechanic formalism these inequalities are violated. Some experiments were performed and their results also violate inequalities from the classical probability theory. 
+One of the main points why Bell inequality is so interesting is that such statistical inequalities can be tested in experiments. And if classical and quantum predictions are incompatible one can check that experiment results satisfies one of the predictions. But if one wants to compare results of two theories he should present a mechanism of mapping between two models. To connect quantum mechanics predictions and classical probability theory Bell made some assumptions. With them and quantum mechanic formalism these inequalities are violated. Some experiments were performed and their results also violate inequalities from the classical probability theory \cite{ASP1}. 
 
-Let us construct an example of such violation from \cite{Khrennikov_information}. Consider a two-particle system in state $\psi = \frac{1}{\sqrt{2}}(|+-\rangle - |-+\rangle)$ and a spin operator that measures a spin of one particle
+Let us construct an example of such violation from \cite{Khrennikov_information}. Consider a two-particle system in the state $\psi = \frac{1}{\sqrt{2}}(|+-\rangle - |-+\rangle)$ and a spin operator that measures a spin of one particle
 \[
 \sigma(\theta) = \cos\theta\sigma_z + \sin\theta\sigma_x,
 \] 
@@ -648,7 +648,7 @@ where $\sigma_x$ and $\sigma_z$ - Pauli matrices:
 0 & -1
 \end{pmatrix}.
 \]
-So for the whole system operator $\sigma(\theta) \otimes I$ measures a spin of the first particle and $I \otimes \sigma(\theta)$ of the second particle.
+So the operator $\sigma(\theta) \otimes I$ measures a spin of the first particle and $I \otimes \sigma(\theta)$ of the second particle for the system with this two particles.
 Then
 \[
 P_\psi(\sigma(\theta_1) = + 1, \sigma(\theta_2) = +1) = \cos^2\frac{\theta_1 - \theta_2}{2},
@@ -668,32 +668,32 @@ We take $\theta_1 = 0$, $\theta_2 = 6\theta$, $\theta_3 = 2\theta$ and we get th
 \cos^2 3\theta + \sin^2 2\theta \geq cos^2 \theta.
 \]
 
-This violation is called Bell theorem.  If this theorem is correct then quantum mechanics , or locality, or realism is wrong, as they are mutually exclusive. 
+This violation is called Bell theorem. If this theorem is correct then quantum mechanics , or locality, or realism is wrong, as they are mutually exclusive. 
 
 Here there are some popular interpretations of Bell's results:
 \begin{enumerate}
 \item Quantum mechanics is complete and nonlocal so it cannot be reduced to the classical theory.
-If this interpretation is true then the state of a partial cannot be represented as random variable $\xi_a(\omega)$ so inequalities cannot be applied to the real measurements. This is the most popular interpretation.
+If this interpretation is true then the state of a partial cannot be represented by a random variable $\xi_a(\omega)$ so inequalities cannot be applied to the real measurements. This is the most popular interpretation.
 
 \item Quantum mechanics is incomplete and any complete classical theory is nonlocal.
-If this interpretation is true then the state of a partial cannot be represented as $\xi_a(\omega)$ because it depends of another partial $b$. The representation as $\xi_{a,b}(\omega)$ doesn't give us the same inequalities so there is no paradox between experiments and classical probability theory.
+If this interpretation is true then the state of a partial cannot be represented by $\xi_a(\omega)$ because it depends of another partial $b$. The representation using $\xi_{a,b}(\omega)$ doesn't give us the same inequalities so there is no paradox between experiments and classical probability theory.
 
-\item Some of Bell's assumptions about accordance between classical and quantum models are wrong. If this interpretation is true then there is no paradox because its proof is incorrect.
+\item Some of Bell's assumptions about mapping between classical and quantum models are wrong. If this interpretation is true then there is no paradox because its proof is incorrect.
 \end{enumerate}
 
 In \cite{Khrennikov_information} it is shown that in Bell's theory there can be some incorrect assumptions in the way of accordance between classical and quantum probabilities.
 
-Firstly, It can be contradicted that classical(an integral) and quantum equalities for covariations are equal.
+Firstly, it can be contradicted that classical(an integral) and quantum equalities for covariations are equal.
 $$\int_\Omega\xi_a(\omega)\xi_b(\omega)dP_\rho(\omega) \equiv Tr\rho\hat{a}\hat{b}$$
-But for other variants of Bell theorem this postulate was replaced by less controversial.
+But for other variants of Bell theorem this postulate was replaced by less controversial ones.
 
-Secondly, domains of classical and quantum variables can be nonequal. There are two systems - the observed and the observer. The probability measure of states for observed partials concerns microscopic world and the observed probabilities concern macroscopic devices. These two systems can have different degrees of freedom, another parameters or possible values. It's hard to determine dependency between them as in theory there is nothing about it.
+Secondly, domains of classical and quantum variables can be nonequal. There are two systems - the observed and the observer. The probability measure of states for observed partials concerns microscopic world and the observed probabilities concern macroscopic devices. These two systems can have different degrees of freedom, another parameters or possible values. It is hard to determine the dependency between them as in theory there is nothing about it.
 
-Moreover, in experimental tests of Bell's inequality statistical data was used. That means that a lot of single experiments were made and their results depended of states of observing devices and assumed hidden variables. So there was different physical context of those experiments. If we fix quantum state $\rho$ it is not necessary that it will always correspond to the fixed classical probability distribution because with hidden variable quantum mechanics is only projection and there is no one to one correspondence. There is one to one correspondence only between classical state $\xi$ and a pair $(\rho, C)$ - quantum state and a context. Using that one can see that Bell's inequality is correct only if contexts of different experiments are the same. Because of many parameters probability to get that is zero. So considering context of experiments Bell's inequality has another form and not violated by experiments.
-
-Another problem with Bell inequalities is experimental data precision. To check something detectors have to have enough efficiency and not give false positive results. Since there is no device without these problems, it is better to have a statistical model which can deal with such experimental errors. One of such models was presented in the Eberhard's article \cite{Eberhard}.
+Moreover, in experimental tests of Bell inequality statistical data was used, i.e. a lot of single experiments were made and their results can depended on states of observing devices and assumed hidden variables. So there was a different physical context of those experiments. With a fixed quantum state $\rho$ it is not necessary that this state will always correspond to the fixed classical probability distribution. With hidden variables quantum mechanics describes only a projection of reality and there is no one to one correspondence between them. There is only one to one correspondence between a classical state $\xi$ and a pair $(\rho, C)$ - quantum state and a context. Using that one can see that Bell inequality is correct only if contexts of different experiments are the same. Probability to get that is equal to zero because the context depends on many different parameters.
 
 \section{Eberhard inequality}
+Another problem with Bell inequalities is experimental data precision. To check something detectors have to have enough efficiency and not give false positive results. Since there is no device without these problems, it is better to have a statistical model which can deal with such experimental errors. One of such models was presented in the Eberhard's article \cite{Eberhard}.
+
 
 \subsection{The derivation of the inequality}
 In the paper of Eberhard \cite{Eberhard} a Bell experiment is considered that is performed on entangled states of two photons. For both particles instead of spins polarization measurements are made using Nicol prisms. If photon is polarized horizontally then the ordinary trajectory is applied, otherwise photons polarized in the vertical plane are detected in the extraordinary trajectory. The angle of polarization axis of the first prism is denoted by $\alpha$, and for the second prism it is called $\beta$.
