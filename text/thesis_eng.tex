@@ -581,7 +581,7 @@ And finally, using that $|\xi_i| = 1$ we get the desired result:
 \]
 \end{proof}
 
-After Bell's article some other inequalities were formulated. For exmaple, Wigner inequality is more suitable for testing because it contains probabilities instead of covariations.
+After Bell's article some other inequalities were formulated. For example, Wigner inequality is more suitable for testing because it contains probabilities instead of covariations.
 \begin{theorem}[Wigner inequality]
 For random variables form the previous theorem the following inequality is performed:
 \[
@@ -1285,16 +1285,25 @@ $\eta$ & $\delta,^\circ$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J$ & $J_{\
 \multirow{3}{*}{1.0} & \multirow{3}{*}{1.0} & 1 & 22.5 & 45 & -0.20711 & -0.20689 & 0.014248 & -14.521\\\cline{3-9}
  &  & 1 & 22.491 & 44.987 & -0.20711 & -0.20689 & 0.014244 & -14.524\\\cline{3-9}
  &  & 0.99999 & 11.855 & 33.072 & -0.17758 & -0.17744 & 0.010995 & -16.137\\\hline
- \caption{Сравнение значений параметров при различных способах минимизации: 1 строка - минимизация $J_\mathcal{B}$ без учета $\delta$, 2 строка - минимизация $J(\delta)$, 3 строка - минимизация $K = J(\delta) / \sigma(\delta)$}
+\caption{Parameters' values comparison for various minimizations: first row -- $J_\mathcal{B}$ 
+minimisation with no regard to $\delta$, second row -- $J(\delta)$ minimization, third row -- 
+$K = J(\delta) / \sigma(\delta)$ minimization}
  \label{tab:one_delta}
 \end{longtable}
 \endgroup
 
-Сравнение результатов для различных значений $\delta$ представлены на графиках \ref{fig:theta_ang} - \ref{fig:J_ang}, а также в таблице \ref{tab:one_delta}. Строки в таблице \ref{tab:one_delta} для заданных значений $\eta$ и $\delta$ сгруппированы по три: первая строка - минимизация $J_\mathcal{B}$ без учета $\delta$, вторая строка - минимизация $J(\delta)$, третья строка - минимизация $K = J(\delta) / \sigma(\delta)$. 
+Comparison of results for various $\delta$ values is shown at Fig.\ref{fig:theta_ang}-\ref{fig:J_ang}, 
+and also in Table~\ref{tab:one_delta}. Rows in Table~\ref{tab:one_delta} are grouped in threes for 
+selected values of $\eta$ and $\delta$: first row --  $J_\mathcal{B}$ minimization with no regard to 
+$\delta$, second row -- $J(\delta)$ minization, third row -- $K = J(\delta) / \sigma(\delta)$ minimization. 
 
-Так как реальные значения эффективностей - около $\eta = 0.85$, то из второго графика видно, что значения мат. ожидания не сильно отличаются от случая нулевой эффективности. Кроме того, для различных значений $\delta$ в пределах одного градуса графики почти совпадают.
+Because of real efficiency values being approximately equal to $\eta = 0.85$, it follows from the second figure 
+that mathematical expectancy values do not differ from zero efficiency case ones that much. Besides, 
+graphs almost coincide within one degree for various $\delta$ values.
 
-Усложним модель разброса - будем рассматривать погрешность каждого угла в отдельности. Будем считать, что реальная величина каждого угла в эксперименте равномерно распределена на отрезке вокруг желаемого значения. В этом случае значения мат. ожидания и дисперсии принимают следующий вид:
+Let us complicate scattering model by taking into consideration an error of every node separately. Consider real value of 
+each angle in the experiment to be uniformly distributed at the section around the desired value. In this case 
+mathematical expectancy and dispersion values become: 
 \[
 J_\mathcal{B} = \frac{1}{16\delta^4}\int\int\int\int_{-\delta}^\delta \langle \mathcal{B}(x_1, x_2, x_3, x_4)\psi, \psi \rangle dx_1dx_2dx_3dx_4,
 \] 
@@ -1304,20 +1313,20 @@ J_\mathcal{B} = \frac{1}{16\delta^4}\int\int\int\int_{-\delta}^\delta \langle \m
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{theta_4ang.eps}
-\caption{Оптимизированные значения для $\theta$ для различных значений углов}
+\caption{Optimized $\theta$ values for various angles' values}
 \label{fig:theta_4ang}
 \end{figure}
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{r_4ang.eps}
 \includegraphics[scale=0.7]{omega_4ang.eps}
-\caption{Оптимизированные значения для $r$ и $\omega$ для различных значений углов}
+\caption{Optimized $r$ and $\omega$ values for various angles' values}
 \label{fig:psi_4ang}
 \end{figure}
 
 \begin{figure}[t]
 \includegraphics[scale=0.7]{K_4ang.eps}
-\caption{Оптимизированные значения для $J_{\mathcal{B}}/N$ для различных значений углов}
+\caption{Optimized $J_{\mathcal{B}}/N$ values for various angles' values}
 \label{fig:J_4ang}
 \end{figure}
 
@@ -1349,12 +1358,17 @@ $\eta$ & $\delta,^\circ$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J$ & $J_{\
  &  & 0.999997 & 22.5 & 45 & -0.207107 & -0.207089 & 0.0035626 & -58.1286\\\cline{3-9}
  &  & 0.999999 & 22.4981 & 44.998 & -0.207107 & -0.207089 & 0.0035626 & -58.1286\\\hline
  \end{tabular}
-\caption{Значения оптимизированных параметров для погрешности в четырех углах в отдельности для случай $\delta = 0.25^\circ$}
+\caption{Optimized parameters' values for the error in four angles separately in case of 
+$\delta = 0.25^\circ$}
 \label{tab:different_deltas}
 \end{table}
 
+Results of optimization performed are shown at Fig.\ref{fig:theta_4ang} - \ref{fig:J_4ang}  and in the 
+Table~\ref{tab:different_deltas}, it's rows are also grouped in threes. It follows from the graphs that 
+the addition of scattering almost does not change optimal parameters. Therefore we can suggest 
+that angles' values control can be reduced.
 
-Результаты проведенной оптимизации представлены на рисунках \ref{fig:theta_4ang} - \ref{fig:J_4ang} и в таблице \ref{tab:different_deltas}, строки которой также сгруппированы по три. Из графиков видно, что добавление разброса почти не изменяет оптимальные параметры. А это означает, что можно сделать предположение, что контроль за величиной углов детекторов можно уменьшить. 
+\newpage
 
 \bibliography{literature.bib}
 \bibliographystyle{ieeetr}
