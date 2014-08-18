@@ -1,17 +1,66 @@
-\documentclass[11pt]{article}
+\documentclass[%
+master,         % тип документа
+subf,           % подключить и настроить пакет subfig для вложенной нумерации рисунков
+href,           % подключить и настроить пакет hyperref
+colorlinks=true % цветные гиперссылки
+%,times         % шрифт Times как основной
+%,fixint=false  % отключить прямые знаки интегралов
+]{disser}
 
+\usepackage[
+  a4paper, mag=1000,
+  left=2.5cm, right=1cm, top=2cm, bottom=2cm, headsep=0.7cm, footskip=1cm
+]{geometry}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{amssymb}
-\usepackage{amsmath}
+\ifpdf\usepackage{epstopdf}\fi
 
-\usepackage[colorlinks=true]{hyperref}
-%\usepackage[top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+% Номера страниц снизу и по центру
+\pagestyle{footcenter}
+\chapterpagestyle{footcenter}
 
+\setcounter{page}{2} 
+
+% Точка с запятой в качестве разделителя между номерами цитирований
+%\setcitestyle{semicolon}
+
+% Использовать полужирное начертание для векторов
+\let\vec=\mathbf
+
+% Включать подсекции в оглавление
+\setcounter{tocdepth}{2}
+
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{afterpage}
+
+\usepackage{subfig}
+\usepackage{graphicx}
+\graphicspath{ {./imgs/} }
+
+\DeclareMathOperator{\Tr}{Tr}
+
+
+%\usepackage{indentfirst}
+\usepackage{amssymb, amsmath, textcomp}
+%\usepackage{color}
+%%\usepackage{tabularx}
+\linespread{1.5}
+\righthyphenmin=99
+%% Включать подсекции в оглавление
+%\setcounter{tocdepth}{2}
+%
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+%
+\let\openbox\relax
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}{Definition}[section]
+
+\usepackage[section]{placeins}
 
 %\newenvironment{proof}[1][Proof]{\begin{trivlist}
 %\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
@@ -29,56 +78,46 @@
 %      \hskip1.5em plus0em minus0.5em \fi \nobreak
 %      \vrule height0.75em width0.5em depth0.25em\fi}
 
-\usepackage{enumitem}
-\usepackage{multirow}
-\usepackage{longtable}
-\usepackage{afterpage}
-
-\usepackage{subfig}
-\usepackage{graphicx}
-\graphicspath{ {./imgs/} }
-
-\DeclareMathOperator{\Tr}{Tr}
-
 
 \begin{document}
+
+\tableofcontents
 
 \section{Introduction}
 One of the foundations of classical mechanics is a principle of local realism. Locality stands that any object can be affected only by its nearest local space and there is no action that can be transmitted faster than the light speed. Realism refers to a philosophical position that the observed values are properties of objects, that is, they are objective and can be attributed to physical systems before the measurement. These postulates are not only confirmed by classical physical experiments, intuitively they are plausible assumptions on the real world.
 
 However, modern quantum mechanics is questioning the adequacy of the model of local realism to the description of the microcosm. According to the Heisenberg uncertainty principle there is a fundamental limit of the accuracy for the joint measurement of the coordinate of a quantum particle and its momentum (as well as any other joint measurement of two observables, described by non-commuting operators). It means that for a quantum system, the values of position and momentum cannot be be assigned to it before measurement. Thus, as a consequence of the Heisenberg principle, in quantum world there is no place for realism.
 
-However, this position was criticised by Einstein, Podolsky and Rosen(EPR paradox)\cite{EPR}. They showed using quantum mechanical formalism that it is possible to come to the contradiction with the above principle. They presented a hypothetical experiment in which one can accurately determine the position and momentum of a particle, taking measurements for particles in the entangled state, located far enough from each other. The discussion of this paradox raised the question of possible incompleteness of the quantum theory. Perhaps, quantum mechanics does not completely describe the state of the system, and there are still some unknown hidden parameters. Another explanation of the paradox is the rejection of the locality principle.
+However, his position was criticised by Einstein, Podolsky and Rosen(EPR paradox)\cite{EPR}. They showed using quantum mechanics formalism that it is possible to come to the contradiction with the above principle. They presented a hypothetical experiment such that one can accurately determine the position and momentum of a particle, taking measurements for particles in the entangled state, located far enough from each other. The discussion of this paradox raised the question of possible incompleteness of the quantum theory. Perhaps, quantum mechanics does not completely describe the state of the system, and there are still some unknown hidden parameters. Another explanation of the paradox is the rejection of the locality principle.
 
-Further evidence of contradiction between classical and quantum models of real world was given by Bell and other authors in the form of statistical inequalities which can be tested experimentally. At the very beginning the question about the coexistence of locality and realism with quantum theory seemed to be a philosophical discussion about the nature of the reality, but with the aid of the Bell inequality it was formulated using mathematical formalism and then tested experimentally. Despite the fact that violations of Bell inequalities predicted by quantum mechanics were observed in the most of experiments \cite{ASP1}, the process of verification is still not completed \cite{Khrennikov_preprint}.
+Further evidence of contradiction between classical and quantum models of real world was given by Bell and other authors in the form of statistical inequalities which can be tested experimentally. At the very beginning the question about the existence of locality and realism seemed to be a philosophical discussion about the nature of the reality, but after it was formulated using mathematical formalism and then tested experimentally. Despite the fact that violations of Bell inequalities predicted by quantum mechanics, were observed in the most of experiments \cite{ASP1}, the process of verification is still not completed \cite{Khrennikov_preprint}.
 
-The main reason for performing further tests is that as any experiment, Bell's test cannot be performed with 100\% efficiency of detectors and without any noise in the detector response. An example of inequality that takes into account these types of errors, is the Eberhard's inequality that was presented in the article \cite{Eberhard}. On its basis a number of experiments such as \cite{Zeilinger} was conducted, which also revealed the violation of the predictions of the classical theory.
+The main reason of further tests is that as any experiment, Bell's test cannot be performed with 100\% efficiency of detectors and without any noise in the detector response. An example of inequality that takes into account these types of errors is an Eberhard inequality from the the article \cite{Eberhard}. On its basis a number of experiments such as \cite{Zeilinger} were conducted, they also revealed the violation of the predictions of the classical theory.
 
 The main difficulty in such experiments is that violations of inequality require a fairly high efficiency of detectors, special initial state of a quantum system and installation angles of polarization beam splitters. These parameters should be such that the inequality is violated as much as possible. To achieve this result Eberhard used a simple brute-force optimization.
 
-This work is devoted to mathematical modeling of parameters of the Eberhard's inequality using optimization techniques. One of the main purposes of this study is to consider more general case when the detectors have different efficiencies. In addition, in the article \cite{Eberhard} the objective function has the meaning of the mathematical expectation. However, it is also useful to investigate the possible level of variability of the results, expressed in terms of standard deviation. In this paper we consider the optimization of parameters for the Eberhard's inequality using coefficient of variation taking into account possible errors in the setup of angles during the experiment. We also model random fluctuations of experimental settings, angles of polarization beam splitters. These fluctuations also contribute to uncertainty in magnitude of the objective function. This problem of sensitivity of the degree of violation of the Eberhard inequality to the precision in the control of angles of polarization beam splitters is very important for experimenters.
-
+This work is devoted to mathematical modeling of parameters of the Eberhard inequality using optimization techniques. The main purpose is to consider more general case when the detectors have different efficiencies. In addition, in the article \cite{Eberhard} the objective function has the sense of mathematical expectation. However, it is also useful to investigate the possible level of variability of the results, expressed in terms of standard deviation. In this paper we consider the optimization of parameters for the Eberhard inequality using coefficient of variation taking into account possible errors in the setup of angles during the experiment.
 
 \section{Required elements of functional analysis}
 \subsection{Hilbert space and linear operator on it}
-Here we present some basic definitions of function analysis which can be used in quantum mechanics formalism. Our presentation will be brief and not detailed, see, e.g. \cite{advanced_la}, for details.
+Here we present some basic definitions of function analysis that can be used in quantum mechanics formalism. Our presentation will be brief and not detailed, see, e.g. \cite{advanced_la}, for details.
 
 \begin{definition}
-For the complex vector space $V$ inner (scalar) product $\langle\cdot,\cdot\rangle$ is a map $V\times V \to \mathbb{C}$ that satisfies the following conditions:
+For the complex vector space $V$ inner (scalar) product $\langle\cdot,\cdot\rangle$ is a map $V\times V \to \mathbb{C}$ that satisfies conditions:
 \begin{enumerate}
 \item Conjugate symmetry - $\langle x, y\rangle = \overline{\langle y, x\rangle}$,
 \item It is positively defined - $\langle x, y\rangle \geq 0$ and $\langle x, y\rangle = 0 \Leftrightarrow x = y$,
-\item Linearity - $\langle x, ay\rangle = a\langle x, y\rangle$ where $a\in\mathbb{C}$, and $\langle x, y_1 + y_2\rangle = \langle x, y_1\rangle + \langle x, y_2\rangle$.
+\item Linearity - $\langle x, ay\rangle = a\langle x, y\rangle$, where $a\in\mathbb{C}$, and $\langle x, y_1 + y_2\rangle = \langle x, y_1\rangle + \langle x, y_2\rangle$.
 \end{enumerate}
 \end{definition}
 
 \begin{definition}
-Hilbert space $H$ is a complex vector space with an inner product which is complete with respect to the norm $\|x\| = \sqrt{\langle x, x\rangle}$
+The hilbert space $H$ is a complex vector space with an inner product such that the space $H$ is complete with respect to the norm $\|x\| = \sqrt{\langle x, x\rangle}$
 \end{definition}
 
-The space $H = \mathbb{C}^n$ with the inner product defined by $\langle\psi, \varphi \rangle = \sum_{i = 1}^n \overline{\psi_i}\varphi_i$ is Hibert space. Another well-known example is the functional space $H = L_2(\mathbb{R}^n, dx)$ of square integrable function with respect to the Lebegue measure. In this space the inner product is defined by the equality $\langle\psi, \varphi \rangle = \int_{\mathbb{R}^n}\overline{\psi(x)}\varphi(x) dx$.
+The space $H = \mathbb{C}^n$ with an inner product defined by $\langle\psi, \varphi \rangle = \sum_{i = 1}^n \overline{\psi_i}\varphi_i$. Another well-known example is the functional space $H = L_2(\mathbb{R}^n, dx)$ of square integrable function with respect to the Lebegue measure. In this space inner product is defined by $\langle\psi, \varphi \rangle = \int_{\mathbb{R}^n}\overline{\psi(x)}\varphi(x) dx$.
 
-Another important notion which is widely used in quantum mechanics is the notion of a linear operator.
+Another important notion which is widely used in quantum mechanics theory is the notion of a linear operator.
 \begin{definition}
 Linear operator $A$ on a Hilbert space $H$ is a map $H \to H$ that has the following properties:
 \begin{enumerate}
@@ -87,16 +126,16 @@ Linear operator $A$ on a Hilbert space $H$ is a map $H \to H$ that has the follo
 \end{enumerate}
 \end{definition}
 
-To simplify further considerations let us assume that Hilbert space has finite dimension.
+Let us assume that Hilbert space has finite dimension to simplify further considerations.
 
 \begin{definition}
-For a linear operator $A$, its adjoint operator $A^*$ is defined with the aid of the equality $\langle A\psi,\varphi\rangle = \langle\psi, A^*\varphi\rangle$. Operator $A$ is called self-adjoint if $A^* = A$.
+For a linear operator $A$, its adjoint operator $A^*$ is denoted with the aid of the equality $\langle A\psi,\varphi\rangle = \langle\psi, A^*\varphi\rangle$. Operator $A$ is called self-adjoint if $A^* = A$.
 \end{definition}
 
 \begin{definition}
 Let $V$ be a vector space over $\mathbb{C}$ and let $A$ be an operator on $V$.
 \begin{enumerate}
-\item A scalar $\lambda\in \mathbb{C}$ is an eigenvalue of $A$ if there exists a nonzero vector $\psi\in V$ for which
+\item A scalar $\lambda\in \mathbb{C}$ is an eigenvalue of $A$ if there exists a nonzero vector $\psi\in V$ such that
 \[
 A\psi = \lambda\psi.
 \]
@@ -116,12 +155,12 @@ For every self-adjoint operator $A$ in complex Hilbert space $H$:
 \end{theorem}
 
 \begin{definition}
-A self-adjoint operator is called positive if it has only non-negative eigenvalues in its spectrum.
+A self-adjoint bounded operator is called positive if it has only non-negative eigenvalues in its spectrum.
 \end{definition}
 
 Another useful operator on Hilbert space is a projector operator.
 \begin{definition}
-Let $H_0$ be a linear subspace of $H$. Operator $\pi: H \to H_0$ is called a projector if $\pi^* = \pi$ and $\pi^2 = \pi$. It projects $H$ orthogonally onto $H_0 = \pi(H)$.
+Let $H_0$ be a linear subspace of $H$. Operator $\pi: H \to H - H_0$ is called a projector if $\pi^* = \pi$ and $\pi^2 = \pi$. It projects $H$ orthogonally onto $H_0 = \pi(H)$.
 \end{definition}
 Let $\{e_1, \ldots, e_n\}$ be a basis in $H$ and $\{e_1, \ldots e_m\}$ a basis in $H_0$. If $e_j \in H_0$ then $\pi e_j = e_j$ and if $e_j\in H_0^\perp$ then $\pi e_j = 0$. For an arbitrary element $\psi\in H$, the projector operator acts as: 
 \[
@@ -157,7 +196,7 @@ For the elements $\psi_1, \psi_2$ from spaces $H_1$ and $H_2$, correspondingly, 
 \psi_1 \otimes \psi_2 = \left(\sum_ix_ie_i\right) \otimes \left(\sum_jy_jf_j\right) \overset{\mbox{def}}= \sum_{i, j} x_iy_j \cdot e_i \otimes f_j \in H_1 \otimes H_2.
 \label{eq:tensor_factorizable}
 \end{equation}
-Elements of $H = H_1\otimes H_2$ which can be written in the form \eqref{eq:tensor_factorizable} are called factorizable elements. But space $H$ does not consist only of factorizable elements. Here we construct an example of a vector that cannot be written in the form  \eqref{eq:tensor_factorizable}.
+Elements of $H = H_1\otimes H_2$ that can be written in the form \eqref{eq:tensor_factorizable} are called factorizable elements. But space $H$ does not consist only of factorizable elements. Here we construct an example of a vector that cannot be written in the form  \eqref{eq:tensor_factorizable}.
 
 Consider Hilbert space $H_1\otimes H_2$, where $H_i$ are Hilbert spaces with the basis $\{e_1, e_2\}$. Let us show that the following quantum state $\psi$ is not factorizable
 \[
@@ -165,7 +204,7 @@ Consider Hilbert space $H_1\otimes H_2$, where $H_i$ are Hilbert spaces with the
 \]
 for any pair $\psi_1, \psi_2$.
 \begin{proof}
-Let assume that $\psi$ can be represented by $\psi = \psi_1\otimes\psi_2$ where
+Let assume that $\psi$ can be represented by $\psi = \psi_1\otimes\psi_2$, where
 $\psi_1$ and $\psi_2$ can be written as weighted sums of basis vectors:
 \begin{gather*}
 	\psi_1 = a_1 e_1 + a_2 e_2,\ a_i\in \mathbb{C},\ |a_1|^2 + |a_2|^2 = 1 \\
@@ -186,7 +225,7 @@ a_1 b_1 = 0 \\
 a_2 b_2 = 0
 \end{cases}
 $$
-which is inconsistent. Therefore $\psi$ is not factorizable.
+The system of equations is inconsistent, therefore $\psi$ is not factorizable.
 \end{proof}
  
 \begin{definition}
@@ -293,13 +332,13 @@ Consider two linear operators $A_1: H_1\to H_1$ and $A_2: H_2\to H_2$. The tenso
 
 \section{Mathematical formalism of quantum mechanics}
 \subsection{Postulates of quantum mechanics }
-The mathematical formalism of quantum mechanics can be formulated as a list of postulates \cite{Khrennikov_information} which are based on the theory of self-adjoint operator on complex Hilbert space $H$. The following list of postulates and principles is called Copenhagen interpretation of quantum mechanics.
+The mathematical formalism of quantum mechanics can be formulated as a list of postulates \cite{Khrennikov_information} based on the theory of self-adjoint operator on complex Hilbert space $H$. The following list of postulates and principles is called Copenhagen interpretation of quantum mechanics.
 \begin{enumerate}[label=\bfseries Postulate \arabic*:, align=left]
   \item A quantum state $\psi$ is a vector of a complex Hilbert space such that $\langle\psi, \psi\rangle = 1$. This vector completely describes the state of a quantum system. Two vectors which differ by a factor of $\gamma = e^{i\varphi}$ describe the same quantum state.
   \item A physical observable $a$ is represented with the aid of a self-adjoint operator $A$ in $H$. Different observables are represented by different operators.
   \item If an observable is represented by the operator $A$ then results of observation are given by the spectrum of $A$. Any self-adjoint operator can be written in the form 
   \[
-  A = \sum_m a_m\pi_m^A
+  A = \sum_m a_m\pi_m^A,
   \]
     where $\pi_m^A$ is an orthogonal projector onto an eigenspace corresponding to the eigenvalue $a_m$.
   \item Born's rule - if $A$ is a self-adjoint operator then the probability to obtain an eigenvalue $a_m$ after measurement can be calculated by using the formula
@@ -309,7 +348,7 @@ The mathematical formalism of quantum mechanics can be formulated as a list of p
   \item 
   Consider a quantum state $\psi$ and a self-adjoint operator $A$. Eigenvectors of $A$ with its eigenvalues $\{a_m\}$ form a basis in the Hilbert space $H$: $\{ \varphi: A\varphi = a_m\varphi\}$ so this state can be represented as $H = H_1\oplus H_2\oplus\ldots H_k$. Projector $\pi_m^A: H\to H_m$ equals to 
   \[
-  \pi_m^A = \sum_{l = 1}^{n_m}\langle\psi,\varphi_{ml}\rangle\varphi_{ml}
+  \pi_m^A = \sum_{l = 1}^{n_m}\langle\psi,\varphi_{ml}\rangle\varphi_{ml},
   \]
   where $\varphi_{ml}$ - $l$-th eigenvector from $H_m$.
   Then quantum state of a system collapses to state $\psi_m$:
@@ -321,12 +360,12 @@ The mathematical formalism of quantum mechanics can be formulated as a list of p
   \[
   i\hbar \dfrac{d}{dt}\psi(t) = \mathcal{\mathcal{H}}\psi(t)
   \] 
-  with the initial condition $\psi(0) = \psi_0$ and
+  with the initial condition $\psi(0) = \psi_0$,
   where $\mathcal{H}$ is a self-adjoint positive operator representing the energy of the system.
   \item If there are two quantum systems int Hilbert spaces $H_1$ and $H_2$, then the state space of the compound system is given by $H_1 \otimes H_2$.  
 \end{enumerate}
 \begin{definition}
-If a state $\psi\in H_1\otimes H_2$ is not factorizable in the form $\psi = \psi_1\otimes\psi_2$ where $\psi_1\in H_1, \psi_2\in H_2$ then it is called entangled.
+If a state $\psi\in H_1\otimes H_2$ is not factorizable in the form $\psi = \psi_1\otimes\psi_2$, where $\psi_1\in H_1, \psi_2\in H_2$ then it is called entangled.
 \end{definition}  
 Consider Hilbert 2-dimensional spaces $H_1 = H_2$ the basis $\{e_1, e_2\}$. One of the examples of entanglement is 
 \[
@@ -357,13 +396,13 @@ a_1 b_1 = \frac{1}{\sqrt{6}} \\
 a_2 b_2 = 0
 \end{cases},
 $$
-which is inconsistent. Therefore the assumption is false and $\psi$ is not factorizable.
+The system is inconsistent therefore the assumption is false and $\psi$ is not factorizable.
 \end{proof}
 
 
 \subsection{Density operator}
 
-To describe a behaviour of an ensemble of quantum states where each state is obtained with some probability we will use the notion of a density operator from \cite{Khrennikov_information}.
+To describe a behaviour of an ensemble of quantum states, where each state is obtained with some probability we will use the notion of a density operator from \cite{Khrennikov_information}.
 
 For a pure state $\psi$ we can define an orthogonal projection operator: $P_\psi: P_\psi\varphi = \langle \psi, \varphi \rangle \psi$. It has following properties:
 \begin{enumerate}
@@ -375,7 +414,7 @@ $\langle P_\psi\varphi, v\rangle = \langle \langle\psi,\varphi\rangle \psi, v\ra
 \begin{proof}
 $\langle P_\psi\varphi, \varphi\rangle = \overline{\langle\psi,\varphi\rangle} \langle\psi, \varphi\rangle = |\langle\psi, \varphi\rangle|^2 \geq 0$
 \end{proof}
-\item $\Tr P_\psi = 1$ where $\Tr A = \sum_k \langle Ae_k, e_k\rangle$ and $\{e_k\}$ is an orthogonal basis.
+\item $\Tr P_\psi = 1$, where $\Tr A = \sum_k \langle Ae_k, e_k\rangle$ and $\{e_k\}$ is an orthogonal basis.
 \begin{proof}
 $\Tr P_\psi = \sum_{k = 1}^n \langle \langle \psi, e_k\rangle\psi, e_k\rangle = \sum_k \overline{\langle\psi, e_k\rangle}\langle\psi, e_k\rangle = \sum_k\psi_k^2 = 1$
 \end{proof}
@@ -390,7 +429,7 @@ In the common case for any state or ensemble of states we can construct an opera
 \]
 where $p_i > 0,\ \sum_ip_i = 1$ represents probability to obtain $\psi_i$ after a measurement.
 
-One can easily show that operator $\rho$ satisfies properties 1-3 using corresponding properties 1-3 for each operator $P_{\psi_i}$. In the common case property 4 of projection operator is violated. For example, let us take density operator $\rho = \cfrac 12P_{\psi_1} + \cfrac 12P_{\psi_2}$ where $\psi_1 = (1, 0)^T$ and $\psi_2 = (0, 1)^T$. Let us find the square of this operator:
+One can easily show that operator $\rho$ satisfies properties 1-3 using corresponding properties 1-3 for each operator $P_{\psi_i}$. In the common case property 4 of projection operator is violated. For example, let us take density operator $\rho = \cfrac 12P_{\psi_1} + \cfrac 12P_{\psi_2}$, where $\psi_1 = (1, 0)^T$ and $\psi_2 = (0, 1)^T$. Let us find the square of this operator:
 \[
 \rho^2\varphi = \frac 12\langle\psi_1, \rho\varphi\rangle\psi_1 + \frac 12\langle\psi_2, \rho\varphi\rangle\psi_2 =
 \]
@@ -411,11 +450,11 @@ The final result is:
 Density operator $\rho$ also can be written in the form $\rho\psi = \sum_i p_i\langle e_i, \psi\rangle e_i$. 
 
 \subsection{Elements of quantum probability theory}
-In quantum mechanics the result of a measurement depends on a state of a system that it had before it collapsed to some pure state according to the measurement result. It means that values of quantum probabilities, expectations, standard deviations etc. depend not only on an observable but also on an initial state of a system which is described by a density operator.
+In quantum mechanics the result of a measurement depends on a state of a system that it had before it collapsed to some pure state according to the measurement result. It means that values of quantum probabilities, expectations, standard deviations etc. depend not only on an observable but also on an initial state of a system described by a density operator.
 
 Let $A$ be an observable with eigenvalues $\{a_1,\ldots a_n\}$ and eigenvectors $\{f_1,\ldots f_n\}$, where $\psi$ describes the state of the system. Then the probability to obtain $a_i$ after a measurement is given by
 \[
-P(A = a_i) = |\langle\psi, f_i\rangle|^2 = \Tr \rho_\psi A_i
+P(A = a_i) = |\langle\psi, f_i\rangle|^2 = \Tr \rho_\psi A_i,
 \]
 where $A_i = |f_i\rangle \langle f_i|$.
 \begin{proof}
@@ -510,7 +549,7 @@ where $I$ is an identity operator. Then in this case Robertson inequality become
 \sigma_A^2\sigma_B^2 \geq \frac{1}{4}\hbar^2.
 \]
 
-From the derivation of Heisenberg's principle it is clear that one can construct nontrivial Robertson inequality for every operators $A$ and $B$ which have nonzero commutator. It is also clear that the result formula does not depend on technology or any conditions during measurement, it is a fundamental property of some pairs of quantum operators such as position and momentum.
+From the derivation of Heisenberg's principle it is clear that one can construct nontrivial Robertson inequality for every operators $A$ and $B$ such that the commutator $[A, B]$ is nonzero. It is also clear that the result formula does not depend on technology or any conditions during measurement, it is a fundamental property of some pairs of quantum operators such as position and momentum.
 
 \section{Einstein-Podolsky-Rosen paradox}
 Einstein-Podolsky-Rosen paradox(EPR-paradox, \cite{EPR}) was published in 1935 as the criticism of some statements of the Copenhagen interpretation of quantum mechanics. The main principle of this interpretation holds that any quantum system is described as a wave-function and after measurement it collapses to one of its eigenstates with some probability. Moreover, Heisenberg's uncertainty principle stands that position of a particle and its momentum are incompatible and they cannot be measured simultaneously with good precision. Einstein and his colleagues did not agree with probabilistic measurement outcomes. His paper was an attempt to show some contradictions in quantum mechanics.
@@ -537,7 +576,7 @@ Suppose after all that we've changed our decision and we want to measure $B$ in 
 
 After that thought experiments we can conclude that the second system has 2 wave-functions $v_m(x_2)$ and $u_n(x_2)$. The paradox is that we can construct such states that cannot be known simultaneously according to the Heisenberg's principle. Here we present an example from the original article \cite{EPR}.
 
-Consider the state $\psi(x_1, x_2) = \int e^{\frac{ip}{\hbar}(x_1+x_2-x_0)}$ where $x_0$ is a constant. On one side, it can be represented by the following formula: $\psi(x_1, x_2) = \int\varphi(p, x_1)v(p, x_2)dp$, where $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$ and $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$. 
+Consider the state $\psi(x_1, x_2) = \int e^{\frac{ip}{\hbar}(x_1+x_2-x_0)}$, where $x_0$ is a constant. On one side, it can be represented by the following formula: $\psi(x_1, x_2) = \int\varphi(p, x_1)v(p, x_2)dp$, where $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$ and $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$. 
 
 Momentum operator is defined by $\hat{p} = \dfrac{\hbar}{i}\dfrac{d}{dx}$. Its eigenfunction is $\psi = e^{\frac{i\lambda}{\hbar}x}$ for eigenvalue $\lambda$. After the measurement of $A$ in the first system its state will collapse to its eigenfunction $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$. The state of the second system $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$ is an eigenfunction of momentum operator, corresponding to the eigenvalue $-p$. 
 
@@ -552,11 +591,11 @@ The question of this paradox - do quantum mechanics provide a complete descripti
 \section{Bell inequalities}
 One of possible solutions of the EPR-paradox is that the quantum mechanics theory is not complete, the actual state of a system is described not only by its quantum state $\psi$ but also by some hidden, i.e. yet unknown, variables. In this case all probabilistic predictions of quantum mechanics can be explained by existing of some unknown degrees of freedom. Using that assumption one can conclude that reality can still have deterministic nature as well as probabilistic.
 
-John Bell in his article \cite{Bell} assumed that there are some hidden variables $\omega$ and measurement results are random variables which depend on it. He formulated statistical inequality that contradicts with quantum mechanical predictions.
+John Bell in his article \cite{Bell} assumed that there are some hidden parameters $\omega$ and all measurement results are random variables depending on it. He formulated a statistical inequality that contradicts with quantum mechanical predictions.
 
 Bell inequality is formulated in the following theorem.
 \begin{theorem}[Bell inequality]
-Consider $\xi_a(\omega)$, $\xi_b(\omega)$, $\xi_c(\omega)$ be discrete random variables which can only be equal $\pm 1$. Then the following inequality is performed:
+Consider $\xi_a(\omega)$, $\xi_b(\omega)$, $\xi_c(\omega)$ be discrete random variables that can only be equal $\pm 1$. Then the following inequality is performed:
 \[
 | \langle\xi_a,\xi_b\rangle -  \langle\xi_c,\xi_b\rangle | \leq 1 - \langle\xi_a,\xi_c\rangle.
 \]
@@ -692,13 +731,13 @@ Secondly, domains of classical and quantum variables can be nonequal. There are 
 Moreover, in experimental tests of Bell inequality statistical data was used, i.e. a lot of single experiments were made and their results can depended on states of observing devices and assumed hidden variables. So there was a different physical context of those experiments. With a fixed quantum state $\rho$ it is not necessary that this state will always correspond to the fixed classical probability distribution. With hidden variables quantum mechanics describes only a projection of reality and there is no one to one correspondence between them. There is only one to one correspondence between a classical state $\xi$ and a pair $(\rho, C)$ - quantum state and a context. Using that one can see that Bell inequality is correct only if contexts of different experiments are the same. Probability to get that is equal to zero because the context depends on many different parameters.
 
 \section{Eberhard inequality}
-Another problem with Bell inequalities is experimental data precision. To check something detectors have to have enough efficiency and not give false positive results. Since there is no device without these problems, it is better to have a statistical model which can deal with such experimental errors. One of such models was presented in the Eberhard's article \cite{Eberhard}.
+Another problem with Bell inequalities is experimental data precision. To check something detectors have to have enough efficiency and not give false positive results. Since there is no device without these problems, it is better to have a statistical model which can deal with such experimental errors. One of such models was presented in the Eberhard article \cite{Eberhard}.
 
 
 \subsection{The derivation of the inequality}
-In the paper of Eberhard \cite{Eberhard} a Bell experiment is considered that is performed on entangled states of two photons. For both particles instead of spins polarization measurements are made using Nicol prisms. If photon is polarized horizontally then the ordinary trajectory is applied, otherwise photons polarized in the vertical plane are detected in the extraordinary trajectory. The angle of polarization axis of the first prism is denoted by $\alpha$, and for the second prism it is called $\beta$.
+In the article of Eberhard \cite{Eberhard} a Bell experiment is considered that is performed on entangled states of two photons. For both particles instead of spins polarization measurements are made using Nicol prisms. If photon is polarized horizontally then the ordinary trajectory is applied, otherwise photons polarized in the vertical plane are detected in the extraordinary trajectory. The angle of polarization axis of the first prism is denoted by $\alpha$, and for the second prism it is called $\beta$.
 
-Eberhard's approach allows to take into account values of detector efficiency $\eta$ and background noise $\zeta$ before any optimization for such experiment. Here we present a derivation of Eberhard inequality from his paper. 
+Eberhard's approach allows to take into account values of detector efficiency $\eta$ and background noise $\zeta$ before any optimization for such experiment. Here we present a derivation of the Eberhard inequality from his paper. 
 
 %It is shown that Bell inequality requires an efficiency $\eta > 2(\sqrt{2} - 1) \approx 82.2\%$. Eberhard inequality still can be used with less efficiency values.
 
@@ -711,7 +750,7 @@ The derivation of Eberhard's inequality is built on the estimation of the number
 \begin{enumerate}[label=(\roman*)]
 \item The result of the detection of the first photon does not depend on the installed
 polarisation plane of the second and vice versa, i.e. for each event in the sequence results for $(\alpha_i, \beta_1)$ and $(\alpha_i, \beta_2)$ are equal as well as results for $(\alpha_1, \beta_i)$ and $(\alpha_2, \beta_i)$.
-\item  Among all possible variants of four sequences that satisfy the first condition there are some for which all averages and corelations differ from the predictions of the theory by less than ten standard deviations.
+\item  Among all possible variants of four sequences that satisfy the first condition there are some such that all averages and corelations differ from the predictions of the theory by less than ten standard deviations.
 \end{enumerate}
 
 Suppose that the theory is local and such four sequences are found. We will consider only the events, included in them, and will refer to four events, corresponding to a single event number in such sequences, as conjugate events.
@@ -741,11 +780,11 @@ Suppose that the theory is local and such four sequences are found. We will cons
 \label{tab:Eberhard_table}
 \end{table}
 
-We denote by $ n_{oo} (\alpha_1, \beta_1) $ the number of elements of the first sequence, when both particles have been found in the ordinary beam (cell $ \bullet $ in the table \ref{tab:Eberhard_table}). According to condition (i) for the conjugate event at $ (\alpha_2, \beta_1) $ the second photon has to be detected also in the ordinary beam, as a result of its detection does not depend on $ \alpha $. The same thing applies for the parameters $ (\alpha_1, \beta_2) $, the first photon has to be found in the ordinary beam. Thus, all associated events could not get into the cells of the table \ref{tab:Eberhard_table}, denoted by a *.
+We denote by $ n_{oo} (\alpha_1, \beta_1) $ the number of elements of the first sequence, when both particles have been found in the ordinary beam (cell $ \bullet $ in Table \ref{tab:Eberhard_table}). According to condition (i) for the conjugate event at $ (\alpha_2, \beta_1) $ the second photon has to be detected also in the ordinary beam, as a result of its detection does not depend on $ \alpha $. The same thing applies for the parameters $ (\alpha_1, \beta_2) $, the first photon has to be found in the ordinary beam. Thus, all associated events could not get into the cells of Table \ref{tab:Eberhard_table}, denoted by a *.
 
-Some of the events which conjugate events are included in the $ n_{oo} (\alpha_1, \beta_1) $ are among the number $ n_{uo} (\alpha_2, \beta_1) + n_ {eo} (\ alpha_2, \ beta_1) $ (a $ \otimes $ in the table). Consider only those events that were not there, that is appropriate to the situation when both photons were detected in the ordinary beam for parameters $ (\alpha_1, \beta_1) $ and $ (\alpha_2, \beta_1) $. Their number is greater than or equal to $ n_{oo} (\alpha_1, \beta_1) - n_{uo} (\alpha_2, \beta_1) - n_{eo} (\alpha_2, \beta_1) $. Similarly, we remove from consideration events that are included in the number $ n_{ou} (\alpha_1, \beta_2) + n_{oe} (\alpha_1, \beta_2) $ (a $ \oplus $ in the table).
+Some of the events whose conjugate events are included in the $ n_{oo} (\alpha_1, \beta_1) $ are among the number $ n_{uo} (\alpha_2, \beta_1) + n_ {eo} (\ alpha_2, \ beta_1) $ (a $ \otimes $ in the table). Consider only those events that were not there, that is appropriate to the situation when both photons were detected in the ordinary beam for parameters $ (\alpha_1, \beta_1) $ and $ (\alpha_2, \beta_1) $. Their number is greater than or equal to $ n_{oo} (\alpha_1, \beta_1) - n_{uo} (\alpha_2, \beta_1) - n_{eo} (\alpha_2, \beta_1) $. Similarly, we remove from consideration events that are included in the number $ n_{ou} (\alpha_1, \beta_2) + n_{oe} (\alpha_1, \beta_2) $ (a $ \oplus $ in the table).
 
-As a result, we find that the remaining number of events is greater than or equal to $ n_{oo} (\alpha_1, \beta_1) - n_{uo} (\alpha_2, \beta_1) + n_{eo} (\alpha_2, \beta_1) - n_{ou} (\alpha_1, \beta_2) - n_{oe} (\alpha_1, \beta_2) $. Furthermore, according to the condition (i) it is impossible to be detected not in an ordinary beam for any photon from the remaining conjugate events, including the parameters $ (\alpha_2, \beta_2) $. Thus, only events that are among the $n_{oo}(\alpha_2, \beta_2)$ are still in considering. Combining all the above, we obtain the Eberhard's inequality:
+As a result, we find that the remaining number of events is greater than or equal to $ n_{oo} (\alpha_1, \beta_1) - n_{uo} (\alpha_2, \beta_1) + n_{eo} (\alpha_2, \beta_1) - n_{ou} (\alpha_1, \beta_2) - n_{oe} (\alpha_1, \beta_2) $. Furthermore, according to the condition (i) it is impossible to be detected not in an ordinary beam for any photon from the remaining conjugate events, including the parameters $ (\alpha_2, \beta_2) $. Thus, only events that are among the $n_{oo}(\alpha_2, \beta_2)$ are still in considering. Combining all the above, we obtain the Eberhard inequality:
 \[
 n_{oo}(\alpha_1, \beta_1) - n_{uo}(\alpha_2, \beta_1) - n_{eo}(\alpha_2, \beta_1) - n_{ou}(\alpha_1, \beta_2) - n_{oe}(\alpha_1, \beta_2) \geq n_{oo}(\alpha_2, \beta_2),
 \]
@@ -795,7 +834,7 @@ J_{\mathcal{B}}^{\mbox{ideal}} = n_{uo}(\alpha_2, \beta_1) + n_{eo}(\alpha_2, \b
 + n_{oe}(\alpha_1, \beta_2) + n_{oo}(\alpha_2, \beta_2) - n_{oo}(\alpha_1, \beta_1) \geq 0.
 \]
 
-However, in the reality, in addition to correct detections during experiments some false positives may arise that is called background. In the Eberhard's model it is assumed that the number of false positive detections for events of type (o, o) can be ignored. We assume that the level of background does not depend on $\alpha$ and $\beta$, so for events $n_{uo}(\alpha_2, \beta_1) + n_{eo}(\alpha_2, \beta_1)$ and $n_{ou}(\alpha_1, \beta_2) + n_{oe}(\alpha_1, \beta_2)$, it has the same value $N\zeta$. The resulting inequality takes the form:
+However, in the reality, in addition to correct detections during experiments some false positives may arise that is called background. In the Eberhard model it is assumed that the number of false positive detections for events of type (o, o) can be ignored. We assume that the level of background does not depend on $\alpha$ and $\beta$, so for events $n_{uo}(\alpha_2, \beta_1) + n_{eo}(\alpha_2, \beta_1)$ and $n_{ou}(\alpha_1, \beta_2) + n_{oe}(\alpha_1, \beta_2)$, it has the same value $N\zeta$. The resulting inequality takes the form:
 \[
 J_{\mathcal{B}} = J_{\mathcal{B}}^{\mbox{ideal}} + 2N\zeta \geq 0.
 \]
@@ -812,7 +851,7 @@ AB - \eta & 1 - \eta & 1 - \eta & 2 - \eta + \xi
 \]
 where $A = \eta/2(e^{2i(\alpha_1-\alpha_2)} - 1)$, $B = e^{2i(\beta_1 - \beta_2)}$, $\xi = 4\zeta/\eta$.
 
-For the implementation of the experiment, which could show a violation of this inequality, we will search for the parameters for which $J_{\mathcal{B}} < 0$. Consider the case when $\zeta = 0$, that is, the detectors do not give false positives, and $\alpha_1 - \alpha_2 = \beta_1 - \beta_2 = \theta$. We will use the following quantum state:
+For the implementation of the experiment, which could show a violation of this inequality, we will search for the parameters such that $J_{\mathcal{B}} < 0$. Consider the case when $\zeta = 0$, that is, the detectors do not give false positives, and $\alpha_1 - \alpha_2 = \beta_1 - \beta_2 = \theta$. We will use the following quantum state:
 \[
 \psi = \frac{1}{2\sqrt{1 + r^2}}
 \begin{vmatrix}
@@ -826,8 +865,10 @@ where $0 \leq r \leq 1$, $\alpha_1 = \omega / 2 - 90^\circ$ and $\beta_1 = \omeg
 
 %\chapter{Результаты}
 
-\section{Eberhard inequality parameters optimization}
-For every $\eta$ let us find parameters $r, \omega, \theta$ for which inequality violates most strongly.
+
+\section{Results}
+\subsection{Optimization of the Eberhard inequality parameters }
+For every $\eta$ let us find parameters $r, \omega, \theta$ that allows the inequality to be violated most strongly.
 To do so we will minimize $J_{\mathcal{B}}(r, \omega, \theta) / N$ function using Nelder-Mead method.
 
 \begin{table}[h]
@@ -844,40 +885,41 @@ $\eta$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J_{\mathcal{B}} / N$
 0.95 & 0.87067 & 22.141 & 44.6958 & -0.142436\\\hline
 1 & 0.999997 & 22.5 & 45 & -0.207107\\\hline
 \end{tabular}
-\caption{Optmimal parameters values for $J_{\mathcal{B}} / N$ from Eberhard inequality}
+\caption{Optmimal parameters values for $J_{\mathcal{B}} / N$ from the Eberhard inequality}
 \label{tab:Eberhard_repeat}
 \end{table}
 
-Values obtained while optimizing $J_{\mathcal{B}}(r, \omega, \theta) / N$ are shown in the 
-Table~\ref{tab:Eberhard_repeat}. During optimization process  $\zeta$ values were equaled to zero, 
-because this parameter brings constant contribution to the $J_{\mathcal{B}} / N$ being equal to 
-$2\zeta$, it increases $J_{\mathcal{B}} / N$ value by a constant regardless of other parameters, 
+Values obtained while optimizing $J_{\mathcal{B}}(r, \omega, \theta) / N$ are shown in  
+Table~\ref{tab:Eberhard_repeat}. During optimization process  $\zeta$ values were set to zero, 
+because this parameter brings constant contribution $2\zeta$ into the $J_{\mathcal{B}} / N$ value. It increases $J_{\mathcal{B}} / N$ value by a constant regardless of other parameters, 
 therefore not affecting optimization result. Thus values from Table~\ref{tab:Eberhard_repeat} 
-match values obtained by Eberhard for non-zero context level, and parameters for which inequality 
-violates the most strongly for $\zeta = 0$ match with parameters for which inequality violates 
-and $\zeta$ has the maximum value.
+match with values obtained by Eberhard for non-zero context level, and parameters such that the inequality is
+violated the most strongly for $\zeta = 0$ match with parameters such that the inequality is
+violated and $\zeta$ has the maximum value.
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{theta.eps}
-\caption{Optimized $\theta$ values for various detectors efficiency values}
+\caption{Optimized $\theta$ values for different detectors efficiency values}
 \label{fig:theta_opt}
 \end{figure}
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{r.eps}
 \includegraphics[scale=0.7]{omega.eps}
-\caption{Optimized $r$ and $\omega$ values for various detectors efficiency values}
+\caption{Optimized $r$ and $\omega$ values for different detectors efficiency values}
 \label{fig:psi_opt}
 \end{figure}
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{J.eps}
-\caption{Optimized $J_{\mathcal{B}}/N$ values for various detector efficiency values}
+\caption{Optimized $J_{\mathcal{B}}/N$ values for different detector efficiency values}
 \label{fig:J_opt}
 \end{figure}
 
 At Fig. \ref{fig:theta_opt}, \ref{fig:psi_opt} relations between obtained parameters and efficiency 
 are shown, at \ref{fig:J_opt} -- minimum function values obtained.
+
+\clearpage
 
 In real experiments detectors more often have different efficiency values, in this case 
 formulas \eqref{eq:Eberhard_n_start}-\eqref{eq:Eberhard_n_finish} can be written as:
@@ -996,7 +1038,7 @@ $\eta_1$ & $\eta_2$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J_{\mathcal{B}}
 1 & 0.9 & 0.863896 & 22.1002 & 44.661 & -0.139755 & 0.0698776\\\hline
 1 & 0.95 & 0.933431 & 22.4101 & 44.924 & -0.172546 & 0.086273\\\hline
 1 & 1 & 0.999997 & 22.5 & 45 & -0.207107 & 0.103553\\\hline
-\caption{Optimal parameters values for different detector efficiencies case}
+\caption{Optimal parameters values for the case with different detector efficiencies}
 \label{tab:different_etas}
 \end{longtable}
 
@@ -1004,16 +1046,13 @@ $\eta_1$ & $\eta_2$ & $r$ & $\omega,^\circ$ & $\theta,^\circ$ & $J_{\mathcal{B}}
 
 Parameters values obtained during optimization process along with maximal allowable noise level 
 are shown in Table~\ref{tab:different_etas}. The bigger each value of efficiency separately, the more 
-strongly inequality can be violated. Minimal efficiency values for which violation is possible are close 
+strongly inequality can be violated. Minimal efficiency values such that the violation is possible are close 
 to  $\eta_1 = \eta_2 = 0.67$ value, matching Eberhard results.
 
-%\clearpage
-
-Generally for every state $\psi$ minimizing expectancy value the following corollary holds.
+Generally, for every state $\psi$ that minimize an expectation value the following corollary holds.
 
 \begin{theorem}
-Quantum state $\psi$ minimizing target function $J$ is an eigenvector of matrix $\mathcal{B}$ and 
-transforms dispersion to zero.
+Quantum state $\psi$ minimizing target function $J$ is an eigenvector of the matrix $\mathcal{B}$ and a dispersion for it is equal to zero.
 \end{theorem}
 \begin{proof}
 By Courant–Fischer theorem $\lambda_1 \leq \langle\mathcal{B}\psi, \psi\rangle \leq \lambda_n$, where $\lambda_1, \ldots \lambda_n$ -- eigenvalues, sorted in ascending order. Minimum 
@@ -1025,29 +1064,30 @@ For the dispersion value in this case we have:
 \]
 \end{proof}
 
-It means that the obtained states are optimal not only from mathematical expectancy point of view 
-for various combinations amount of polarization measurements, but also from 
-possible scatter of measurement results expressed in terms of dispersion point of view.
+It means that the obtained states are optimal not only from mathematical expectation point of view, but also from 
+possible spread of measurement results point of view expressed in terms of dispersion.
 
-\section{Parameters optimization for Zeilinger model}
-In article \cite{Zeilinger} Eberhard inequality check applied to the real experiment is considered. 
-During experiment conditions $n_{ou}, n_{uo}$ values were found by the following formulas:
+\clearpage
+
+\subsection{Optimization of parameters from Zeilinger model}
+In the article \cite{Zeilinger} the Eberhard inequality check applied to the real experiment is considered. 
+During experiments values of $n_{ou}, n_{uo}$  were found by the following formulas:
 \[
 n_{ou}(\alpha_1, \beta_2) = S_o^A(\alpha_1) - n_{oo}(\alpha_1, \beta_2) - n_{oe}(\alpha_1, \beta_2),
 \]
 \[
 n_{uo}(\alpha_2, \beta_1) = S_o^B(\beta_1) - n_{oo}(\alpha_2, \beta_1) - n_{eo}(\alpha_2, \beta_1),
 \]
-where $S_o^A, S_o^B$ -- the amount of clicks in the usual beam for first and second system 
+where $S_o^A, S_o^B$ -- an amount of clicks in the ordinary beam for the first and second system 
 correspondingly.
 
-In this case Eberhard inequality takes form:
+In this case the Eberhard inequality takes form:
 \begin{equation}
 J = -n_{oo}(\alpha_1, \beta_1) + S_o^A(\alpha_1) - n_{oo}(\alpha_1, \beta_2) + S_o^B(\beta_1) - n_{oo}(\alpha_2, \beta_1) + n_{oo}(\alpha_2, \beta_2) \geq 0
 \label{eq:Zeilinger_J}
 \end{equation}
 
-Consider density operator as a quantum state of the system:
+Consider a density operator as a quantum state of the system:
 \[
 \rho = \frac{1}{\sqrt{1+r^2}}
 \begin{vmatrix}
@@ -1057,14 +1097,14 @@ Consider density operator as a quantum state of the system:
 0 & 0 & 0 & 0
 \end{vmatrix},
 \]
-where $0 \leq r \leq 1$ и $0 \leq V \leq 1$.
+where $0 \leq r \leq 1$ and $0 \leq V \leq 1$.
 In this case predictions of quantum mechanics for values included to inequality become:
 \begin{eqnarray*}
 \tilde{S}_o^A(\alpha_i) = \eta_1 N \Tr[\rho(\hat{P}_A(\alpha_i) \otimes I)]\\
 \tilde{S}_o^B(\beta_i) = \eta_1 N \Tr[\rho(I \otimes \hat{P}_B(\beta_i))]\\
 \tilde{n}_{oo}(\alpha_i, \beta_i) = \eta_1\eta_2 N \Tr[\rho(\hat{P}_A(\alpha_i) \otimes \hat{P}_B(\beta_i))],
 \end{eqnarray*}
-where $\hat{P}_A, \hat{P}_B$ -- projection operators on usual beam direction for the first and second prism:
+where $\hat{P}_A, \hat{P}_B$ -- projection operators on ordinary beam direction for the first and second prisms:
 \[
 \hat{P}(\gamma) = 
 \begin{pmatrix}
@@ -1073,7 +1113,7 @@ where $\hat{P}_A, \hat{P}_B$ -- projection operators on usual beam direction for
 \end{pmatrix}.
 \]
 
-With regard to false clicks during time $T$ $S_o^A, S_o^B$ values take form:
+With regard to false clicks during time $T$ $S_o^A, S_o^B$ values take the following form:
 \[
 S_o^A(\alpha_i) = \tilde{S}_o^A(\alpha_i) + \zeta T,
 \]
@@ -1081,7 +1121,7 @@ S_o^A(\alpha_i) = \tilde{S}_o^A(\alpha_i) + \zeta T,
 S_o^B(\beta_i) = \tilde{S}_o^B(\beta_i) + \zeta T.
 \]
 
-Besides noise Zeilinger model also considers inconsistencies in time when pairs from different 
+Besides noise level Zeilinger model also considers inconsistencies in time when pairs from different 
 launches are detected as a conjugate events. Let us introduce temporary window value $\tau_c$, within 
 which conjugate events must be detected. In this case $n_{oo}(\alpha_i, \beta_i)$ can be found using 
 the following formulas:
@@ -1092,8 +1132,8 @@ n_{oo}(\alpha_i, \beta_i) = \tilde{n}_{oo}(\alpha_i, \beta_i) + n_{oo}^{acc}(\al
 n_{oo}^{acc}(\alpha_i, \beta_i) = S_o^A(\alpha_i)S_o^B(\beta_i)\frac{\tau_c}{T}\left(1 - \frac{\tilde{n}_{oo}(\alpha_i, \beta_i)}{S_o^A(\alpha_i)}\right) \left( 1 - \frac{\tilde{n}_{oo}(\alpha_i, \beta_i)}{S_o^B(\beta_i)}\right).
 \]
 
-For this model an optimization for $J$ \eqref{eq:Zeilinger_J} was done, during which angle values 
-minimising target function were found for selected values of experimental parameters 
+For this model an optimization for $J$ \eqref{eq:Zeilinger_J} was done, and angle values that
+minimise the target function were found for selected values of experimental parameters 
 ($\eta_1, \eta_2, r, V, T, \tau_c, N, \zeta$).
 
 \begin{table}
@@ -1103,7 +1143,7 @@ minimising target function were found for selected values of experimental parame
 \hline 
 Results from the article & 85.6 & 118.0 & -5.4 & 25.9 & -120191 \\ 
 \hline 
-Results of optimization & 85.0 & 115.1 & -4.0 & 27.4 & -126060 \\ 
+Results of the optimization & 85.0 & 115.1 & -4.0 & 27.4 & -126060 \\ 
 \hline 
 \end{tabular}
 \caption{Optimal parameters comparison with ones from Zeilinger article \cite{Zeilinger}}
@@ -1114,35 +1154,37 @@ Optimization results are shown in Table~\ref{tab:Zeilinger_parameters}. Accordin
 optimal angle values for prism installation differ from given in \cite{Zeilinger} and let inequality to be 
 violated stronger.
 
-\section{Inequality parameters search in the case of errors when setting angle values}
+\clearpage
+
+\subsection{Inequality parameters search in the case of errors when setting angle values}
 Generally quantum operator $A$ can be represented using spectral decomposition as 
-$A = \int_{-\infty}^{+\infty}\lambda dE_\lambda$. Then it's mathematical expectancy value for $\psi$ 
-state can be expressed as:
+$A = \int_{-\infty}^{+\infty}\lambda dE_\lambda$. Then its mathematical expectation value for a sate $\psi$ 
+ can be expressed as:
 \[
 \overline{A}_\psi = \int_{-\infty}^{+\infty}\lambda dp_\psi (\lambda),
 \]
 where $dp_\psi (\lambda) = d\langle E_\lambda\psi, \psi\rangle$ -- probability distribution for the 
-corresponding spectral expansion and quantum state. Therefore for fixed $\psi$ quantum observable 
-can be regarded as classical random variable with probabilities distribution
+corresponding spectral decomposition and quantum state. Therefore for the fixed $\psi$ quantum observable 
+can be regarded as a classical random variable with the probability distribution
 $p_\psi (O) = \int_O d\langle E_\lambda\psi, \psi\rangle, O\in \mathbb{R}$.
 
-Consider the following problem. Let observable $A$ to depend on some classical random variable 
+Consider the following problem. Let observable $A$ depend on some classical random variable 
 $\omega: A = A(\omega)$ corresponding to the case when angle values for the prisms positions 
-cannot be exactly set during experiments. In this case spectral decomposition 
-$A(\omega) = \int_{-\infty}^{+\infty}\lambda dE_\lambda(\omega)$ and density distribution function 
+cannot be set without an error during experiments. In this case the spectral decomposition 
+$A(\omega) = \int_{-\infty}^{+\infty}\lambda dE_\lambda(\omega)$ and the density distribution function 
 $dp_\psi (\lambda|\omega) = d\langle E_\lambda(\omega)\psi, \psi\rangle$ also depends on 
 this random variable. For every fixed $\omega$ also 
 $\int_{-\infty}^{+\infty}dp_\psi (\lambda|\omega) = 1$ condition holds.
 
 Let random variable $\omega$ be described using probability space $(\Omega, \mathcal{F}, P)$, 
 where $\Omega$ -- set of elementary events, $\mathcal{F}$ - $\sigma$-algebra of events and 
-$P$ is the probability measure. Mathematical expectancy value of $A(\omega)$ becomes:
+$P$ is the probability measure. Mathematical expectation value of $A(\omega)$ takes the following form:
 \[
 \overline{A}_\psi(\omega) = \int_\Omega\left[\int_{-\infty}^{+\infty}\lambda dp_\psi (\lambda|\omega)\right] dP(\omega) = \int_\Omega\langle A(\omega)\psi, \psi\rangle dP(\omega) = \mathbf{\tilde{E}}[ \langle A(\omega)\psi, \psi\rangle],
 \]
-where $\mathbf{\tilde{E}}[\cdot]$ -- classical mathematical expectancy.
+where $\mathbf{\tilde{E}}[\cdot]$ -- classical mathematical expectation.
 
-Similarly we obtained an expression for dispersion $A(\omega)$:
+In a similar way we obtained an expression for a dispersion $A(\omega)$:
 \[
 \sigma^2(A) = \mathbf{\tilde{E}}[ \langle A^2(\omega)\psi, \psi\rangle - \langle A(\omega)\psi, \psi\rangle^2].
 \]
@@ -1158,25 +1200,25 @@ J_\mathcal{B} = \frac{1}{2\delta}\int_{-\delta}^\delta \langle \mathcal{B}(r, \o
 \]
 
 Consider also target function that takes into account relative scatter of values obtained, expressed with 
-$J / \sigma$ variance coefficient. It enables us to obtain parameters for which  relative value will be minimal 
+$J / \sigma$ variance coefficient. It enables us to obtain parameters such that relative value will be minimal 
 with some scatter of experimental data.
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{theta_ang.eps}
-\caption{Optimized values for $\theta$ for various $\delta$ values case of $\theta' = \theta + \xi$}
+\caption{Optimized values of $\theta$ for various $\delta$ values for the case of $\theta' = \theta + \xi$}
 \label{fig:theta_ang}
 \end{figure}
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{r_ang.eps}
 \includegraphics[scale=0.7]{omega_ang.eps}
-\caption{Optimized values for $r$ and $\omega$ for various $\delta$ values case of $\theta' = \theta + \xi$}
+\caption{Optimized values of $r$ and $\omega$ for various $\delta$ values for the case of $\theta' = \theta + \xi$}
 \label{fig:psi_ang}
 \end{figure}
 
 \begin{figure}[t]
 \includegraphics[scale=0.7]{J_ang.eps}
-\caption{Optimized values for $J_{\mathcal{B}}/N$ for various $\delta$ values case of $\theta' = \theta + \xi$}
+\caption{Optimized values of $J_{\mathcal{B}}/N$ for various $\delta$ values for the case of $\theta' = \theta + \xi$}
 \label{fig:J_ang}
 \end{figure}
 
@@ -1293,7 +1335,7 @@ $K = J(\delta) / \sigma(\delta)$ minimization}
 \endgroup
 
 Comparison of results for various $\delta$ values is shown at Fig.\ref{fig:theta_ang}-\ref{fig:J_ang}, 
-and also in Table~\ref{tab:one_delta}. Rows in Table~\ref{tab:one_delta} are grouped in threes for 
+and also in Table~\ref{tab:one_delta}. Rows in Table~\ref{tab:one_delta} are grouped in triads for 
 selected values of $\eta$ and $\delta$: first row --  $J_\mathcal{B}$ minimization with no regard to 
 $\delta$, second row -- $J(\delta)$ minization, third row -- $K = J(\delta) / \sigma(\delta)$ minimization. 
 
@@ -1303,7 +1345,7 @@ graphs almost coincide within one degree for various $\delta$ values.
 
 Let us complicate scattering model by taking into consideration an error of every node separately. Consider real value of 
 each angle in the experiment to be uniformly distributed at the section around the desired value. In this case 
-mathematical expectancy and dispersion values become: 
+mathematical expectation and dispersion values become: 
 \[
 J_\mathcal{B} = \frac{1}{16\delta^4}\int\int\int\int_{-\delta}^\delta \langle \mathcal{B}(x_1, x_2, x_3, x_4)\psi, \psi \rangle dx_1dx_2dx_3dx_4,
 \] 
@@ -1363,13 +1405,24 @@ $\delta = 0.25^\circ$}
 \label{tab:different_deltas}
 \end{table}
 
-Results of optimization performed are shown at Fig.\ref{fig:theta_4ang} - \ref{fig:J_4ang}  and in the 
-Table~\ref{tab:different_deltas}, it's rows are also grouped in threes. It follows from the graphs that 
+Results of the performed optimization are shown at Fig.\ref{fig:theta_4ang} - \ref{fig:J_4ang}  and in  
+Table~\ref{tab:different_deltas}, it's rows are also grouped in triads. It follows from the graphs that 
 the addition of scattering almost does not change optimal parameters. Therefore we can suggest 
 that angles' values control can be reduced.
 
-\newpage
+\clearpage
 
+\section{Conclusion}
+In this thesis the model of the Eberhard inequality was considered. The goal was to find angles of polarization prisms and a quantum state that allow to violate the inequality as much as possible. Required parameters were found using optimization procedure and these results are consistent with values from the article. Note that describes predictions of quantum mechanics only for the case of equal detector efficiencies. However, in real experiments, detector efficiency may differ materially. The similar procedure was performed for the case of different efficiencies. 
+
+In addition, the magnitude of the possible spread of experimental data which can be expressed using coefficient of variation $\sigma_J / J $, was studied. It was shown that in Eberhard's model the minimum value of mathematical expectation is reached for the $\psi$ that is equal to the eigenvector of the matrix $\mathcal{B}$, and the dispersion in this case is equal zero. 
+
+However, this objective function allows to find optimal parameters in the case of possible inaccuracy of polarization prism angles in experiments. 
+The obtained parameters differ from the results of Eberhard. Recently (May 2014), prof. Khrennikov discussed these results with members of the Quantum Optics and Information laboratory, University of Vienna. The simulation results were interesting for experimenters as they allow to weaken control over precision orientation of the polarization prisms' axis.
+
+In addition, the model from the article of Zeilinger \cite{Zeilinger} based on the Eberhard inequality was considered. For the parameters specified there and with given values of the efficiency, orientation angles were also optimized. After substituting these values in the Zeilinger's model the observed violation was stronger then in the article. These results were also discussed with experimenters from Vienna. It turned out that they are actively working on this issue: explain discrepancy between the theoretical and experimental values, as well as the discrepancy between the values predicted by the different models. 
+
+The obtained results allow us to expect that in the experiments with the  found values violation of the inequality will be obtained even with different detector efficiencies and inaccuracy in the installation angles.
 \bibliography{literature.bib}
 \bibliographystyle{ieeetr}
 \end{document}
