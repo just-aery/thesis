@@ -88,22 +88,22 @@ One of the foundations of classical mechanics is a principle of local realism. L
 
 However, modern quantum mechanics is questioning the adequacy of the model of local realism to the description of the microcosm. According to the Heisenberg uncertainty principle there is a fundamental limit of the accuracy for the joint measurement of the coordinate of a quantum particle and its momentum (as well as any other joint measurement of two observables, described by non-commuting operators). It means that for a quantum system, the values of position and momentum cannot be be assigned to it before measurement. Thus, as a consequence of the Heisenberg principle, in quantum world there is no place for realism.
 
-However, his position was criticised by Einstein, Podolsky and Rosen(EPR paradox)\cite{EPR}. They showed using quantum mechanics formalism that it is possible to come to the contradiction with the above principle. They presented a hypothetical experiment such that one can accurately determine the position and momentum of a particle, taking measurements for particles in the entangled state, located far enough from each other. The discussion of this paradox raised the question of possible incompleteness of the quantum theory. Perhaps, quantum mechanics does not completely describe the state of the system, and there are still some unknown hidden parameters. Another explanation of the paradox is the rejection of the locality principle.
+However, this position was criticised by Einstein, Podolsky and Rosen(EPR paradox)\cite{EPR}. They showed using quantum mechanical formalism that it is possible to come to the contradiction with the above principle. They presented a hypothetical experiment such that one can accurately determine the position and momentum of a particle, taking measurements for particles in the entangled state, located far enough from each other. The discussion of this paradox raised the question of possible incompleteness of the quantum theory. Perhaps, quantum mechanics does not completely describe the state of the system, and there are still some unknown hidden parameters. Another explanation of the paradox is the rejection of the locality principle.
 
-Further evidence of contradiction between classical and quantum models of real world was given by Bell and other authors in the form of statistical inequalities which can be tested experimentally. At the very beginning the question about the existence of locality and realism seemed to be a philosophical discussion about the nature of the reality, but after it was formulated using mathematical formalism and then tested experimentally. Despite the fact that violations of Bell inequalities predicted by quantum mechanics, were observed in the most of experiments \cite{ASP1}, the process of verification is still not completed \cite{Khrennikov_preprint}.
+Further evidence of contradiction between classical and quantum models of real world was given by Bell and other authors in the form of statistical inequalities which can be tested experimentally. At the very beginning the question about the coexistence of locality and realism with quantum theory seemed to be a philosophical discussion about the nature of the reality, but with the aid of the Bell inequality it was formulated using mathematical formalism and then tested experimentally. Despite the fact that violations of Bell inequalities predicted by quantum mechanics were observed in the most of experiments \cite{ASP1}, the process of verification is still not completed \cite{Khrennikov_preprint}.
 
-The main reason of further tests is that as any experiment, Bell's test cannot be performed with 100\% efficiency of detectors and without any noise in the detector response. An example of inequality that takes into account these types of errors is an Eberhard inequality from the the article \cite{Eberhard}. On its basis a number of experiments such as \cite{Zeilinger} were conducted, they also revealed the violation of the predictions of the classical theory.
+The main reason for performing further tests is that as any experiment, Bell's test cannot be performed with 100\% efficiency of detectors and without any noise in the detector response. An example of inequality that takes into account these types of errors is the Eberhard inequality derived in the article \cite{Eberhard}. On its basis a number of experiments such as \cite{Zeilinger} were conducted, they also revealed the violation of the predictions of the classical theory.
 
 The main difficulty in such experiments is that violations of inequality require a fairly high efficiency of detectors, special initial state of a quantum system and installation angles of polarization beam splitters. These parameters should be such that the inequality is violated as much as possible. To achieve this result Eberhard used a simple brute-force optimization.
 
-This work is devoted to mathematical modeling of parameters of the Eberhard inequality using optimization techniques. The main purpose is to consider more general case when the detectors have different efficiencies. In addition, in the article \cite{Eberhard} the objective function has the sense of mathematical expectation. However, it is also useful to investigate the possible level of variability of the results, expressed in terms of standard deviation. In this paper we consider the optimization of parameters for the Eberhard inequality using coefficient of variation taking into account possible errors in the setup of angles during the experiment.
+This work is devoted to mathematical modeling of parameters of the Eberhard inequality using optimization techniques. One of the main purposes of this study is to consider more general case when the detectors have different efficiencies. In addition, in the article \cite{Eberhard} the objective function has the meaning of the mathematical expectation. However, it is also useful to investigate the possible level of variability of the results, expressed in terms of standard deviation. In this paper we consider the optimization of parameters for the Eberhard inequality using coefficient of variation taking into account possible errors in the setup of angles during the experiment. We also model random fluctuations of experimental settings, angles of polarization beam splitters. These fluctuations also contribute to uncertainty in magnitude of the objective function. This problem of sensitivity of the degree of violation of the Eberhard inequality to the precision in the control of angles of polarization beam splitters is very important for experimenters.  
 
 \section{Required elements of functional analysis}
 \subsection{Hilbert space and linear operator on it}
 Here we present some basic definitions of function analysis that can be used in quantum mechanics formalism. Our presentation will be brief and not detailed, see, e.g. \cite{advanced_la}, for details.
 
 \begin{definition}
-For the complex vector space $V$ inner (scalar) product $\langle\cdot,\cdot\rangle$ is a map $V\times V \to \mathbb{C}$ that satisfies conditions:
+For the complex vector space $V$ inner (scalar) product $\langle\cdot,\cdot\rangle$ is a map $V\times V \to \mathbb{C}$ that satisfies the following conditions:
 \begin{enumerate}
 \item Conjugate symmetry - $\langle x, y\rangle = \overline{\langle y, x\rangle}$,
 \item It is positively defined - $\langle x, y\rangle \geq 0$ and $\langle x, y\rangle = 0 \Leftrightarrow x = y$,
@@ -112,12 +112,12 @@ For the complex vector space $V$ inner (scalar) product $\langle\cdot,\cdot\rang
 \end{definition}
 
 \begin{definition}
-The hilbert space $H$ is a complex vector space with an inner product such that the space $H$ is complete with respect to the norm $\|x\| = \sqrt{\langle x, x\rangle}$
+The Hilbert space $H$ is a complex vector space with an inner product such that the space $H$ is complete with respect to the norm $\|x\| = \sqrt{\langle x, x\rangle}$
 \end{definition}
 
-The space $H = \mathbb{C}^n$ with an inner product defined by $\langle\psi, \varphi \rangle = \sum_{i = 1}^n \overline{\psi_i}\varphi_i$. Another well-known example is the functional space $H = L_2(\mathbb{R}^n, dx)$ of square integrable function with respect to the Lebegue measure. In this space inner product is defined by $\langle\psi, \varphi \rangle = \int_{\mathbb{R}^n}\overline{\psi(x)}\varphi(x) dx$.
+The space $H = \mathbb{C}^n$ with the inner product defined by $\langle\psi, \varphi \rangle = \sum_{i = 1}^n \overline{\psi_i}\varphi_i$ is Hilbert space. Another well-known example is the functional space $H = L_2(\mathbb{R}^n, dx)$ of square integrable function with respect to the Lebegue measure. In this space the inner product is defined by the equality $\langle\psi, \varphi \rangle = \int_{\mathbb{R}^n}\overline{\psi(x)}\varphi(x) dx$.
 
-Another important notion which is widely used in quantum mechanics theory is the notion of a linear operator.
+Another important notion which is widely used in quantum mechanics is the notion of a linear operator.
 \begin{definition}
 Linear operator $A$ on a Hilbert space $H$ is a map $H \to H$ that has the following properties:
 \begin{enumerate}
@@ -126,10 +126,10 @@ Linear operator $A$ on a Hilbert space $H$ is a map $H \to H$ that has the follo
 \end{enumerate}
 \end{definition}
 
-Let us assume that Hilbert space has finite dimension to simplify further considerations.
+To simplify further considerations let us assume that Hilbert space has finite dimension.
 
 \begin{definition}
-For a linear operator $A$, its adjoint operator $A^*$ is denoted with the aid of the equality $\langle A\psi,\varphi\rangle = \langle\psi, A^*\varphi\rangle$. Operator $A$ is called self-adjoint if $A^* = A$.
+For a linear operator $A$, its adjoint operator $A^*$ is defined with the aid of the equality $\langle A\psi,\varphi\rangle = \langle\psi, A^*\varphi\rangle$. Operator $A$ is called self-adjoint if $A^* = A$.
 \end{definition}
 
 \begin{definition}
@@ -155,12 +155,12 @@ For every self-adjoint operator $A$ in complex Hilbert space $H$:
 \end{theorem}
 
 \begin{definition}
-A self-adjoint bounded operator is called positive if it has only non-negative eigenvalues in its spectrum.
+A self-adjoint operator is called positive if it has only non-negative eigenvalues in its spectrum.
 \end{definition}
 
 Another useful operator on Hilbert space is a projector operator.
 \begin{definition}
-Let $H_0$ be a linear subspace of $H$. Operator $\pi: H \to H - H_0$ is called a projector if $\pi^* = \pi$ and $\pi^2 = \pi$. It projects $H$ orthogonally onto $H_0 = \pi(H)$.
+Let $H_0$ be a linear subspace of $H$. Operator $\pi: H \to H_0$ is called a projector if $\pi^* = \pi$ and $\pi^2 = \pi$. It projects $H$ orthogonally onto $H_0 = \pi(H)$.
 \end{definition}
 Let $\{e_1, \ldots, e_n\}$ be a basis in $H$ and $\{e_1, \ldots e_m\}$ a basis in $H_0$. If $e_j \in H_0$ then $\pi e_j = e_j$ and if $e_j\in H_0^\perp$ then $\pi e_j = 0$. For an arbitrary element $\psi\in H$, the projector operator acts as: 
 \[
@@ -336,33 +336,40 @@ The mathematical formalism of quantum mechanics can be formulated as a list of p
 \begin{enumerate}[label=\bfseries Postulate \arabic*:, align=left]
   \item A quantum state $\psi$ is a vector of a complex Hilbert space such that $\langle\psi, \psi\rangle = 1$. This vector completely describes the state of a quantum system. Two vectors which differ by a factor of $\gamma = e^{i\varphi}$ describe the same quantum state.
   \item A physical observable $a$ is represented with the aid of a self-adjoint operator $A$ in $H$. Different observables are represented by different operators.
-  \item If an observable is represented by the operator $A$ then results of observation are given by the spectrum of $A$. Any self-adjoint operator can be written in the form 
+  \item If an observable is represented by the operator $A$ then results of observation are given by the spectrum of $A$.
+\end{enumerate}
+Any self-adjoint operator can be written in the form 
   \[
   A = \sum_m a_m\pi_m^A,
   \]
     where $\pi_m^A$ is an orthogonal projector onto an eigenspace corresponding to the eigenvalue $a_m$.
-  \item Born's rule - if $A$ is a self-adjoint operator then the probability to obtain an eigenvalue $a_m$ after measurement can be calculated by using the formula
+\begin{enumerate}[label=\bfseries Postulate \arabic*:, align=left]
+  \setcounter{enumi}{3}
+  \item Born's rule - If an observable is represented by the operator $A$ then the probability to obtain an eigenvalue $a_m$ after measurement can be calculated by using the formula
   \[
   P(a = a_m) = \| \pi_m^A\psi\|^2.
   \]
-  \item 
-  Consider a quantum state $\psi$ and a self-adjoint operator $A$. Eigenvectors of $A$ with its eigenvalues $\{a_m\}$ form a basis in the Hilbert space $H$: $\{ \varphi: A\varphi = a_m\varphi\}$ so this state can be represented as $H = H_1\oplus H_2\oplus\ldots H_k$. Projector $\pi_m^A: H\to H_m$ equals to 
+\end{enumerate}
+
+Eigenvectors of $A$ with its eigenvalues $\{a_m\}$ form a basis in the Hilbert space $H$: $H_m = \{ \varphi: A\varphi = a_m\varphi\}$ so this space can be represented as $H = H_1\oplus H_2\oplus\ldots H_k$. Projector $\pi_m^A: H\to H_m$ equals to 
   \[
   \pi_m^A = \sum_{l = 1}^{n_m}\langle\psi,\varphi_{ml}\rangle\varphi_{ml},
   \]
-  where $\varphi_{ml}$ - $l$-th eigenvector from $H_m$.
-  Then quantum state of a system collapses to state $\psi_m$:
+where $\varphi_{ml}$ - $l$-th eigenvector from $H_m$.
+\begin{enumerate}[label=\bfseries Postulate \arabic*:, align=left]
+  \setcounter{enumi}{4}
+  \item Consider a quantum state $\psi$ and a self-adjoint operator $A$. 
+  Then after a measurement with a result $A \to a_m$ quantum state of a system collapses to state $\psi_m$:
   \[
-  \psi_m = \frac{\pi_m^A\psi}{ \| \pi_m^A\psi\|}
+  \psi_m = \frac{\pi_m^A\psi}{ \| \pi_m^A\psi\|}.
   \] 
-  after a measurement with a result $A \to a_m$.
-  \item The time evolution of the quantum state $\psi$ satisfies the Schr\"{o}dinger equation
+  \item The time evolution of the quantum state $\psi$ is described by the Schr\"{o}dinger equation
   \[
   i\hbar \dfrac{d}{dt}\psi(t) = \mathcal{\mathcal{H}}\psi(t)
   \] 
   with the initial condition $\psi(0) = \psi_0$,
-  where $\mathcal{H}$ is a self-adjoint positive operator representing the energy of the system.
-  \item If there are two quantum systems int Hilbert spaces $H_1$ and $H_2$, then the state space of the compound system is given by $H_1 \otimes H_2$.  
+  where $\mathcal{H}$ is a self-adjoint positive operator representing the energy of the system(Hamiltonian).
+  \item If there are two quantum systems with Hilbert state spaces $H_1$ and $H_2$, then the state space of the compound system is given by $H_1 \otimes H_2$.  
 \end{enumerate}
 \begin{definition}
 If a state $\psi\in H_1\otimes H_2$ is not factorizable in the form $\psi = \psi_1\otimes\psi_2$, where $\psi_1\in H_1, \psi_2\in H_2$ then it is called entangled.
@@ -381,13 +388,13 @@ Let us assume that $\psi$ is represented by $\psi = \psi_1\otimes\psi_2$, where 
 	\psi_1 = a_1 e_1 + a_2 e_2,\ a_i\in \mathbb{C},\ |a_1|^2 + |a_2|^2 = 1 \\
 	\psi_2 = b_1 e_1 + b_2 e_2, b_i\in \mathbb{C}, |b_1|^2 + |b_2|^2 = 1.
 \end{gather*}
-For this $\psi$ one can construct that:
+By using the rules of tensor multiplication of vectors we have:
 \begin{eqnarray*}
 	\psi_1 \otimes \psi_2 &=& (a_1 e_1 + a_2 e_2) \otimes (b_1 e_1 + b_2 e_2) = \\ &=&  
 	a_1 b_1 \cdot e_1 \otimes e_1 + a_1 b_2 \cdot e_1 \otimes e_2 + 
 	a_2 b_1 \cdot e_2 \otimes e_1 + a_2 b_2 \cdot e_2 \otimes e_2.
 \end{eqnarray*}
-One should solve the following system of equations to find coefficients $a_1$, $a_2$, $b_1$, $b_2$:
+To find coefficients $a_1$, $a_2$, $b_1$, $b_2$ one should solve the following system of equations:
 $$
 \begin{cases}
 a_1 b_2 = \frac{1}{\sqrt{6}} \\
@@ -396,13 +403,13 @@ a_1 b_1 = \frac{1}{\sqrt{6}} \\
 a_2 b_2 = 0
 \end{cases},
 $$
-The system is inconsistent therefore the assumption is false and $\psi$ is not factorizable.
+The system is inconsistent. Therefore the assumption is false and $\psi$ is not factorizable.
 \end{proof}
 
 
 \subsection{Density operator}
 
-To describe a behaviour of an ensemble of quantum states, where each state is obtained with some probability we will use the notion of a density operator from \cite{Khrennikov_information}.
+To describe behaviour of an ensemble of quantum states, where each state is obtained with some probability, we will use the notion of a density operator, see, e.g., \cite{Khrennikov_information}.
 
 For a pure state $\psi$ we can define an orthogonal projection operator: $P_\psi: P_\psi\varphi = \langle \psi, \varphi \rangle \psi$. It has following properties:
 \begin{enumerate}
@@ -429,7 +436,7 @@ In the common case for any state or ensemble of states we can construct an opera
 \]
 where $p_i > 0,\ \sum_ip_i = 1$ represents probability to obtain $\psi_i$ after a measurement.
 
-One can easily show that operator $\rho$ satisfies properties 1-3 using corresponding properties 1-3 for each operator $P_{\psi_i}$. In the common case property 4 of projection operator is violated. For example, let us take density operator $\rho = \cfrac 12P_{\psi_1} + \cfrac 12P_{\psi_2}$, where $\psi_1 = (1, 0)^T$ and $\psi_2 = (0, 1)^T$. Let us find the square of this operator:
+One can easily show that the operator $\rho$ satisfies properties 1-3 (using corresponding properties 1-3 for each operator $P_{\psi_i}$). In the general case property 4 of projection operator is violated. For example, let us take density operator $\rho = \cfrac 12P_{\psi_1} + \cfrac 12P_{\psi_2}$, where $\psi_1 = (1, 0)^T$ and $\psi_2 = (0, 1)^T$. Let us find the square of this operator:
 \[
 \rho^2\varphi = \frac 12\langle\psi_1, \rho\varphi\rangle\psi_1 + \frac 12\langle\psi_2, \rho\varphi\rangle\psi_2 =
 \]
@@ -450,7 +457,7 @@ The final result is:
 Density operator $\rho$ also can be written in the form $\rho\psi = \sum_i p_i\langle e_i, \psi\rangle e_i$. 
 
 \subsection{Elements of quantum probability theory}
-In quantum mechanics the result of a measurement depends on a state of a system that it had before it collapsed to some pure state according to the measurement result. It means that values of quantum probabilities, expectations, standard deviations etc. depend not only on an observable but also on an initial state of a system described by a density operator.
+In quantum mechanics the result of a measurement depends on the state of a system that it had before it collapsed to some pure state according to the measurement result. It means that values of quantum probabilities, expectations, standard deviations etc. depend not only on an observable, but also on the initial state of a system described by a density operator.
 
 Let $A$ be an observable with eigenvalues $\{a_1,\ldots a_n\}$ and eigenvectors $\{f_1,\ldots f_n\}$, where $\psi$ describes the state of the system. Then the probability to obtain $a_i$ after a measurement is given by
 \[
@@ -461,7 +468,7 @@ where $A_i = |f_i\rangle \langle f_i|$.
 $\Tr \rho_\psi A_i = \sum_j \langle\rho_\psi A_if_j, f_j\rangle = \langle \langle\rho_\psi, f_i\rangle, f_i\rangle = \langle \langle \psi, f_i\rangle\psi, f_i\rangle = $\\
 $= \overline{\langle\psi, f_i\rangle} \langle\psi, f_i\rangle = |\langle\psi, f_i\rangle|^2.$
 \end{proof}
-For the mixture state probability by definition is given by the same formula
+For the mixed state, probability by definition is given by the same formula
 \[
 P(A = a_i) = \Tr \rho |f_i\rangle \langle f_i|.
 \]
@@ -476,9 +483,9 @@ Quantum dispersion is defined the same way as it is defined in the classical pro
 \] 
 
 \subsection{Heisenberg's uncertainty principle}
-Uncertainty principle of quantum mechanics states that there is a limit of the precision with which some of physical parameters of one system can be known simultaneously. This limit does not depend on the precision of used measurement devices or on the level of technoloy, it is fundamental and presents in any case.
+The uncertainty principle of quantum mechanics states that there is a limit of the precision with which some of physical parameters of one system can be known simultaneously. This limit does not depend on the precision of used measurement devices or on the level of technology, it is fundamental.
 
-For the first time uncertainty principle was formulated by Werner Heisenberg in 1927. He discovered that the more precisely the position of a particle can be measured, the less precisely its momentum can be determined.
+For the first time the uncertainty principle was formulated by Werner Heisenberg in 1927. He discovered that the more precisely the position of a particle can be measured, the less precisely its momentum can be determined.
 
 In 1928 it was formulated as an inequality:
 \[
@@ -499,18 +506,18 @@ For the derivation of the inequality we will use Cauchy-Schwartz inequality for 
 |\langle f, g\rangle |^2 \leq \langle f, f\rangle \langle g, g\rangle. \label{eq:Caushy-Schwartz}
 \end{equation}
 
-Quantum dispersion $\sigma^2_A$ of self-adjoint operator $A$ can be found using formula:
+Quantum dispersion $\sigma^2_A$ of self-adjoint operator $A$ can be found using the following formula:
 \[
 \sigma_A^2 = \langle (A - \langle A\rangle)^2\psi, \psi\rangle = \langle  (A - \langle A\rangle)\psi,  (A - \langle A\rangle)\psi\rangle.
 \]
-We will denote $f = (A - \langle A\rangle)\psi$ and $g = (B - \langle B\rangle)\psi$, then for the left side of \eqref{eq:Caushy-Schwartz} we obtain:
+We denote $f = (A - \langle A\rangle)\psi$ and $g = (B - \langle B\rangle)\psi$, then for the left-hand side of \eqref{eq:Caushy-Schwartz} we obtain:
 \[
 |\langle f, g\rangle |^2 = |\langle (A - \langle A\rangle)\psi, (B - \langle B\rangle)\psi\rangle |^2 = |\langle (B - \langle B\rangle)(A - \langle A\rangle)\psi, \psi |^2 = 
 \]
 \[
 = | \langle BA\psi, \psi\rangle - \langle B\rangle\langle A\rangle - \langle A\rangle \langle B\rangle + \langle A\rangle\langle B\rangle |^2 = | \langle BA\rangle - \langle A\rangle\langle B\rangle |^2.
 \]
-As any other complex number the left side of the inequality can be written as
+As any other complex number the left-hand side of the inequality can be written as
 \[
 |\langle f, g\rangle |^2 = \left| \frac{1}{2}(\langle f, g\rangle + \overline{\langle f, g\rangle})\right|^2 + \left| \frac{1}{2i}(\langle f, g\rangle - \overline{\langle f, g\rangle})\right|^2, 
 \]
@@ -518,16 +525,17 @@ where $\overline{\langle f, g\rangle})$ is given by
 \[
 \overline{\langle f, g\rangle}) = \overline{\langle BA\psi, \psi\rangle} - \langle A\rangle\langle B\rangle = \langle\psi, BA\psi\rangle - \langle A\rangle\langle B\rangle = \langle AB\psi, \psi\rangle - \langle A\rangle\langle B\rangle.
 \]
-Putting it all together to the inequality \eqref{eq:Caushy-Schwartz} we have an expression from the Schr\"{o}dinger inequality \eqref{eq:Schrodinger_ineq}:
-\[
-\left| \frac{1}{2}(\langle BA\rangle - \langle A\rangle\langle B\rangle + \langle AB\rangle - \langle A\rangle\langle B\rangle)\right|^2 + \left| \frac{1}{2i}(\langle BA\rangle - \langle A\rangle\langle B\rangle - \langle AB\rangle + \langle A\rangle\langle B\rangle)\right|^2 \leq \sigma_A^2\sigma_B^2
-\]
+Putting it all together to the inequality \eqref{eq:Caushy-Schwartz} we obtain the Schr\"{o}dinger inequality \eqref{eq:Schrodinger_ineq}:
+\begin{multline*}
+\left| \frac{1}{2}(\langle BA\rangle - \langle A\rangle\langle B\rangle + \langle AB\rangle - \langle A\rangle\langle B\rangle)\right|^2 + \\
+\left| \frac{1}{2i}(\langle BA\rangle - \langle A\rangle\langle B\rangle - \langle AB\rangle + \langle A\rangle\langle B\rangle)\right|^2 \leq \sigma_A^2\sigma_B^2
+\end{multline*}
 \[
 \Leftrightarrow \left| \frac{1}{2}\langle\{A, B\}\rangle - \langle A\rangle\langle B\rangle \right|^2 + \left| \frac{1}{2i}\langle [A, B]\rangle\right|^2 \leq \sigma_A^2\sigma_B^2
 \]
 \end{proof}
 
-In quantum mechanics the position operator is given by the formula:
+In quantum mechanics the position operator is defined by the formula:
 \[
 (\hat{x}f) = x\cdot f(x)
 \]
@@ -535,21 +543,20 @@ and momentum operator is defined by
 \[
 (\hat{p}f) = \frac{\hbar}{i}\frac{df}{dx}.
 \]
-It the common case the Robertson inequality can be derived from \eqref{eq:Schrodinger_ineq}:
+It the general case the Robertson inequality can be derived from \eqref{eq:Schrodinger_ineq}:
 \[
-\sigma_A^2\sigma_B^2 \geq \frac{1}{4}|[A, B]|^2.
+\sigma_A^2\sigma_B^2 \geq \frac{1}{4}|\langle [A, B]\rangle|^2.
 \]
 
-Commutator operator of position and momentum is 
+The commutator operator of position and momentum is 
 \[
 [\hat{x}, \hat{p}]f(x) = (\hat{x}\hat{p} - \hat{p}\hat{x})f(x) = x\frac{\hbar}{i}\frac{df(x)}{dx} - \frac{\hbar}{i}\frac{d xf(x)}{dx} = i\hbar If(x),
 \]
-where $I$ is an identity operator. Then in this case Robertson inequality becomes Heisenberg's uncertainty principle:
+where $I$ is the identity operator. Then in this case the Robertson inequality becomes the Heisenberg inequality:
 \[
 \sigma_A^2\sigma_B^2 \geq \frac{1}{4}\hbar^2.
 \]
 
-From the derivation of Heisenberg's principle it is clear that one can construct nontrivial Robertson inequality for every operators $A$ and $B$ such that the commutator $[A, B]$ is nonzero. It is also clear that the result formula does not depend on technology or any conditions during measurement, it is a fundamental property of some pairs of quantum operators such as position and momentum.
 
 \section{Einstein-Podolsky-Rosen paradox}
 Einstein-Podolsky-Rosen paradox(EPR-paradox, \cite{EPR}) was published in 1935 as the criticism of some statements of the Copenhagen interpretation of quantum mechanics. The main principle of this interpretation holds that any quantum system is described as a wave-function and after measurement it collapses to one of its eigenstates with some probability. Moreover, Heisenberg's uncertainty principle stands that position of a particle and its momentum are incompatible and they cannot be measured simultaneously with good precision. Einstein and his colleagues did not agree with probabilistic measurement outcomes. His paper was an attempt to show some contradictions in quantum mechanics.
