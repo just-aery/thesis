@@ -48,15 +48,15 @@ One of the foundations of classical mechanics is a principle of local realism. L
 
 However, modern quantum mechanics is questioning the adequacy of the model of local realism to the description of the microcosm. According to the Heisenberg uncertainty principle there is a fundamental limit of the accuracy for the joint measurement of the coordinate of a quantum particle and its momentum (as well as any other joint measurement of two observables, described by non-commuting operators). It means that for a quantum system, the values of position and momentum cannot be be assigned to it before measurement. Thus, as a consequence of the Heisenberg principle, in quantum world there is no place for realism.
 
-However, his position was criticised by Einstein, Podolsky and Rosen(EPR paradox)\cite{EPR}. They showed using quantum mechanics formalism that it is possible to come to the contradiction with the above principle. They presented a hypothetical experiment in which one can accurately determine the position and momentum of a particle, taking measurements for particles in the entangled state, located far enough from each other. The discussion of this paradox raised the question of possible incompleteness of the quantum theory. Perhaps, quantum mechanics does not completely describe the state of the system, and there are still some unknown hidden parameters. Another explanation of the paradox is the rejection of the locality principle.
+However, this position was criticised by Einstein, Podolsky and Rosen(EPR paradox)\cite{EPR}. They showed using quantum mechanical formalism that it is possible to come to the contradiction with the above principle. They presented a hypothetical experiment in which one can accurately determine the position and momentum of a particle, taking measurements for particles in the entangled state, located far enough from each other. The discussion of this paradox raised the question of possible incompleteness of the quantum theory. Perhaps, quantum mechanics does not completely describe the state of the system, and there are still some unknown hidden parameters. Another explanation of the paradox is the rejection of the locality principle.
 
-Further evidence of contradiction between classical and quantum models of real world was given by Bell and other authors in the form of statistical inequalities which can be tested experimentally. At the very beginning the question about the existence of locality and realism seemed to be a philosophical discussion about the nature of the reality, but after it was formulated using mathematical formalism and then tested experimentally. Despite the fact that violations of Bell inequalities predicted by quantum mechanics, were observed in the most of experiments \cite{ASP1}, the process of verification is still not completed \cite{Khrennikov_preprint}.
+Further evidence of contradiction between classical and quantum models of real world was given by Bell and other authors in the form of statistical inequalities which can be tested experimentally. At the very beginning the question about the coexistence of locality and realism with quantum theory seemed to be a philosophical discussion about the nature of the reality, but with the aid of the Bell inequality it was formulated using mathematical formalism and then tested experimentally. Despite the fact that violations of Bell inequalities predicted by quantum mechanics were observed in the most of experiments \cite{ASP1}, the process of verification is still not completed \cite{Khrennikov_preprint}.
 
-The main reason of further tests is that as any experiment, Bell's test cannot be performed with 100\% efficiency of detectors and without any noise in the detector response. An example of inequality that takes into account these types of errors, is an Eberhard's inequality that was presented in the article \cite{Eberhard}. On its basis a number of experiments such as \cite{Zeilinger} was conducted, which also revealed the violation of the predictions of the classical theory.
+The main reason for performing further tests is that as any experiment, Bell's test cannot be performed with 100\% efficiency of detectors and without any noise in the detector response. An example of inequality that takes into account these types of errors, is the Eberhard's inequality that was presented in the article \cite{Eberhard}. On its basis a number of experiments such as \cite{Zeilinger} was conducted, which also revealed the violation of the predictions of the classical theory.
 
 The main difficulty in such experiments is that violations of inequality require a fairly high efficiency of detectors, special initial state of a quantum system and installation angles of polarization beam splitters. These parameters should be such that the inequality is violated as much as possible. To achieve this result Eberhard used a simple brute-force optimization.
 
-This work is devoted to mathematical modeling of parameters of the Eberhard's inequality using optimization techniques. The main purpose is to consider more general case when the detectors have different efficiencies. In addition, in the article \cite{Eberhard} the objective function has the sense of mathematical expectation. However, it is also useful to investigate the possible level of variability of the results, expressed in terms of standard deviation. In this paper we consider the optimization of parameters for the Eberhard's inequality using coefficient of variation taking into account possible errors in the setup of angles during the experiment.
+This work is devoted to mathematical modeling of parameters of the Eberhard's inequality using optimization techniques. One of the main purposes of this study is to consider more general case when the detectors have different efficiencies. In addition, in the article \cite{Eberhard} the objective function has the meaning of the mathematical expectation. However, it is also useful to investigate the possible level of variability of the results, expressed in terms of standard deviation. In this paper we consider the optimization of parameters for the Eberhard's inequality using coefficient of variation taking into account possible errors in the setup of angles during the experiment. We also model random fluctuations of experimental settings, angles of polarization beam splitters. These fluctuations also contribute to uncertainty in magnitude of the objective function. This problem of sensitivity of the degree of violation of the Eberhard inequality to the precision in the control of angles of polarization beam splitters is very important for experimenters.
 
 
 \section{Required elements of functional analysis}
@@ -64,7 +64,7 @@ This work is devoted to mathematical modeling of parameters of the Eberhard's in
 Here we present some basic definitions of function analysis which can be used in quantum mechanics formalism. Our presentation will be brief and not detailed, see, e.g. \cite{advanced_la}, for details.
 
 \begin{definition}
-For the complex vector space $V$ inner (scalar) product $\langle\cdot,\cdot\rangle$ is a map $V\times V \to \mathbb{C}$ that satisfies conditions:
+For the complex vector space $V$ inner (scalar) product $\langle\cdot,\cdot\rangle$ is a map $V\times V \to \mathbb{C}$ that satisfies the following conditions:
 \begin{enumerate}
 \item Conjugate symmetry - $\langle x, y\rangle = \overline{\langle y, x\rangle}$,
 \item It is positively defined - $\langle x, y\rangle \geq 0$ and $\langle x, y\rangle = 0 \Leftrightarrow x = y$,
@@ -76,9 +76,9 @@ For the complex vector space $V$ inner (scalar) product $\langle\cdot,\cdot\rang
 Hilbert space $H$ is a complex vector space with an inner product which is complete with respect to the norm $\|x\| = \sqrt{\langle x, x\rangle}$
 \end{definition}
 
-The space $H = \mathbb{C}^n$ with an inner product defined by $\langle\psi, \varphi \rangle = \sum_{i = 1}^n \overline{\psi_i}\varphi_i$. Another well-known example is the functional space $H = L_2(\mathbb{R}^n, dx)$ of square integrable function with respect to the Lebegue measure. In this space inner product is defined by $\langle\psi, \varphi \rangle = \int_{\mathbb{R}^n}\overline{\psi(x)}\varphi(x) dx$.
+The space $H = \mathbb{C}^n$ with the inner product defined by $\langle\psi, \varphi \rangle = \sum_{i = 1}^n \overline{\psi_i}\varphi_i$ is Hibert space. Another well-known example is the functional space $H = L_2(\mathbb{R}^n, dx)$ of square integrable function with respect to the Lebegue measure. In this space the inner product is defined by the equality $\langle\psi, \varphi \rangle = \int_{\mathbb{R}^n}\overline{\psi(x)}\varphi(x) dx$.
 
-Another important notion which is widely used in quantum mechanics theory is the notion of a linear operator.
+Another important notion which is widely used in quantum mechanics is the notion of a linear operator.
 \begin{definition}
 Linear operator $A$ on a Hilbert space $H$ is a map $H \to H$ that has the following properties:
 \begin{enumerate}
@@ -87,10 +87,10 @@ Linear operator $A$ on a Hilbert space $H$ is a map $H \to H$ that has the follo
 \end{enumerate}
 \end{definition}
 
-Let us assume that Hilbert space has finite dimension to simplify further considerations.
+To simplify further considerations let us assume that Hilbert space has finite dimension.
 
 \begin{definition}
-For a linear operator $A$, its adjoint operator $A^*$ is denoted with the aid of the equality $\langle A\psi,\varphi\rangle = \langle\psi, A^*\varphi\rangle$. Operator $A$ is called self-adjoint if $A^* = A$.
+For a linear operator $A$, its adjoint operator $A^*$ is defined with the aid of the equality $\langle A\psi,\varphi\rangle = \langle\psi, A^*\varphi\rangle$. Operator $A$ is called self-adjoint if $A^* = A$.
 \end{definition}
 
 \begin{definition}
@@ -116,12 +116,12 @@ For every self-adjoint operator $A$ in complex Hilbert space $H$:
 \end{theorem}
 
 \begin{definition}
-A self-adjoint bounded operator is called positive if it has only non-negative eigenvalues in its spectrum.
+A self-adjoint operator is called positive if it has only non-negative eigenvalues in its spectrum.
 \end{definition}
 
 Another useful operator on Hilbert space is a projector operator.
 \begin{definition}
-Let $H_0$ be a linear subspace of $H$. Operator $\pi: H \to H - H_0$ is called a projector if $\pi^* = \pi$ and $\pi^2 = \pi$. It projects $H$ orthogonally onto $H_0 = \pi(H)$.
+Let $H_0$ be a linear subspace of $H$. Operator $\pi: H \to H_0$ is called a projector if $\pi^* = \pi$ and $\pi^2 = \pi$. It projects $H$ orthogonally onto $H_0 = \pi(H)$.
 \end{definition}
 Let $\{e_1, \ldots, e_n\}$ be a basis in $H$ and $\{e_1, \ldots e_m\}$ a basis in $H_0$. If $e_j \in H_0$ then $\pi e_j = e_j$ and if $e_j\in H_0^\perp$ then $\pi e_j = 0$. For an arbitrary element $\psi\in H$, the projector operator acts as: 
 \[
