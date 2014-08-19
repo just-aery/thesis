@@ -559,65 +559,77 @@ where $I$ is the identity operator. Then in this case the Robertson inequality b
 
 
 \section{Einstein-Podolsky-Rosen paradox}
-Einstein-Podolsky-Rosen paradox(EPR-paradox, \cite{EPR}) was published in 1935 as the criticism of some statements of the Copenhagen interpretation of quantum mechanics. The main principle of this interpretation holds that any quantum system is described as a wave-function and after measurement it collapses to one of its eigenstates with some probability. Moreover, Heisenberg's uncertainty principle stands that position of a particle and its momentum are incompatible and they cannot be measured simultaneously with good precision. Einstein and his colleagues did not agree with probabilistic measurement outcomes. His paper was an attempt to show some contradictions in quantum mechanics.
+The Einstein-Podolsky-Rosen paradox(EPR-paradox, \cite{EPR}) was published in 1935 as the criticism of some statements of the Copenhagen interpretation of quantum mechanics. The main principle of this interpretation holds that for any quantum system the wave function present the finest possible description of its state and after measurement it collapses to one of its eigenstates with some probability. Moreover, Heisenberg's uncertainty principle stands that position of a particle and its momentum are incompatible and they cannot be measured simultaneously with good precision. Einstein and his colleagues did not agree with probabilistic measurement outcomes. Their paper was an attempt to show some contradictions in the Copenhagen interpretation of quantum mechanics.
 
-The article \cite{EPR} is based on a thought experiment with the following initial conditions. Consider two systems $S_1$, $S_2$, both with the state space $L_2(\mathbb{R})$ and a source which produces particles for these systems. The superposition state can be represented by a quantum state from the tensor product of its single Hilbert spaces.
-Operator $A$ with eigenvalues $\{a_k\}$ and eigenvectors $\{\varphi_k(x_1)\}$ will denote an observable on $S_1$. Operator $B$  with eigenvalues $\{b_k\}$ and eigenvectors $\{\psi_k(x_1)\}$ will denote another observable on the same system. 
+The article \cite{EPR} is based on a thought experiment which can be presented as follows. Consider two systems $S_1$, $S_2$, both with the state space $L_2(\mathbb{R})$\footnote{In fact, the real mathematical situation is more complicated. Although all EPR-considerations were performed in the Hilbert spaces (in particular, they used expansions of states with respect to orthogonal  bases), the finally used entangled state does not belong to the $L_2$ space. However, physicists typically do not pay the attention to such mathematical technicalities.} and a source which produces pairs $S=(S_1, S_2)$ for these systems. The state of $S$ can be represented by a quantum state from the tensor product of its component Hilbert spaces.
+Take a self-adjoint operator $A$ with eigenvalues $\{a_k\}$ and eigenvectors $\{\varphi_k(x_1)\}$, It defines an observable on $S_1$. Consider also a self-adjoint operator $B$  with eigenvalues $\{b_k\}$ and eigenvectors $\{\psi_k(x_1)\}$. It defines another observable on the same system. 
 
-In the common case of two Hilbert spaces $H_1$ and $H_2$ and their basis vectors $\{e_k\}$ and $\{f_k\}$ respectively the state $\varphi = \varphi_1\otimes\varphi_2$ is given by:
+In the general case of two Hilbert spaces $H_1$ and $H_2$ and with orthonormal bases $\{e_k\}$ and $\{f_k\}$, respectively. An arbitrary state $\varphi \in H_1 \otimes H_2$  can be represented as:
 \[
 \varphi = \sum_{k, m}c_{k, m}e_k\otimes f_m.
 \]
-If $H_1 = H_2 = L_2(\mathbb{R})$ its tensor product is $L_2(\mathbb{R})\otimes L_2(\mathbb{R}) = L(\mathbb{R}^2)$. For this space such state $\varphi$ can be represented by the sum:
+If $H_1 = H_2 = L_2(\mathbb{R})$ , then their tensor product is $L_2(\mathbb{R})\otimes L_2(\mathbb{R}) = L(\mathbb{R}^2)$. For this space any state $\varphi$ can be represented by the sum:
 \[
 \varphi (x_1, x_2) = \sum_{k, m}c_{k, m}e_k(x_1)f_m(x_2),
 \]
-or for the continuous case it is
+or, for the continuous case, it has the form:
 \[
 \varphi (x_1, x_2) = \int u(x, x_1)v(x, x_2)dx.
 \]
 
-Suppose we want to execute the measurement of $A$. Before this the particle has the state $\psi(x_1, x_2) = \sum_k v_k(x_2)\varphi_k(x_1)$. According to von Neumann projection postulate after the measurement the system will collapse to a pure state $\psi = \varphi_m(x_1)v_m(x_2)$.  this implies that at the same time the second system will also have a determinate state $v_m(x_2)$. But if two detector are situated far enough from each other(so they cannot have an impact on each other according to the locality principle) the second system has to have such a state $v_m(x_2)$ not only before measurement but always.
+Suppose we want to execute the measurement of $A$. Before this the particle has the state $\psi(x_1, x_2) = \sum_k v_k(x_2)\varphi_k(x_1)$. According to projection postulate after the measurement the state of the system will collapse to the pure state $\psi = \varphi_m(x_1)v_m(x_2)$.  This implies that at the same time the second system will also have the determinate state $v_m(x_2)$. But if two detectors are situated far enough from each other(so they cannot have an impact on each other according to the locality principle), then the second system has to have such a state $v_m(x_2)$ even before measurement.
 
-Suppose after all that we've changed our decision and we want to measure $B$ in $S_1$ instead of $A$. By analogy for the previous consideration, after the measurement the system will collapse to a state $\psi = \zeta_n(x_1)u_n(x_2)$ and in this case the second system will have state $u_n(x_2)$. And again, it has to have such state independently of the measurement on the first system i.e. it stands in this state even before any measurements.
+Suppose after all that we've changed our decision and we want to measure $B$ on $S_1$, instead of $A$. By analogy with the previous consideration, after the measurement the state of the system will collapse to the state $\psi = \zeta_n(x_1)u_n(x_2)$ and in this case the second system will have the state $u_n(x_2)$. And again, it has to have such state independently of the measurement on the first system i.e. it stands in this state even before any measurements.
 
-After that thought experiments we can conclude that the second system has 2 wave-functions $v_m(x_2)$ and $u_n(x_2)$. The paradox is that we can construct such states that cannot be known simultaneously according to the Heisenberg's principle. Here we present an example from the original article \cite{EPR}.
+By taking into account this thought experiment we can conclude that the second system has 2 wave-functions $v_m(x_2)$ and $u_n(x_2)$. The paradox is that we can construct such states that such an assignment is impossibel according to the Heisenberg's principle. Here we present the example from the original article \cite{EPR}.
 
-Consider the state $\psi(x_1, x_2) = \int e^{\frac{ip}{\hbar}(x_1+x_2-x_0)}$, where $x_0$ is a constant. On one side, it can be represented by the following formula: $\psi(x_1, x_2) = \int\varphi(p, x_1)v(p, x_2)dp$, where $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$ and $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$. 
+Consider the state $\psi(x_1, x_2) = \int e^{\frac{ip}{\hbar}(x_1+x_2-x_0)}dp$, where $x_0$ is a constant. On one hand, it can be represented by the following formula: 
+\[
+\psi(x_1, x_2) = \int\varphi(p, x_1)v(p, x_2)dp,
+\]
+ where 
+\[
+\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}
+\]
+and 
+\[
+v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}.
+\]
 
-Momentum operator is defined by $\hat{p} = \dfrac{\hbar}{i}\dfrac{d}{dx}$. Its eigenfunction is $\psi = e^{\frac{i\lambda}{\hbar}x}$ for eigenvalue $\lambda$. After the measurement of $A$ in the first system its state will collapse to its eigenfunction $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$. The state of the second system $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$ is an eigenfunction of momentum operator, corresponding to the eigenvalue $-p$. 
+The momentum operator is defined by $\hat{p} = \dfrac{\hbar}{i}\dfrac{d}{dx}$. Its eigenfunction is $\psi = e^{\frac{i\lambda}{\hbar}x}$ for eigenvalue $\lambda$. After the measurement of $A$ on the first system its state will collapse to its eigenfunction $\varphi(p, x_1) = e^{\frac{ip}{\hbar}x_1}$. The state of the second system $v(p, x_2) = e^{\frac{ip}{\hbar}(x_2-x_0)}$ is an eigenfunction of momentum operator, corresponding to the eigenvalue $-p$. 
 
-On another side considering state can be represented as $\psi(x_1, x_2) = \delta(x_1 + x_2 - x_0) = \hbar\int\delta(x - x_1)\delta (x - x_2 + x_0)dx = \int\zeta(x, x_1)u(x, x_2)dx$. 
+On the other hand, the state under consideration can be represented as $\psi(x_1, x_2) = \delta(x_1 + x_2 - x_0) = \hbar\int\delta(x - x_1)\delta (x - x_2 + x_0)dx = \int\zeta(x, x_1)u(x, x_2)dx$. 
 
-Position operator in the second system is defined by $\hat{x_2}f = x_2f$. Its eigenfunction is $\delta(x - \lambda)$ for the eigenvalue $\lambda$. After the measure of $B$ in the first system its state will collapse to the eigenfunction $\zeta(x, x_1) = \delta(x - x_1)$. The state of the second system $u(x, x_2) = \delta(x - x_2 + x_0)$ is also an eigenfunction of position operator, corresponding to the eigenvalue $x + x_0$.
+The position operator for the second system is defined by $\hat{x_2}f = x_2f$. Its eigenfunction is $\delta(x - \lambda)$ for the eigenvalue $\lambda$. After the measurement of $B$ on the first system its state will collapse to the eigenfunction $\zeta(x, x_1) = \delta(x - x_1)$. The state of the second system $u(x, x_2) = \delta(x - x_2 + x_0)$ is also an eigenfunction of the position operator, corresponding to the eigenvalue $x + x_0$.
 
-At this point authors conclude that both position and momentum in the second system are elements of reality since they couldn't be affected by measurementss in the first system. But Heisenberg's principle stands that they cannot be known both i.e. can't be both elements of reality simultaneously. 
+At this point the authors conclude that both position and momentum of the second system are elements of reality, since they couldn't be affected by measurements on the first system. But Heisenberg's principle stands that they cannot be known both i.e. they cannot be both elements of reality simultaneously. 
 
-The question of this paradox - do quantum mechanics provide a complete description of the physical reality. Another possible explanation of this paradox can be found with rejection of the locality or realism.
+The following question arose as a consequence of this paradox. Does quantum mechanics provide a complete description of the physical reality? Another possible explanation of this paradox can be found by rejecting locality.
 
 \section{Bell inequalities}
-One of possible solutions of the EPR-paradox is that the quantum mechanics theory is not complete, the actual state of a system is described not only by its quantum state $\psi$ but also by some hidden, i.e. yet unknown, variables. In this case all probabilistic predictions of quantum mechanics can be explained by existing of some unknown degrees of freedom. Using that assumption one can conclude that reality can still have deterministic nature as well as probabilistic.
+One of the possible solutions of the EPR-paradox is that the quantum mechanics theory is not complete, the actual state of a system is described not only by its quantum state $\psi$ but also by some hidden, i.e. yet unknown, variables. In this case all probabilistic predictions of quantum mechanics can be explained by existing of some unknown degrees of freedom. Using that assumption one can conclude that reality can still have deterministic nature as well as probabilistic.
 
-John Bell in his article \cite{Bell} assumed that there are some hidden parameters $\omega$ and all measurement results are random variables depending on it. He formulated a statistical inequality that contradicts with quantum mechanical predictions.
+John Bell in his article \cite{Bell} assumed that there are some hidden parameters $\omega$ and all measurement results are random variables depending on them. He formulated a statistical inequality that contradicts to the quantum mechanical predictions.
 
-Bell inequality is formulated in the following theorem.
-\begin{theorem}[Bell inequality]
-Consider $\xi_a(\omega)$, $\xi_b(\omega)$, $\xi_c(\omega)$ be discrete random variables that can only be equal $\pm 1$. Then the following inequality is performed:
-\[
-| \langle\xi_a,\xi_b\rangle -  \langle\xi_c,\xi_b\rangle | \leq 1 - \langle\xi_a,\xi_c\rangle.
-\]
-\end{theorem}
-
-\begin{proof}
-Covariance of two variables can be found using the following classical probabilistic formula:
+The Bell inequality is formulated in the following theorem.
+For two classical random variables $\xi$ and $\eta$ we set 
 \[
 \langle \xi, \eta \rangle = \int_\Omega \xi(\omega)\eta(\omega)dP(\omega).
 \]
-Using this we obtain:
+\begin{theorem}[Bell inequality]
+Let $\xi_a(\omega)$, $\xi_b(\omega)$, $\xi_c(\omega)$ be discrete random variables taking the values $\pm 1$. Then the following inequality holds:
+\[
+| \langle\xi_a,\xi_b\rangle -  \langle\xi_c,\xi_b\rangle | \leq 1 - \langle\xi_a,\xi_c\rangle.
+\]
+\label{thm:Bell_ineq}
+\end{theorem}
+
+\begin{proof}
+We have:
 \[
 | \langle\xi_a,\xi_b\rangle -  \langle\xi_c,\xi_b\rangle | = \left| \int_\Omega\xi_a\xi_b dP - \int_\Omega\xi_c\xi_b dP\right| = \left|\int_\Omega (\xi_a - \xi_c)\xi_bdP \right|.
 \]
-After multiplying it by $\xi_a^2 = 1$ we have:
+After multiplying the last formula by $\xi_a^2 = 1$ we have:
 \[
 \left|\int_\Omega (1 - \xi_a\xi_c)\xi_a\xi_bdP \right|.
 \]
@@ -627,9 +639,9 @@ And finally, using that $|\xi_i| = 1$ we get the desired result:
 \]
 \end{proof}
 
-After Bell's article some other inequalities were formulated. For example, Wigner inequality is more suitable for testing because it contains probabilities instead of covariations.
+After Bell's article some other inequalities were derived. For example, the Wigner inequality is more suitable for testing, because it contains probabilities instead of covariations.
 \begin{theorem}[Wigner inequality]
-For random variables form the previous theorem the following inequality is performed:
+Let the random variables satisfy conditions of Theorem \ref{thm:Bell_ineq}. Then the follwoing inequality holds:
 \[
 P(\xi_a = +1, \xi_b = +1) + P(\xi_b = -1, \xi_c = +1) \geq P(\xi_a = -1, \xi_c = +1).
 \]
@@ -659,9 +671,9 @@ P(\xi_a = +1, \xi_b = +1) + P(\xi_b = -1, \xi_c = +1) = P(\xi_a = +1, \xi_b = +1
 \]
 \end{proof}
 
-Another example of an inequality of Bell type is Clauser-Horne-Shimony-Holt inequality.
+Another example of an inequality of the Bell type is the Clauser-Horne-Shimony-Holt inequality.
 \begin{theorem}[Clauser-Horne-Shimony-Holt inequality]
-For all random variables $\xi_j(\omega)$ and $\xi'_j(\omega)$ such as $|\xi_j(\omega)| \leq 1$ and $|\xi'_j(\omega)| \leq 1$ the following inequality is performed:
+For all random variables $\xi_j(\omega)$ and $\xi'_j(\omega)$ such as $|\xi_j(\omega)| \leq 1$ and $|\xi'_j(\omega)| \leq 1$ the following inequality holds:
 \[
 \langle\xi_1,\xi'_1\rangle + \langle\xi_1,\xi'_2\rangle + \langle\xi_2,\xi'_1\rangle -  \langle\xi_2,\xi'_2\rangle \leq 2
 \]
@@ -676,13 +688,13 @@ After integrating it we obtain the Clauser-Horne-Shimony-Holt inequality.
 
 \end{proof}
 
-One of the main points why Bell inequality is so interesting is that such statistical inequalities can be tested in experiments. And if classical and quantum predictions are incompatible one can check that experiment results satisfies one of the predictions. But if one wants to compare results of two theories he should present a mechanism of mapping between two models. To connect quantum mechanics predictions and classical probability theory Bell made some assumptions. With them and quantum mechanic formalism these inequalities are violated. Some experiments were performed and their results also violate inequalities from the classical probability theory \cite{ASP1}. 
+One of the main points why the Bell inequality is so interesting is that such statistical inequalities can be tested in experiments. And if classical and quantum predictions are incompatible one can check whether experimental results match with one of the predictions. But if one wants to compare results of two theories he should present a mechanism of mapping between two models. To connect quantum mechanical predictions and classical probability theory, Bell made some assumptions. Under these assumption predictions of quantum mechanics do not match with the Bell type inequalities. Some experiments were performed and their results also violate the Bell type inequalities \cite{ASP1}.
 
-Let us construct an example of such violation from \cite{Khrennikov_information}. Consider a two-particle system in the state $\psi = \frac{1}{\sqrt{2}}(|+-\rangle - |-+\rangle)$ and a spin operator that measures a spin of one particle
+Let us construct a theoretical example of such violation from \cite{Khrennikov_information}. Consider a two-particle system in the state $\psi = \frac{1}{\sqrt{2}}(|+-\rangle - |-+\rangle)$ and the spin operator that measures the spin of one particle
 \[
 \sigma(\theta) = \cos\theta\sigma_z + \sin\theta\sigma_x,
 \] 
-where $\sigma_x$ and $\sigma_z$ - Pauli matrices:
+where $\sigma_x$ and $\sigma_z$ are the Pauli matrices:
 \[
 \sigma_x = 
 \begin{pmatrix}
@@ -694,7 +706,7 @@ where $\sigma_x$ and $\sigma_z$ - Pauli matrices:
 0 & -1
 \end{pmatrix}.
 \]
-So the operator $\sigma(\theta) \otimes I$ measures a spin of the first particle and $I \otimes \sigma(\theta)$ of the second particle for the system with this two particles.
+So, the operator $\sigma(\theta) \otimes I$ measures the spin of the first particle and $I \otimes \sigma(\theta)$ of the second particle for the system consisting of these two particles.
 Then
 \[
 P_\psi(\sigma(\theta_1) = + 1, \sigma(\theta_2) = +1) = \cos^2\frac{\theta_1 - \theta_2}{2},
@@ -714,44 +726,43 @@ We take $\theta_1 = 0$, $\theta_2 = 6\theta$, $\theta_3 = 2\theta$ and we get th
 \cos^2 3\theta + \sin^2 2\theta \geq cos^2 \theta.
 \]
 
-This violation is called Bell theorem. If this theorem is correct then quantum mechanics , or locality, or realism is wrong, as they are mutually exclusive. 
+A violation of this inequality is a prediction of quantum mechanics. If this prediction is confirmed by an experiment, then either quantum mechanics or one of the Bell assumption, locality or realism, are wrong.
 
-Here there are some popular interpretations of Bell's results:
+Here there are some widely accepted interpretations of Bell's results:
 \begin{enumerate}
-\item Quantum mechanics is complete and nonlocal so it cannot be reduced to the classical theory.
-If this interpretation is true then the state of a partial cannot be represented by a random variable $\xi_a(\omega)$ so inequalities cannot be applied to the real measurements. This is the most popular interpretation.
+\item Quantum mechanics is complete.
 
 \item Quantum mechanics is incomplete and any complete classical theory is nonlocal.
-If this interpretation is true then the state of a partial cannot be represented by $\xi_a(\omega)$ because it depends of another partial $b$. The representation using $\xi_{a,b}(\omega)$ doesn't give us the same inequalities so there is no paradox between experiments and classical probability theory.
+If this interpretation is true, then observables on the subsystems of a compound system cannot be represented by classical random variables labeled just by one index, as $\xi_a(\omega)$, because  it depends of another partial $b$. The representation using $\xi_{a,b}(\omega)$ doesn't give us the same inequalities, so there is no paradox between experiments and classical probability theory.
 
-\item Some of Bell's assumptions about mapping between classical and quantum models are wrong. If this interpretation is true then there is no paradox because its proof is incorrect.
+\item Some of Bell's assumptions about mapping between classical and quantum models are wrong. If this interpretation is true, then there is no paradox, because some of Bell's assumptions are violated in the real physical situation.
 \end{enumerate}
 
-In \cite{Khrennikov_information} it is shown that in Bell's theory there can be some incorrect assumptions in the way of accordance between classical and quantum probabilities.
+In \cite{Khrennikov_information} it was shown that some Bell's assumptions on the correspondence between classical and quantum probabilities can be questioned.
 
-Firstly, it can be contradicted that classical(an integral) and quantum equalities for covariations are equal.
+Firstly, it can be questioned the coincidence of the classical (integral) an quantum (trace) representations for correlations (the assumption in the original Bell's inequality).
 $$\int_\Omega\xi_a(\omega)\xi_b(\omega)dP_\rho(\omega) \equiv Tr\rho\hat{a}\hat{b}$$
 But for other variants of Bell theorem this postulate was replaced by less controversial ones.
 
 Secondly, domains of classical and quantum variables can be nonequal. There are two systems - the observed and the observer. The probability measure of states for observed partials concerns microscopic world and the observed probabilities concern macroscopic devices. These two systems can have different degrees of freedom, another parameters or possible values. It is hard to determine the dependency between them as in theory there is nothing about it.
 
-Moreover, in experimental tests of Bell inequality statistical data was used, i.e. a lot of single experiments were made and their results can depended on states of observing devices and assumed hidden variables. So there was a different physical context of those experiments. With a fixed quantum state $\rho$ it is not necessary that this state will always correspond to the fixed classical probability distribution. With hidden variables quantum mechanics describes only a projection of reality and there is no one to one correspondence between them. There is only one to one correspondence between a classical state $\xi$ and a pair $(\rho, C)$ - quantum state and a context. Using that one can see that Bell inequality is correct only if contexts of different experiments are the same. Probability to get that is equal to zero because the context depends on many different parameters.
+Moreover, in experimental tests of the Bell inequality statistical data was used, i.e. a huge number of single measurements was performed. And their results can depended on the states of measurement devices and assumed hidden variables. For the fixed quantum state $\rho$ it is not necessary that this state will always correspond to the fixed classical probability distribution. From the viewpoint of the hidden variables approach quantum mechanics describes only a projection of reality and there is no one to one correspondence between them. There is only one to one correspondence between a classical state $\xi$ and a pair $(\rho, C)$ - quantum state and a measurement. From this point of view, one can see that the Bell inequality is correct only if contexts of different experiments are precisely the same.
 
 \section{Eberhard inequality}
-Another problem with Bell inequalities is experimental data precision. To check something detectors have to have enough efficiency and not give false positive results. Since there is no device without these problems, it is better to have a statistical model which can deal with such experimental errors. One of such models was presented in the Eberhard article \cite{Eberhard}.
+Another problem with Bell inequalities is the problem of low efficiency of detectors. To perform the decisive experimental test, detectors have to have enough efficiency and not give false positive results. Since there are no such detectors, it is better to have a statistical model which can deal with such experimental errors. One of such models was presented in the Eberhard article \cite{Eberhard}.
 
 
 \subsection{The derivation of the inequality}
-In the article of Eberhard \cite{Eberhard} a Bell experiment is considered that is performed on entangled states of two photons. For both particles instead of spins polarization measurements are made using Nicol prisms. If photon is polarized horizontally then the ordinary trajectory is applied, otherwise photons polarized in the vertical plane are detected in the extraordinary trajectory. The angle of polarization axis of the first prism is denoted by $\alpha$, and for the second prism it is called $\beta$.
+In the article of Eberhard \cite{Eberhard} the Bell experiment for pairs of entangled photons was considered. For both particles, instead of the spins, polarization measurements are made using Nicol prisms. If photon is polarized horizontally then the ordinary trajectory is applied, otherwise photons polarized in the vertical plane are detected in the extraordinary trajectory. The angle of polarization axis of the first prism is denoted by $\alpha$, and for the second prism it is denoted by $\beta$.
 
-Eberhard's approach allows to take into account values of detector efficiency $\eta$ and background noise $\zeta$ before any optimization for such experiment. Here we present a derivation of the Eberhard inequality from his paper. 
+Eberhard's approach allows to take into account values of detector efficiency $\eta$ and background noise $\zeta$ before any optimization for such an experiment. Here we present the derivation of the Eberhard inequality from his paper. 
 
 %It is shown that Bell inequality requires an efficiency $\eta > 2(\sqrt{2} - 1) \approx 82.2\%$. Eberhard inequality still can be used with less efficiency values.
 
-For the described experiment there are four different setups of polarization planes: \[
+For the described experiment, there are four different setups of polarization planes: \[
 (\alpha_1, \beta_1), (\alpha_2, \beta_1), (\alpha_, \beta_2), (\alpha_2, \beta_2),
 \] 
-where the first item in the pair denotes values of $\alpha$ and the second one $\beta$ values. There are also three possible fates of photon after performing the experiment. Photon that is detected in the ordinary beam is counted with an index (o), photon that is detected in the extraordinary beam is counted with an index (e) and undetected photon is denoted by (u). Therefore for a system with two particles there are nine types of events with can be obtained for every measure.
+where the first item in the pair denotes the values of $\alpha$ and the second one the $\beta$ values. There are also three possible fates of photon after performing the experiment. Photon that is detected in the ordinary beam is counted with the index (o), photon that is detected in the extraordinary beam is counted with the index (e) and undetected photon is denoted by (u). Therefore for a system with two particles there are nine types of events which can be obtained for every measurement.
 
 The derivation of Eberhard's inequality is built on the estimation of the number of events of a certain type with certain prism angles. The key role is played by the assumption of the locality of the considering theory. According to Eberhard, theory can be considered as local if among all possible sequences of observed events it is possible to construct four groups corresponding to the four installation options of polarization planes satisfying the conditions:
 \begin{enumerate}[label=(\roman*)]
@@ -789,7 +800,7 @@ Suppose that the theory is local and such four sequences are found. We will cons
 
 We denote by $ n_{oo} (\alpha_1, \beta_1) $ the number of elements of the first sequence, when both particles have been found in the ordinary beam (cell $ \bullet $ in Table \ref{tab:Eberhard_table}). According to condition (i) for the conjugate event at $ (\alpha_2, \beta_1) $ the second photon has to be detected also in the ordinary beam, as a result of its detection does not depend on $ \alpha $. The same thing applies for the parameters $ (\alpha_1, \beta_2) $, the first photon has to be found in the ordinary beam. Thus, all associated events could not get into the cells of Table \ref{tab:Eberhard_table}, denoted by a *.
 
-Some of the events whose conjugate events are included in the $ n_{oo} (\alpha_1, \beta_1) $ are among the number $ n_{uo} (\alpha_2, \beta_1) + n_ {eo} (\ alpha_2, \ beta_1) $ (a $ \otimes $ in the table). Consider only those events that were not there, that is appropriate to the situation when both photons were detected in the ordinary beam for parameters $ (\alpha_1, \beta_1) $ and $ (\alpha_2, \beta_1) $. Their number is greater than or equal to $ n_{oo} (\alpha_1, \beta_1) - n_{uo} (\alpha_2, \beta_1) - n_{eo} (\alpha_2, \beta_1) $. Similarly, we remove from consideration events that are included in the number $ n_{ou} (\alpha_1, \beta_2) + n_{oe} (\alpha_1, \beta_2) $ (a $ \oplus $ in the table).
+Some of the events whose conjugate events are included in the $ n_{oo} (\alpha_1, \beta_1) $ are among the number $ n_{uo} (\alpha_2, \beta_1) + n_ {eo} (\alpha_2, \beta_1) $ (a $ \otimes $ in the table). Consider only those events that were not there, that is appropriate to the situation when both photons were detected in the ordinary beam for parameters $ (\alpha_1, \beta_1) $ and $ (\alpha_2, \beta_1) $. Their number is greater than or equal to $ n_{oo} (\alpha_1, \beta_1) - n_{uo} (\alpha_2, \beta_1) - n_{eo} (\alpha_2, \beta_1) $. Similarly, we remove from consideration events that are included in the number $ n_{ou} (\alpha_1, \beta_2) + n_{oe} (\alpha_1, \beta_2) $ (a $ \oplus $ in the table).
 
 As a result, we find that the remaining number of events is greater than or equal to $ n_{oo} (\alpha_1, \beta_1) - n_{uo} (\alpha_2, \beta_1) + n_{eo} (\alpha_2, \beta_1) - n_{ou} (\alpha_1, \beta_2) - n_{oe} (\alpha_1, \beta_2) $. Furthermore, according to the condition (i) it is impossible to be detected not in an ordinary beam for any photon from the remaining conjugate events, including the parameters $ (\alpha_2, \beta_2) $. Thus, only events that are among the $n_{oo}(\alpha_2, \beta_2)$ are still in considering. Combining all the above, we obtain the Eberhard inequality:
 \[
@@ -805,7 +816,7 @@ J_{\mathcal{B}} = n_{uo}(\alpha_2, \beta_1) + n_{eo}(\alpha_2, \beta_1) + n_{ou}
 To satisfy the condition (ii), this inequality sould hold for mathematical expectations predicted by the theory. This, in turn, suggests that if quantum mechanics is a local theory (and hence satisfies the conditions (i) - (ii)), then inequality \eqref{eq:Eberhard_inequality} should be performed for its predictions.
 
 \subsection{Eberhard's inequality for quantum mechanics}
-Consider two detectors with efficiency $\eta$, that perform measurements in $N$ experiments. That is, in every experiment each of the detectors detects a photon in one of the trajectories with probability $\eta$. Then for the initial state of the system $\psi$ quantum mechanics predicts the following results:
+Consider two detectors with the same efficiency $\eta$, which perform measurements in $N$ experiments. That is, in every experiment each of the detectors detects a photon in one of the trajectories with probability $\eta$. Then, for the initial state of the system $\psi$, quantum mechanics predicts the following results:
 \begin{eqnarray} \label{eq:Eberhard_n_start}
 n_{oo}(\alpha_1, \beta_1) = N\frac{\eta^2}{4}\psi^\dagger[I + \sigma(\alpha_1)][I + \tau(\beta_1)]\psi,\\
 n_{oe}(\alpha_1, \beta_2) = N\frac{\eta^2}{4}\psi^\dagger[I + \sigma(\alpha_1)][I - \tau(\beta_2)]\psi,\\
@@ -836,12 +847,12 @@ e^{-2i(\beta - \beta_1)} & 0 & 0 & 0\\
 \]
 
 Thus, we obtain Eberhard's inequality:
-\[
+\begin{multline*}
 J_{\mathcal{B}}^{\mbox{ideal}} = n_{uo}(\alpha_2, \beta_1) + n_{eo}(\alpha_2, \beta_1) + n_{ou}(\alpha_1, \beta_2) \\
 + n_{oe}(\alpha_1, \beta_2) + n_{oo}(\alpha_2, \beta_2) - n_{oo}(\alpha_1, \beta_1) \geq 0.
-\]
+\end{multline*}
 
-However, in the reality, in addition to correct detections during experiments some false positives may arise that is called background. In the Eberhard model it is assumed that the number of false positive detections for events of type (o, o) can be ignored. We assume that the level of background does not depend on $\alpha$ and $\beta$, so for events $n_{uo}(\alpha_2, \beta_1) + n_{eo}(\alpha_2, \beta_1)$ and $n_{ou}(\alpha_1, \beta_2) + n_{oe}(\alpha_1, \beta_2)$, it has the same value $N\zeta$. The resulting inequality takes the form:
+However, in reality, in addition to correct detections during experiments some false positives may arise that is called background. In the Eberhard model it is assumed that the number of false positive detections for events of type (o, o) can be ignored. We assume that the level of background does not depend on $\alpha$ and $\beta$, so for events $n_{uo}(\alpha_2, \beta_1) + n_{eo}(\alpha_2, \beta_1)$ and $n_{ou}(\alpha_1, \beta_2) + n_{oe}(\alpha_1, \beta_2)$, it has the same value $N\zeta$. The resulting inequality takes the form:
 \[
 J_{\mathcal{B}} = J_{\mathcal{B}}^{\mbox{ideal}} + 2N\zeta \geq 0.
 \]
@@ -870,13 +881,10 @@ For the implementation of the experiment, which could show a violation of this i
 \]
 where $0 \leq r \leq 1$, $\alpha_1 = \omega / 2 - 90^\circ$ and $\beta_1 = \omega / 2$.
 
-%\chapter{Результаты}
-
-
 \section{Results}
 \subsection{Optimization of the Eberhard inequality parameters }
 For every $\eta$ let us find parameters $r, \omega, \theta$ that allows the inequality to be violated most strongly.
-To do so we will minimize $J_{\mathcal{B}}(r, \omega, \theta) / N$ function using Nelder-Mead method.
+To do so, we will minimize $J_{\mathcal{B}}(r, \omega, \theta) / N$ function using Nelder-Mead method.
 
 \begin{table}[h]
 \centering
@@ -900,7 +908,7 @@ Values obtained while optimizing $J_{\mathcal{B}}(r, \omega, \theta) / N$ are sh
 Table~\ref{tab:Eberhard_repeat}. During optimization process  $\zeta$ values were set to zero, 
 because this parameter brings constant contribution $2\zeta$ into the $J_{\mathcal{B}} / N$ value. It increases $J_{\mathcal{B}} / N$ value by a constant regardless of other parameters, 
 therefore not affecting optimization result. Thus values from Table~\ref{tab:Eberhard_repeat} 
-match with values obtained by Eberhard for non-zero context level, and parameters such that the inequality is
+match with values obtained by Eberhard \citep{Eberhard} for non-zero context level, and parameters such that the inequality is
 violated the most strongly for $\zeta = 0$ match with parameters such that the inequality is
 violated and $\zeta$ has the maximum value.
 
@@ -1059,7 +1067,7 @@ to  $\eta_1 = \eta_2 = 0.67$ value, matching Eberhard results.
 Generally, for every state $\psi$ that minimize an expectation value the following corollary holds.
 
 \begin{theorem}
-Quantum state $\psi$ minimizing target function $J$ is an eigenvector of the matrix $\mathcal{B}$ and a dispersion for it is equal to zero.
+Quantum state $\psi$ minimizing target function $J$ is an eigenvector of the matrix $\mathcal{B}$ and the dispersion for it is equal to zero.
 \end{theorem}
 \begin{proof}
 By Courant–Fischer theorem $\lambda_1 \leq \langle\mathcal{B}\psi, \psi\rangle \leq \lambda_n$, where $\lambda_1, \ldots \lambda_n$ -- eigenvalues, sorted in ascending order. Minimum 
@@ -1071,7 +1079,7 @@ For the dispersion value in this case we have:
 \]
 \end{proof}
 
-It means that the obtained states are optimal not only from mathematical expectation point of view, but also from 
+It means that the obtained states are optimal not only from the mathematical expectation point of view, but also from 
 possible spread of measurement results point of view expressed in terms of dispersion.
 
 \clearpage
@@ -1105,7 +1113,7 @@ Consider a density operator as a quantum state of the system:
 \end{vmatrix},
 \]
 where $0 \leq r \leq 1$ and $0 \leq V \leq 1$.
-In this case predictions of quantum mechanics for values included to inequality become:
+In this case predictions of quantum mechanics for values included into the inequality become:
 \begin{eqnarray*}
 \tilde{S}_o^A(\alpha_i) = \eta_1 N \Tr[\rho(\hat{P}_A(\alpha_i) \otimes I)]\\
 \tilde{S}_o^B(\beta_i) = \eta_1 N \Tr[\rho(I \otimes \hat{P}_B(\beta_i))]\\
@@ -1158,24 +1166,21 @@ Results of the optimization & 85.0 & 115.1 & -4.0 & 27.4 & -126060 \\
 \end{table}
 
 Optimization results are shown in Table~\ref{tab:Zeilinger_parameters}. According to obtained values, 
-optimal angle values for prism installation differ from given in \cite{Zeilinger} and let inequality to be 
-violated stronger.
+optimal angle values for prism installation differ from given in \cite{Zeilinger} and let inequality to be violated stronger. This result was also communicated to the Zeilinger's group by prof. Khrennikov, May 2014. 
 
 \clearpage
 
-\subsection{Inequality parameters search in the case of errors when setting angle values}
-Generally quantum operator $A$ can be represented using spectral decomposition as 
+\subsection{Inequality parameters search in the case of random errors for setting angle values}
+Generally any self-adjoint quantum operator $A$ can be represented using spectral decomposition as 
 $A = \int_{-\infty}^{+\infty}\lambda dE_\lambda$. Then its mathematical expectation value for a sate $\psi$ 
  can be expressed as:
 \[
 \overline{A}_\psi = \int_{-\infty}^{+\infty}\lambda dp_\psi (\lambda),
 \]
-where $dp_\psi (\lambda) = d\langle E_\lambda\psi, \psi\rangle$ -- probability distribution for the 
-corresponding spectral decomposition and quantum state. Therefore for the fixed $\psi$ quantum observable 
-can be regarded as a classical random variable with the probability distribution
+where $dp_\psi (\lambda) = d\langle E_\lambda\psi, \psi\rangle$ is the probability distribution for the corresponding spectral decomposition and quantum state. Therefore for the fixed $\psi$ quantum observable can be regarded as a classical random variable with the probability distribution
 $p_\psi (O) = \int_O d\langle E_\lambda\psi, \psi\rangle, O\in \mathbb{R}$.
 
-Consider the following problem. Let observable $A$ depend on some classical random variable 
+Consider the following problem. Let the observable $A$ depend on some classical random variable 
 $\omega: A = A(\omega)$ corresponding to the case when angle values for the prisms positions 
 cannot be set without an error during experiments. In this case the spectral decomposition 
 $A(\omega) = \int_{-\infty}^{+\infty}\lambda dE_\lambda(\omega)$ and the density distribution function 
@@ -1183,22 +1188,19 @@ $dp_\psi (\lambda|\omega) = d\langle E_\lambda(\omega)\psi, \psi\rangle$ also de
 this random variable. For every fixed $\omega$ also 
 $\int_{-\infty}^{+\infty}dp_\psi (\lambda|\omega) = 1$ condition holds.
 
-Let random variable $\omega$ be described using probability space $(\Omega, \mathcal{F}, P)$, 
-where $\Omega$ -- set of elementary events, $\mathcal{F}$ - $\sigma$-algebra of events and 
-$P$ is the probability measure. Mathematical expectation value of $A(\omega)$ takes the following form:
+Let the random variable $\omega$ be described using the Kolmogorov probability space $(\Omega, \mathcal{F}, P)$, where $\Omega$ is the set of elementary events, $\mathcal{F}$ is the $\sigma$-algebra of events and $P$ is the probability measure. The mathematical expectation value of $A(\omega)$ takes the following form:
 \[
 \overline{A}_\psi(\omega) = \int_\Omega\left[\int_{-\infty}^{+\infty}\lambda dp_\psi (\lambda|\omega)\right] dP(\omega) = \int_\Omega\langle A(\omega)\psi, \psi\rangle dP(\omega) = \mathbf{\tilde{E}}[ \langle A(\omega)\psi, \psi\rangle],
 \]
-where $\mathbf{\tilde{E}}[\cdot]$ -- classical mathematical expectation.
+where $\mathbf{\tilde{E}}[\cdot]$ is the classical mathematical expectation.
 
-In a similar way we obtained an expression for a dispersion $A(\omega)$:
+In a similar way we obtained an expression for the dispersion $A(\omega)$:
 \[
 \sigma^2(A) = \mathbf{\tilde{E}}[ \langle A^2(\omega)\psi, \psi\rangle - \langle A(\omega)\psi, \psi\rangle^2].
 \]
 
-Consider real value of $\theta$ angles' difference to be uniformly distributed at the sector around 
-the desired value in the experiment. In this case $\theta' = \theta + \xi$, where $\xi$ -- random variable, 
-uniformly distributed at $[-\delta; \delta]$ sector, $\delta > 0$ -- scatter parameter. Then
+Consider a model in which the value of $\theta$ is uniformly distributed at the sector around 
+the desired value in the experiment. In this case $\theta' = \theta + \xi$, where $\xi$ is the random variable, uniformly distributed at $[-\delta; \delta]$ sector, $\delta > 0$ is the scatter parameter. Then
 \[
 J_\mathcal{B} = \frac{1}{2\delta}\int_{-\delta}^\delta \langle \mathcal{B}(r, \omega, \theta + x)\psi, \psi \rangle dx
 \] and
@@ -1206,7 +1208,7 @@ J_\mathcal{B} = \frac{1}{2\delta}\int_{-\delta}^\delta \langle \mathcal{B}(r, \o
 \sigma^2 = \frac{1}{2\delta}\int_{-\delta}^\delta (\langle \mathcal{B}^2(r, \omega, \theta + x)\psi, \psi \rangle - \langle \mathcal{B}(r, \omega, \theta + x)\psi, \psi \rangle^2) dx.
 \]
 
-Consider also target function that takes into account relative scatter of values obtained, expressed with 
+Consider also the target function that takes into account relative scatter of values obtained, expressed with 
 $J / \sigma$ variance coefficient. It enables us to obtain parameters such that relative value will be minimal 
 with some scatter of experimental data.
 
@@ -1350,8 +1352,7 @@ Because of real efficiency values being approximately equal to $\eta = 0.85$, it
 that mathematical expectancy values do not differ from zero efficiency case ones that much. Besides, 
 graphs almost coincide within one degree for various $\delta$ values.
 
-Let us complicate scattering model by taking into consideration an error of every node separately. Consider real value of 
-each angle in the experiment to be uniformly distributed at the section around the desired value. In this case 
+Let us complicate scattering model by taking into consideration an error of every node separately. Consider model in which the value of each angle in the experiment to be uniformly distributed at the section around the desired value. In this case 
 mathematical expectation and dispersion values become: 
 \[
 J_\mathcal{B} = \frac{1}{16\delta^4}\int\int\int\int_{-\delta}^\delta \langle \mathcal{B}(x_1, x_2, x_3, x_4)\psi, \psi \rangle dx_1dx_2dx_3dx_4,
@@ -1420,16 +1421,16 @@ that angles' values control can be reduced.
 \clearpage
 
 \section{Conclusion}
-In this thesis the model of the Eberhard inequality was considered. The goal was to find angles of polarization prisms and a quantum state that allow to violate the inequality as much as possible. Required parameters were found using optimization procedure and these results are consistent with values from the article. Note that describes predictions of quantum mechanics only for the case of equal detector efficiencies. However, in real experiments, detector efficiency may differ materially. The similar procedure was performed for the case of different efficiencies. 
+In this thesis the model of the Eberhard inequality was considered. The goal was to find angles of polarization prisms and a quantum state that allow to violate the inequality as much as possible. Required parameters were found using optimization procedure and these results are consistent with values from the article \cite{Eberhard}. Note that the model of Eberhard describes only the case of  equal detector efficiencies. However, in real experiments, detectors' efficiencies may differ essentially. Therefore it was important to perform the study similar to \cite{Eberhard} for detectors of different efficiencies.
 
-In addition, the magnitude of the possible spread of experimental data which can be expressed using coefficient of variation $\sigma_J / J $, was studied. It was shown that in Eberhard's model the minimum value of mathematical expectation is reached for the $\psi$ that is equal to the eigenvector of the matrix $\mathcal{B}$, and the dispersion in this case is equal zero. 
+In addition, the magnitude of the possible spread of experimental data which can be expressed using the coefficient of variation $\sigma_J / J $, was studied. It was shown that in Eberhard's model the minimum value of mathematical expectation is reached for the $\psi$ that is equal to the eigenvector of the matrix $\mathcal{B}$, and the dispersion in this case is equal zero. 
 
 However, this objective function allows to find optimal parameters in the case of possible inaccuracy of polarization prism angles in experiments. 
 The obtained parameters differ from the results of Eberhard. Recently (May 2014), prof. Khrennikov discussed these results with members of the Quantum Optics and Information laboratory, University of Vienna. The simulation results were interesting for experimenters as they allow to weaken control over precision orientation of the polarization prisms' axis.
 
-In addition, the model from the article of Zeilinger \cite{Zeilinger} based on the Eberhard inequality was considered. For the parameters specified there and with given values of the efficiency, orientation angles were also optimized. After substituting these values in the Zeilinger's model the observed violation was stronger then in the article. These results were also discussed with experimenters from Vienna. It turned out that they are actively working on this issue: explain discrepancy between the theoretical and experimental values, as well as the discrepancy between the values predicted by the different models. 
+In addition, the model from the article of Zeilinger \cite{Zeilinger} based on the Eberhard inequality was considered. For the parameters specified there and with given values of the efficiency, orientation angles were also optimized. After substituting these values in the Zeilinger's model the observed violation was stronger than in the article. These results were also discussed with experimenters from Vienna. It turned out that they are actively working on this issue: explain discrepancy between the theoretical and experimental values, as well as the discrepancy between the values predicted by the different models. 
 
-The obtained results allow us to expect that in the experiments with the  found values violation of the inequality will be obtained even with different detector efficiencies and inaccuracy in the installation angles.
+The obtained results allow us to expect that in the experimental test of the Bell type inequality in the Eberhard form by using the optimal values of physical parameters obtaind in this thesis, the inequality will be significantly violate even for different detectors' efficiencies and inaccuracy in the installation angles.
 \bibliography{literature.bib}
 \bibliographystyle{ieeetr}
 \end{document}
