@@ -31,7 +31,7 @@ colorlinks=true % цветные гиперссылки
 % Включать подсекции в оглавление
 \setcounter{tocdepth}{2}
 
-\usepackage{enumitem}
+\usepackage[shortlabels]{enumitem}
 \usepackage{multirow}
 \usepackage{longtable}
 \usepackage{afterpage}
@@ -41,6 +41,7 @@ colorlinks=true % цветные гиперссылки
 \graphicspath{ {./imgs/} }
 
 \DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Span}{span}
 
 
 %\usepackage{indentfirst}
@@ -721,10 +722,11 @@ In this case Wigner inequality has the form:
 \[
 \cos^2\frac{\theta_1 - \theta_2}{2} + \sin^2\frac{\theta_3 - \theta_2}{2} \geq  \cos^2\frac{\theta_1 - \theta_3}{2}.
 \]
-We take $\theta_1 = 0$, $\theta_2 = 6\theta$, $\theta_3 = 2\theta$ and we get the following inequality which is violated for some sufficiently large $\theta$:
+We take $\theta_1 = 0$, $\theta_2 = 6\theta$, $\theta_3 = 2\theta$ and we get the following inequality:
 \[
-\cos^2 3\theta + \sin^2 2\theta \geq cos^2 \theta.
+\cos^2 3\theta + \sin^2 2\theta \geq \cos^2 \theta
 \]
+which is violated for $\pi n - \frac\pi 6 \leq \theta \leq \pi n + \frac\pi 6,\ \forall n \in \mathbb{Z}$.
 
 A violation of this inequality is a prediction of quantum mechanics. If this prediction is confirmed by an experiment, then either quantum mechanics or one of the Bell assumption, locality or realism, are wrong.
 
@@ -859,7 +861,7 @@ J_{\mathcal{B}} = J_{\mathcal{B}}^{\mbox{ideal}} + 2N\zeta \geq 0.
 
 This inequality can be written as $\psi^\dagger\mathcal{B}\psi \geq 0$, where $\mathcal{B}$ is a matrix:
 \[
-\mathcal{B} = 
+\mathcal{B} = N \dfrac{\eta}{2}
 \begin{vmatrix}
 2 - \eta + \xi & 1 - \eta & 1 - \eta & A^*B^* - \eta\\
 1 - \eta & 2 - \eta + \xi & AB^* - \eta & 1 - \eta\\
@@ -867,7 +869,7 @@ This inequality can be written as $\psi^\dagger\mathcal{B}\psi \geq 0$, where $\
 AB - \eta & 1 - \eta & 1 - \eta & 2 - \eta + \xi
 \end{vmatrix},
 \]
-where $A = \eta/2(e^{2i(\alpha_1-\alpha_2)} - 1)$, $B = e^{2i(\beta_1 - \beta_2)}$, $\xi = 4\zeta/\eta$.
+where $A = \eta/2(e^{2i(\alpha_1-\alpha_2)} - 1)$, $B = e^{2i(\beta_1 - \beta_2)} -1$, $\xi = 4\zeta/\eta$.
 
 For the implementation of the experiment, which could show a violation of this inequality, we will search for the parameters such that $J_{\mathcal{B}} < 0$. Consider the case when $\zeta = 0$, that is, the detectors do not give false positives, and $\alpha_1 - \alpha_2 = \beta_1 - \beta_2 = \theta$. We will use the following quantum state:
 \[
@@ -884,7 +886,47 @@ where $0 \leq r \leq 1$, $\alpha_1 = \omega / 2 - 90^\circ$ and $\beta_1 = \omeg
 \section{Results}
 \subsection{Optimization of the Eberhard inequality parameters }
 For every $\eta$ let us find parameters $r, \omega, \theta$ that allows the inequality to be violated most strongly.
-To do so, we will minimize $J_{\mathcal{B}}(r, \omega, \theta) / N$ function using Nelder-Mead method.
+To do so, we will minimize $J_{\mathcal{B}}(r, \omega, \theta) / N$ function using Nelder-Mead method. Nelder-Mead method is an unconstrained optimization algorithm for finding a local minimum of a function of several variables. Here we present the summary of this method.
+
+Nelder-Mead method uses the concept of a simplex in $n$-dimensional space. 
+
+\begin{definition}
+The convex hull of a set $X$ is the smallest convex set $C$ such that $X \subseteq C$.
+\end{definition}
+\begin{definition}
+A simplex or $n$-simplex is the convex hull of a set of $n+1$ points. For example, 2-simplex is a triangle and 3-simplex is a tetrahedron.
+\end{definition}
+
+Consider the optimization problem $f(x) \to \min$. The main idea of this algorithm is to construct a simplex which vertices matches the given termination criteria using simplex transformations on each iteration. The best vertex of the resulting simplex with associated function value is considered as the solution of the optimization problem.
+
+The initial working simplex is constructed by generating $n+1$ points $x_i = \left(x^{(1)}_i,x^{(2)}_i,\ldots,x^{(n)}_i\right)$. The usual choise is to make $x_0 = x_n$. One iteration of the main part of the algorithm consists of the following steps.
+
+\begin{enumerate}
+\item Sorting. Among vertices of the simplex select three points: $x_h$ with the largest function value $f_h$, $x_g$ with the next largest value $f_g$ and $x_l$ with the lowest value of the function $f_l$. 
+\item Find the center of gravity of all points, except $x_h$: $x_c=\frac{1}{n} \sum_{i\neq h} x_i$.
+\item Transformation. Try to construct new working simplex by replacing the current one. This step is controlled by four parameters: 
+\begin{enumerate}[a)]
+	\item coefficient of reflection $\alpha > 0$ with the default value $\alpha = 1$
+	\item coefficient of contraction $0 < \beta < 1$ with the default value $\beta = 0.5$
+	\item coefficient of expansion $\gamma > 1,\ \gamma > \alpha$ with the default value $\gamma = 2$
+\item coefficient of shrinkage $0 < \delta < 1$ with the default value $\delta = 0.5$
+\end{enumerate}
+\item Convergence(termination) check. It can be performed in different ways, for example, using the dispersion of a set of points. The goal of the test is to verify that obtained vertices are close enough in some sense which involves and their closeness to the desired minimum. If the required accuracy is not yet reached, then the next iteration is performed from step 1.
+\end{enumerate}
+
+The third step include four different stages of transformation:
+\begin{enumerate}
+\item The reflection. Reflect $x_h$ relative to the point $x_c$ by a factor of $\alpha$: $x_r = (1+\alpha)x_c - \alpha x_h$ and $f_r = f(x_r)$. If $f_l < f_r < f_g$, then replace the point $x_h$ by $x_r$ and terminate the transformation for this iteration.
+\item The expansion. If $f_r < f_l$, then compute the expanded point $x_e$: $x_e = (1-\gamma)x_c + \gamma x_r$ and $f_e = f(x_e)$. If $f_e < f_l$, then replace the point $x_h$ by $x_e$ and terminate the transformation for this iteration. If $f_e > f_l$, then replace the point $x_h$ by $x_r$ and terminate the transformation step.
+\item The contraction. 
+\begin{itemize}
+\item If $f_h > f_r > f_g$, then compute the contraction point $x_s$ outside the simplex: $x_s = x_c + \beta (x_r - x_c)$ and $f_s = f(x_s)$. If $f_s < f_r$, then replace $x_h$ by $x_s$ and terminate the transformation step.
+\item If $f_r > f_h$, then compute the contraction point inside the simplex: $ x_s = \beta x_h + (1-\beta) x_c$. $f_s < f_h$, then replace $x_h$ by $x_s$ and terminate the transformation step.
+\end{itemize}
+\item The shrinkage. If $f_s > f_h$, then compute new vertices $x_j = x_l + \delta (x_j - x_l)$ for $j = 0, \ldots n, \ j \neq l$.
+\end{enumerate}
+
+In our further considerations the function $f = J_{\mathcal{B}}(r, \omega, \theta) / N$ was minimized using described algorithm.
 
 \begin{table}[h]
 \centering
@@ -946,6 +988,18 @@ n_{eo}(\alpha_2, \beta_1) = N\frac{\eta_1\eta_2}{4}\psi^\dagger[I - \sigma(\alph
 n_{uo}(\alpha_2, \beta_1) = N[\eta_2(1 - \eta_1)/2]\psi^\dagger[I + \tau(\beta_1)]\psi,\\
 n_{oo}(\alpha_2, \beta_2) = N\frac{\eta_1\eta_2}{4}\psi^\dagger[I + \sigma(\alpha_2)][I + \tau(\beta_2)]\psi.
 \end{eqnarray*}
+
+The Eberhard inequality can be written as $\psi^\dagger\mathcal{B}\psi \geq 0$, where $\mathcal{B}$ is a matrix:
+\[
+\mathcal{B} = \dfrac{N}{2}
+\begin{vmatrix}
+C + \xi & \eta_1(1 - \eta_2) & \eta_2(1 - \eta_1) & A^*B^* - \eta_1\eta_2\\
+\eta_1(1 - \eta_2) & C + \xi & AB^* - \eta_1\eta_2 & \eta_2(1 - \eta_1)\\
+\eta_2(1 - \eta_1) & A^*B - \eta_1\eta_2 & C + \xi & \eta_1(1 - \eta_2)\\
+AB - \eta_1\eta_2 & \eta_2(1 - \eta_1) & \eta_1(1 - \eta_2) & C + \xi
+\end{vmatrix},
+\]
+where $A = \eta_1/2(e^{2i(\alpha_1-\alpha_2)} - 1)$, $B = \eta_2(e^{2i(\beta_1 - \beta_2)} -1)$, $C = \eta_1 + \eta_2 - \eta_1\eta_2$ and $\xi = 4\zeta$.
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{theta3d.eps}
@@ -1068,7 +1122,73 @@ Generally, for every state $\psi$ that minimize an expectation value the followi
 
 \begin{theorem}
 Quantum state $\psi$ minimizing target function $J$ is an eigenvector of the matrix $\mathcal{B}$ and the dispersion for it is equal to zero.
+\label{thm:psi_thm}
 \end{theorem}
+
+This theorem can be prooved using Courant–Fischer theorem.
+\begin{theorem}[Courant-Fisher theorem]
+Let $A$ be a $n \times n$ Hermitian matrix with eigenvalues $\lambda_1 \leq \lambda_2 \leq \ldots \leq \lambda_n$. Rayleigh–Ritz quotient for this matrix is defined by 
+\[
+R_A(x) = \frac{(Ax, x)}{(x,x)}.
+\]
+For $1 \leq k \leq n$, let $S_k$ denote the span of $v_1,\ldots ,v_k$ and let $Sk$ denote the orthogonal complement of $S_k$.
+Then
+\[
+\lambda_1 \leq R_A(x) \leq \lambda_n, \ \forall x \in \mathbb{C}^n\setminus \{0\}
+\]
+and
+\[
+\lambda_k = \max\{\min \{R_A(x)\mid x\neq 0 \in U\} \mid \dim(U) = k \},
+\]
+\[
+\lambda_k = \min \{ \max\{R_A(x)\mid x\neq 0 \in U\} \mid  \dim(U) = n - k +1\}
+\]
+\end{theorem}
+
+\begin{proof}
+Let $u_1, \ldots, u_n$ be an orthonormal basis of eigenvectors for $A$. Let $U_1$ be a $k$-dimensional subspace, its intersection with the linear span $L_{n-k+1}$ of the vectors $\{u_k, \ldots, u_n\}$ is not zero, because $\dim(U_1) + \dim(L_{n-k+1}) = n+1$. So, there exists a vector $v_1 \in U_1 \cap L_{n-k+1}$: 
+\[
+v_1 = \sum_{i=k}^n \alpha_i u_i.
+\]
+For its Rayleigh–Ritz quotient we have:
+\[
+R_A(v_1) = \frac{\sum_{i=k}^n \lambda_i \alpha_i^2}{\sum_{i=k}^n \alpha_i^2} \geq \lambda_k.
+\]
+This implies that
+\[
+\max \{R_A(x)\mid x\neq 0 \in U_1\} \geq \lambda_k
+\]
+and 
+\[
+\min\{\max \{R_A(x)\mid x\neq 0 \in U_1\} \mid \dim(U_1) = k \} \geq \lambda_k.
+\]
+With $U_1 = \Span\{u_1, \ldots, u_k\}$ the minimum is achieved since $R_A(v_1) = \lambda_k$.
+
+By analogy with the previous consideration, Let $U_2$ be a $(n-k+1)$-dimensional subspace, which intersection with the linear span $L_{k}$ of the vectors $\{u_1, \ldots, u_k\}$ is not zero. There exists a vector $v_2 \in U_2 \cap L_{n-k+1}$: 
+\[
+v_2 = \sum_{i=k}^n \alpha_i u_i.
+\]
+For its Rayleigh–Ritz quotient we have:
+\[
+R_A(v_2) = \frac{\sum_{i=1}^k \lambda_i \alpha_i^2}{\sum_{i=1}^k \alpha_i^2} \leq \lambda_k.
+\]
+This implies that
+\[
+\min \{R_A(x)\mid x\neq 0 \in U_1\} \leq \lambda_k
+\]
+and
+\[
+\max\{\min \{R_A(x)\mid x\neq 0 \in U_1\} \mid \dim(U_1) = k \} \leq \lambda_k.
+\]
+And again, with $U_2 = \Span\{u_k, \ldots, u_k\}$ this inequality becomes the desired equality since $R_A(v_2) = \lambda_k$.
+
+So, in general 
+\[
+\lambda_1 \leq R_A(x) \leq \lambda_n, \ \forall x \in \mathbb{C}^n\setminus \{0\}.
+\]
+\end{proof}
+
+Using that theorem, consider the proof for \ref{thm:psi_thm}.
 \begin{proof}
 By Courant–Fischer theorem $\lambda_1 \leq \langle\mathcal{B}\psi, \psi\rangle \leq \lambda_n$, where $\lambda_1, \ldots \lambda_n$ -- eigenvalues, sorted in ascending order. Minimum 
 $J_\mathcal{B} = \langle\mathcal{B}\psi, \psi\rangle = \lambda_1$ is reached if $\psi = \psi_1$ is an 

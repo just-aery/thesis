@@ -218,4 +218,4 @@ quant_mean = psi.T * n * psi
 #opt_val = eta_K_opt(n.det(), to_min, quant_mean[0])
 to_min = quant_mean[0]
 
-opt_val = eta_K_opt(n, to_min)
+#opt_val = eta_K_opt(n, to_min)
