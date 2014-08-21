@@ -93,7 +93,7 @@ However, this position was criticised by Einstein, Podolsky and Rosen(EPR parado
 
 Further evidence of contradiction between classical and quantum models of real world was given by Bell and other authors in the form of statistical inequalities which can be tested experimentally. At the very beginning the question about the coexistence of locality and realism with quantum theory seemed to be a philosophical discussion about the nature of the reality, but with the aid of the Bell inequality it was formulated using mathematical formalism and then tested experimentally. Despite the fact that violations of Bell inequalities predicted by quantum mechanics were observed in the most of experiments \cite{ASP1}, the process of verification is still not completed \cite{Khrennikov_preprint}.
 
-The main reason for performing further tests is that as any experiment, Bell's test cannot be performed with 100\% efficiency of detectors and without any noise in the detector response. An example of inequality that takes into account these types of errors is the Eberhard inequality derived in the article \cite{Eberhard}. On its basis a number of experiments such as \cite{Zeilinger} were conducted, they also revealed the violation of the predictions of the classical theory.
+The main reason for performing further tests is that as any experiment, Bell's test cannot be performed with 100\% efficiency of detectors and without any noise in the detector response. An example of inequality that takes into account these types of errors is the Eberhard inequality derived in the article \cite{Eberhard}. On its basis a number of experiments such as \cite{Zeilinger}(see also \cite{Kwiat1, Kwiat2} on recent experimental studies on Bell test) were conducted, they also revealed the violation of the predictions of the classical theory.
 
 The main difficulty in such experiments is that violations of inequality require a fairly high efficiency of detectors, special initial state of a quantum system and installation angles of polarization beam splitters. These parameters should be such that the inequality is violated as much as possible. To achieve this result Eberhard used a simple brute-force optimization.
 
@@ -333,7 +333,7 @@ Consider two linear operators $A_1: H_1\to H_1$ and $A_2: H_2\to H_2$. The tenso
 
 \section{Mathematical formalism of quantum mechanics}
 \subsection{Postulates of quantum mechanics }
-The mathematical formalism of quantum mechanics can be formulated as a list of postulates \cite{Khrennikov_information} based on the theory of self-adjoint operator on complex Hilbert space $H$. The following list of postulates and principles is called Copenhagen interpretation of quantum mechanics.
+The mathematical formalism of quantum mechanics can be formulated as a list of postulates \cite{Khrennikov_information} (see also \cite{khrennikov_contextual}) based on the theory of self-adjoint operator on complex Hilbert space $H$. The following list of postulates and principles is called Copenhagen interpretation of quantum mechanics.
 \begin{enumerate}[label=\bfseries Postulate \arabic*:, align=left]
   \item A quantum state $\psi$ is a vector of a complex Hilbert space such that $\langle\psi, \psi\rangle = 1$. This vector completely describes the state of a quantum system. Two vectors which differ by a factor of $\gamma = e^{i\varphi}$ describe the same quantum state.
   \item A physical observable $a$ is represented with the aid of a self-adjoint operator $A$ in $H$. Different observables are represented by different operators.
@@ -410,7 +410,7 @@ The system is inconsistent. Therefore the assumption is false and $\psi$ is not 
 
 \subsection{Density operator}
 
-To describe behaviour of an ensemble of quantum states, where each state is obtained with some probability, we will use the notion of a density operator, see, e.g., \cite{Khrennikov_information}.
+To describe behaviour of an ensemble of quantum states, where each state is obtained with some probability, we will use the notion of a density operator, see, e.g., \cite{Khrennikov_information, khrennikov_contextual}.
 
 For a pure state $\psi$ we can define an orthogonal projection operator: $P_\psi: P_\psi\varphi = \langle \psi, \varphi \rangle \psi$. It has following properties:
 \begin{enumerate}
@@ -740,7 +740,7 @@ If this interpretation is true, then observables on the subsystems of a compound
 \item Some of Bell's assumptions about mapping between classical and quantum models are wrong. If this interpretation is true, then there is no paradox, because some of Bell's assumptions are violated in the real physical situation.
 \end{enumerate}
 
-In \cite{Khrennikov_information} it was shown that some Bell's assumptions on the correspondence between classical and quantum probabilities can be questioned.
+In \cite{Khrennikov_information, khrennikov_contextual} it was shown that some Bell's assumptions on the correspondence between classical and quantum probabilities can be questioned. See also \cite{L2, AD1, Lo, KV1, Hess, Hess1, Hess2, Gill13, Gill14, SCheid, Marian, ENTROPY} on recent theoretical studies on Bell's inequality.
 
 Firstly, it can be questioned the coincidence of the classical (integral) an quantum (trace) representations for correlations (the assumption in the original Bell's inequality).
 $$\int_\Omega\xi_a(\omega)\xi_b(\omega)dP_\rho(\omega) \equiv Tr\rho\hat{a}\hat{b}$$
@@ -1205,7 +1205,7 @@ possible spread of measurement results point of view expressed in terms of dispe
 \clearpage
 
 \subsection{Optimization of parameters from Zeilinger model}
-In the article \cite{Zeilinger} the Eberhard inequality check applied to the real experiment is considered. 
+In articles \cite{Zeilinger, Zeilinger1} the Eberhard inequality check applied to the real experiment is considered. 
 During experiments values of $n_{ou}, n_{uo}$  were found by the following formulas:
 \[
 n_{ou}(\alpha_1, \beta_2) = S_o^A(\alpha_1) - n_{oo}(\alpha_1, \beta_2) - n_{oe}(\alpha_1, \beta_2),
@@ -1548,9 +1548,10 @@ In addition, the magnitude of the possible spread of experimental data which can
 However, this objective function allows to find optimal parameters in the case of possible inaccuracy of polarization prism angles in experiments. 
 The obtained parameters differ from the results of Eberhard. Recently (May 2014), prof. Khrennikov discussed these results with members of the Quantum Optics and Information laboratory, University of Vienna. The simulation results were interesting for experimenters as they allow to weaken control over precision orientation of the polarization prisms' axis.
 
-In addition, the model from the article of Zeilinger \cite{Zeilinger} based on the Eberhard inequality was considered. For the parameters specified there and with given values of the efficiency, orientation angles were also optimized. After substituting these values in the Zeilinger's model the observed violation was stronger than in the article. These results were also discussed with experimenters from Vienna. It turned out that they are actively working on this issue: explain discrepancy between the theoretical and experimental values, as well as the discrepancy between the values predicted by the different models. 
+In addition, the model from articles of Zeilinger \cite{Zeilinger, Zeilinger1} based on the Eberhard inequality was considered. For the parameters specified there and with given values of the efficiency, orientation angles were also optimized. After substituting these values in the Zeilinger's model the observed violation was stronger than in the article. These results were also discussed with experimenters from Vienna. It turned out that they are actively working on this issue: explain discrepancy between the theoretical and experimental values, as well as the discrepancy between the values predicted by the different models. 
 
 The obtained results allow us to expect that in the experimental test of the Bell type inequality in the Eberhard form by using the optimal values of physical parameters obtaind in this thesis, the inequality will be significantly violate even for different detectors' efficiencies and inaccuracy in the installation angles.
+
 \bibliography{literature.bib}
-\bibliographystyle{ieeetr}
+\bibliographystyle{ugost2008}
 \end{document}
