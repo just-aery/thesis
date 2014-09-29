@@ -818,7 +818,78 @@ J_{\mathcal{B}} = n_{uo}(\alpha_2, \beta_1) + n_{eo}(\alpha_2, \beta_1) + n_{ou}
 To satisfy the condition (ii), this inequality sould hold for mathematical expectations predicted by the theory. This, in turn, suggests that if quantum mechanics is a local theory (and hence satisfies the conditions (i) - (ii)), then inequality \eqref{eq:Eberhard_inequality} should be performed for its predictions.
 
 \subsection{Eberhard's inequality for quantum mechanics}
-Consider two detectors with the same efficiency $\eta$, which perform measurements in $N$ experiments. That is, in every experiment each of the detectors detects a photon in one of the trajectories with probability $\eta$. Then, for the initial state of the system $\psi$, quantum mechanics predicts the following results:
+Consider two detectors with the same efficiency $\eta$, which perform measurements in $N$ experiments. That is, in every experiment each of the detectors detects a photon in one of the trajectories with probability $\eta$. 
+
+Let us construct density operators for particles in the ordinary and extraordinary beams. We will use the helicity basis for deriviation of this operators.
+
+Two main circular polarization states are described with the following vectors:
+\[
+u = \frac{1}{\sqrt{2}}\begin{pmatrix}
+1\\
+-i
+\end{pmatrix},\ 
+v = \frac{1}{\sqrt{2}}\begin{pmatrix}
+1\\
+i
+\end{pmatrix}.
+\]
+They form the transformation matrix from standart basis to helicity basis:
+\[
+W = \frac{1}{\sqrt{2}}\begin{pmatrix}
+1 & 1\\
+-i & i
+\end{pmatrix}.
+\]
+The inverse transformation can be made with the inverse matrix:
+\[
+T = W^{-1} = \dfrac{1}{\sqrt{2}}\begin{pmatrix}
+1 & i\\
+1 & -1
+\end{pmatrix}.
+\]
+
+Then, consider a polarization prism which is rotated by an angle $\theta$. A particle which appeared in the ordinary beam has the following state:
+\[
+\psi_o = \begin{pmatrix}
+\cos\theta\\
+\sin\theta
+\end{pmatrix}
+\]
+and a particle in the extraordinary beam appeared with the state:
+\[
+\psi_e = \begin{pmatrix}
+-\sin\theta\\
+\cos\theta
+\end{pmatrix}.
+\]
+In the helicity basis this states are described by the following equations, respectively:
+\[
+\psi_o' = \dfrac{1}{\sqrt{2}}\begin{pmatrix}
+e^{i\theta}\\
+e^{-i\theta}
+\end{pmatrix},\ 
+\psi_e' = \dfrac{1}{\sqrt{2}}\begin{pmatrix}
+ie^{i\theta}\\
+-ie^{-i\theta}
+\end{pmatrix}.
+\]
+Then, corresponding density operators have the following form:
+\[
+P_o = \psi_o' \cdot \psi_o'^{\dagger} = \dfrac{1}{2}\begin{pmatrix}
+1 & e^{2i\theta}\\
+e^{-2i\theta} & 1
+\end{pmatrix},
+\]
+\[
+P_e = \psi_e' \cdot \psi_e'^{\dagger} = \dfrac{1}{2}\begin{pmatrix}
+1 & -e^{2i\theta}\\
+-e^{-2i\theta} & 1
+\end{pmatrix}.
+\]
+
+Density operators of the considering system with two particles are described by tensor products. If the first particle appeared in the ordinary beam, it is described by $P_o \otimes I$, if the second particle appeared in the ordinary beam, then the corresponding operator is given by $I \otimes P_o$. Operators for particles in extraordinary beam can be constructed in the similar way.
+
+Finally, putting it all together and using the formula of quantum expectation value, for the initial state of the system $\psi$ quantum mechanics predicts the following results:
 \begin{eqnarray} \label{eq:Eberhard_n_start}
 n_{oo}(\alpha_1, \beta_1) = N\frac{\eta^2}{4}\psi^\dagger[I + \sigma(\alpha_1)][I + \tau(\beta_1)]\psi,\\
 n_{oe}(\alpha_1, \beta_2) = N\frac{\eta^2}{4}\psi^\dagger[I + \sigma(\alpha_1)][I - \tau(\beta_2)]\psi,\\
@@ -847,6 +918,8 @@ e^{-2i(\beta - \beta_1)} & 0 & 0 & 0\\
 0 & e^{-2i(\beta - \beta_1)} & 0 & 0
 \end{vmatrix}.
 \]
+
+Note that matrices $I + \sigma(\alpha)$, $I - \sigma(\alpha)$, $I + \tau(\beta)$ and $I + \tau(\beta)$ can be simply derived from previously considered density operators with the properly choosen value of $\theta$. Also note that probability to fail to detect particle equals to $1 - \eta$ no matter what particle is considered, first of second.
 
 Thus, we obtain Eberhard's inequality:
 \begin{multline*}
